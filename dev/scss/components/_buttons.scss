@@ -1,0 +1,31 @@
+/* =============
+    Buttons
+============= */
+
+button{
+  background-color: transparent;
+  border: 0;
+}
+
+.link{
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: relative;
+  &::before{
+    height: var(--border-wght);
+    background-color: var(--text-color);
+    content:'';
+    position: absolute;
+    bottom: -0.5rem;
+    width: 100%;
+  }
+}
+
+.fillButton{
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: relative;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  padding: 0.25rem;
+}
