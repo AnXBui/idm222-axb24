@@ -19,3 +19,17 @@ $screen-xl-min: 1200px;
 $light: #f4f4ea;
 $dark: #1b2354;
 $gradientLight: linear-gradient(to top, $light 0%, rgba($light, 0.45) 100%);
+
+:root{
+  height: 100%;
+  --bgColor: #0C0B12;
+  --textColor: #BFBFBF;
+  --accentColor: #E07425;
+  color: var(--textColor);
+}
+
+body{
+  // --bgColor: white;
+  background-color: var(--bgColor);
+  color: var(--textColor);
+}

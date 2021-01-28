@@ -40,3 +40,10 @@ Projects will feature up to 7 projects, projects may be added or improve later. 
 - Identify preloading/prefetching resource
 - Code split CSS / defer CSS
 - SEOs and other stuffs.
+
+##Project Image Format / Responsive Size
+format= avif>webp>jp2>png
+- image_name_1920.format
+- image_name_1080.format
+- image_name_768.format
+- image_name_250.format

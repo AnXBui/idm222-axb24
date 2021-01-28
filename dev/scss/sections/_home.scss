@@ -2,30 +2,6 @@
     Home
 ============= */
 
-html{
-  height: 100%;
-}
-body{
-  --bgColor: white;
-  background-color: lightgrey;
-}
-
-main{
-  // overflow-y: scroll;
-  // height: 100vh;
-}
-
-
-.logo{
-  width: 3rem;
-  height: 100%;
-  display: block;
-
-  >svg{
-    width: 100%;
-    height: 100%;
-  }
-}
 
 img, picture{
   width: 100%;
@@ -33,40 +9,12 @@ img, picture{
   object-fit: cover;
 }
 
-header{
-  position: fixed;
-  // position: sticky;
-  background-color: var(--bgColor);
-  top: 0;
-  height: 3rem;
-  width: 100%;
-  padding: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  z-index: 11;
-}
+
 
 main{
   &:focus{
     outline:0;
   }
-}
-
-.homeProjectList{
-  height: 10rem;
-
-  .projectCover{
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.projectItem{
-  display: grid;
-  // background-color: red;
-  height: auto;
-  grid-template-rows: auto 30rem;
-  width: 30%;
 }
 
 .fullScreen{
@@ -87,33 +35,31 @@ main{
 
 .fixedCoverWrapper{
   position: fixed;
-  // border: 2px solid red;
   left:0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  // background-color: red;
   z-index: 10;
 }
 
-.flipButton{
-  background-color: red;
+.homeIntro{
+  height: 100vh;
+  padding: 10vh;
 }
 
 
+.homeProjectList{
+  height: 10rem;
 
-// .transition-fade {
-//   transition: 0.4s;
-//   opacity: 1;
-// }
-//
-// html.is-animating .transition-fade {
-//   opacity: 0;
-// }
-//
+  .projectCover{
+    width: 100%;
+    height: 100%;
+  }
+}
 
-
-
-html{
-  // background-color: red;
+.projectItem{
+  display: grid;
+  height: auto;
+  grid-template-rows: auto 30rem;
+  width: 30%;
 }

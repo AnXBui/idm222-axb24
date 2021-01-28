@@ -25,27 +25,64 @@
 
 <body>
 
-  <header>
-    <a data-swup-link  class="logo" href="index.html">
-      <svg overflow="visible" viewBox="0 0 258 137.9">
-            <path class="st0" d="M142.8 137.9H0L46.8 0h50.3l19.8 59.7H58.6l-5.9 18.6H123zM258 102.1c0 35.7-47.9 35.7-48 35.7h-44.6l-20.2-59.6h60l-10-18.6h-56.3L118.7 0H214s44-.1 44 33.2c0 32.4-31 32.8-32.8 32.8 1.8.1 32.8 1.5 32.8 36.1z" />
-      </svg>
-    </a>
+  <header class="inactive">
+    <div class="menuBar">
+      <a data-swup-link  class="menuLogo" href="index.html">
+        <svg overflow="visible" viewBox="0 0 258 137.9">
+              <path class="st0" d="M142.8 137.9H0L46.8 0h50.3l19.8 59.7H58.6l-5.9 18.6H123zM258 102.1c0 35.7-47.9 35.7-48 35.7h-44.6l-20.2-59.6h60l-10-18.6h-56.3L118.7 0H214s44-.1 44 33.2c0 32.4-31 32.8-32.8 32.8 1.8.1 32.8 1.5 32.8 36.1z" />
+        </svg>
+      </a>
 
-    <button class="menuButton">
-      <svg overflow="visible" viewBox="0 0 43.5 29">
-        <rect class="bar barTop" width="43.5" height="5.5" />
-        <rect class="bar barCenter1" y="11.8" width="43.5" height="5.5" />
-        <rect class="bar barCenter2" y="11.8" width="43.5" height="5.5" />
-        <rect class="bar barBot" y="23.5" width="43.5" height="5.5" />
-      </svg>
-    </button>
+      <button class="menuButton">
+        <svg overflow="visible" viewBox="0 0 43.5 29">
+          <rect class="bar barTop" width="43.5" height="5.5" />
+          <rect class="bar barCenter1" y="11.8" width="43.5" height="5.5" />
+          <rect class="bar barCenter2" y="11.8" width="43.5" height="5.5" />
+          <rect class="bar barBot" y="23.5" width="25.5" height="5.5" />
+        </svg>
+      </button>
+    </div>
 
-    <nav>
-      <ul>
-        <li><a data-swup-transition='fade' data-swup-link href="about.html">About</a></li>
-        <li><a data-swup-transition='scale' data-swup-link href="contact.html">Contact</a></li>
-      </ul>
+
+    <nav class="menuWrapper">
+      <div class='menuMain textDark'>
+        <div data-animate class="menuMainPages">
+          <p>Welcome to a digital portfolio by An Bui</p>
+          <ul>
+            <li><a data-swup-transition='fade' data-swup-link href="index.html">Home</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="about.html">About</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div data-animate class="menuProjects">
+          <h3>Projects</h3>
+          <ul>
+            <li><a data-swup-transition='fade' data-swup-link href="shleep-kit.html">Shleep Kit</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="ento-bug-snack.html">Ento Bug Snack</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="find-found-founded.html">Find Found Founded</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="awbury-arboretum.html">Awbury Arboretum</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="sacred-form-vibrant-soul.html">Sacred Form, <br>Vibrant Soul</a></li>
+            <li><a  data-swup-transition='fade' data-swup-link href="synesthesia-fantasia.html">Synesthesia Fantasia</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="itsnk.html">Itsnk</a></li>
+          </ul>
+        </div>
+
+        <div data-animate class="menuSocial">
+          <div>
+            <h3>Social Media</h3>
+            <a  href="">@Altans.design</a>
+          </div>
+
+          <div>
+            <h3>Contact</h3>
+            <a>bxan954@gmail.com</a>
+            <a href="">axb24@drexel.edu</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menuFill"></div>
     </nav>
   </header>
 

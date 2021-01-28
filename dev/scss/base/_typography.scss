@@ -4,7 +4,12 @@
 
 *{
   font-family: 'Space Grotesk', sans-serif;
+  color: var(--textColor);
   // color: $light;
+}
+
+.textDark{
+  --textColor: var(--bgColor);
 }
 
 h1,h2,h3,h4,h5{
@@ -13,4 +18,8 @@ h1,h2,h3,h4,h5{
   *{
     font-family: bee, sans-serif;
   }
+}
+
+p,a{
+  font-size: 1.5rem;
 }
