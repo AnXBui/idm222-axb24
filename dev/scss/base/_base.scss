@@ -31,26 +31,11 @@ a {
   transition: 0.25s;
 }
 
-.content-grid {
-  display: grid;
-  grid-template-areas: ". content .";
-  grid-template-columns: 10px auto 10px;
-  padding: 10px 0 0;
-
-  > div {
-    grid-area: content;
-
-  }
-}
-
 *{
   box-sizing: border-box;
 }
 
 body{
-  --bg-color: white;
-  --text-color: black;
-  --border-wght: 1.5px;
   color: var(--text-color);
 }
 

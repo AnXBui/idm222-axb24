@@ -20,6 +20,71 @@ h1,h2,h3,h4,h5{
   }
 }
 
+h1,h2,h3{
+  text-transform: uppercase;
+  line-height: 80%;
+
+  >span{
+    display: block;
+  }
+}
+
 p,a{
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 130%;
+
+  @include xl{
+    font-size: max(1.1vw, 1.1rem);
+  }
+}
+
+
+h2{
+  font-size: clamp(4rem,25vw,21vw);
+  font-weight: 700;
+
+  @include md{
+    font-size: 15vw;
+  }
+
+  @include lg{
+    font-size: 10vw;
+  }
+}
+
+h3{
+  font-size: clamp(2rem,15vw,20vw);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+
+
+  @include md{
+    font-size: 10vw;
+  }
+
+  @include lg{
+    font-size: 4vw;
+  }
+
+  a{
+    font-size: 1em;
+    color: var(--accentColor);
+  }
+}
+
+.outlineText{
+   color: var(--bgColor);
+   font-family: bee, sans-serif;
+   line-height: 0.75;
+   font-weight: 700;
+   text-shadow: -1px -1px 0 var(--textColor), 1px -1px 0 var(--textColor), -1px 1px 0 var(--textColor), 1px 1px 0 var(--textColor);
+
+  @supports (-webkit-text-stroke: 1px black) {
+    -webkit-text-stroke: 1px var(--textColor);
+    -webkit-text-fill-color: var(--bgColor);
+  }
+}
+
+.tightText{
+  letter-spacing: -0.05em;
 }

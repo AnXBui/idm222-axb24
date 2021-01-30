@@ -1,4 +1,4 @@
-gsap.registerPlugin(ScrollToPlugin, Flip);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Flip);
 
 
 function reParent(target, parent) {
@@ -11,6 +11,48 @@ function addClass(element, clss) {
 
 function rmvClass(element, clss) {
   element.classList.remove(clss);
+}
+
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+}
+
+function getViewport() {
+
+ var viewPortWidth;
+ var viewPortHeight;
+
+ // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
+ if (typeof window.innerWidth != 'undefined') {
+   viewPortWidth = window.innerWidth,
+   viewPortHeight = window.innerHeight
+ }
+
+// IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
+ else if (typeof document.documentElement != 'undefined'
+ && typeof document.documentElement.clientWidth !=
+ 'undefined' && document.documentElement.clientWidth != 0) {
+    viewPortWidth = document.documentElement.clientWidth,
+    viewPortHeight = document.documentElement.clientHeight
+ }
+
+ // older versions of IE
+ else {
+   viewPortWidth = document.getElementsByTagName('body')[0].clientWidth,
+   viewPortHeight = document.getElementsByTagName('body')[0].clientHeight
+ }
+ return [viewPortWidth, viewPortHeight];
 }
 
 function enableBodyScroll() {
@@ -55,6 +97,7 @@ let durmin2 = dur / 2;
 let durmin3 = dur / 4;
 let lastScrollTop = 0;
 let delta = 30;
+let transitioning = false;
 // let navBarHeight = document.querySelector('.menuBar').offsetHeight;
 // console.log(navBarHeight);
 
@@ -127,6 +170,7 @@ const swupJS = [{
             enableBodyScroll();
             next();
             tl.kill();
+            transitioning = false;
           }
         }})
       }
@@ -134,8 +178,11 @@ const swupJS = [{
     },
     out: (next) => {
 
+
       let target = projectLink;
+      console.log('target animated is ' + target);
       let state = Flip.getState(target);
+      transitioning = true;
       // addClass(target,'fullScreen');
       document.querySelector('.fixedCoverWrapper').appendChild(target);
       addClass(projectLink, 'fullScreen');
@@ -143,7 +190,6 @@ const swupJS = [{
       gsap.set(document, {
         scrollTo: scrollPosition
       });
-      console.log(scrollPosition);
 
       let tl = gsap.timeline();
 
@@ -151,7 +197,6 @@ const swupJS = [{
         duration: 0.75,
         zIndex: 5,
         onComplete: () => {
-          console.log('animated transiiton');
           next();
         }
       });
@@ -206,10 +251,6 @@ class Menu {
     // this.animate3 = header.querySelectorAll('*[data-animate="3"]');
 
 
-    console.log(this.animate);
-
-
-
     this.button = {
       main: header.querySelector('.menuButton'),
       top: header.querySelector('.barTop'),
@@ -239,6 +280,7 @@ class Menu {
         paused: true,
         onComplete: () => {
           this.animating = false;
+          disableBodyScroll({ savePosition: true });
         }
       })
       .to(this.button.top, dur, {
@@ -278,7 +320,6 @@ class Menu {
         onComplete: () => {
           addClass(this.menu, 'inactive');
           this.animating = false;
-          console.log('animation out completed');
         }
       })
       .to(this.main, dur, {
@@ -305,7 +346,7 @@ class Menu {
   }
 
   init() {
-    console.log('init');
+    // console.log('init');
 
     this.button.main.addEventListener('click', () => {
       if (!this.animating) {
@@ -319,8 +360,8 @@ class Menu {
     })
 
     this.links.forEach((element) => {
-      let href = element.href;
       element.addEventListener('click', () => {
+        let href = element.href;
         if (!this.animating && this.active) {
           if(href.indexOf(window.location.href) > -1) {
             this.hide();
@@ -344,7 +385,6 @@ class Menu {
   }
 
   hasScrolled() {
-    console.log('has scroll');
     let st = window.pageYOffset || document.documentElement.scrollTop;
 
     if (Math.abs(lastScrollTop - st) <= delta)
@@ -363,6 +403,11 @@ class Menu {
     lastScrollTop = st;
   }
 
+  showBar(){
+    rmvClass(this.menu,'up');
+    lastScrollTop = 0;
+  }
+
   hide() {
     // if (this.active){
       this.animating = true;
@@ -379,7 +424,6 @@ class Menu {
   show() {
     // this.in.restart(false, true);
     this.animating = true;
-    disableBodyScroll({ savePosition: true });
     // addClass(document.querySelector('main'),'bodyLock');
     rmvClass(this.menu, 'inactive');
     addClass(this.bar, 'dark');
@@ -388,7 +432,77 @@ class Menu {
   }
 }
 
+let viewSize = getViewport()[0]
+
+class HomeProject{
+  constructor(){
+    this.main = document.querySelector('.homeProjectList');
+    this.target = this.main.querySelector('.groupScroller');
+    this.active = false;
+    let that = this;
+    console.log(that);
+
+
+    if (viewSize >= 992){
+      this.start();
+    }
+
+    window.addEventListener('resize', debounce(() => {
+      viewSize = getViewport()[0];
+      console.log(viewSize);
+      console.log('refactoring');
+      if (viewSize >= 992){
+        if (!this.active){
+          this.start();
+        }
+      } else {
+        if (this.active){
+          this.end();
+        }
+      }
+    }, 150));
+  }
+
+  start(){
+    this.active = true;
+    this.tl = gsap.to(this.target, 0.5, {yPercent: -100, ease: 'linear', scrollTrigger:{
+      trigger: this.main,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true
+    }});
+  }
+
+  end(){
+    this.active = false;
+    this.tl.kill();
+    gsap.set(this.target,{yPercent: 0});
+  }
+
+  kill(){
+    window.removeEventListener('resize', debounce(() => {
+      viewSize = getViewport()[0];
+      console.log(viewSize);
+      console.log('refactoring');
+      if (viewSize >= 992){
+        if (!this.active){
+          this.start();
+        }
+      } else {
+        if (this.active){
+          this.end();
+        }
+      }
+    }, 150));
+    this.main = null;
+    this.target = null;
+    this.tl = null;
+  }
+}
+
+
 let menu = new Menu(document.querySelector('header'));
+let homeProj;
 // console.log(menu);
 
 
@@ -400,11 +514,20 @@ function init() {
   // rmvClass(document.querySelector('main'),'bodyLock');
   enableBodyScroll();
   lastScrollTop =  0;
-  // menu.hide();
-  if (document.querySelector('.home')) {
-    // let text = new Console('Home Page');
-    // something like new Carousel('#carousel')
+  if (projectLink != null) {
+    gsap.to(projectLink,0.15,{alpha:0, delay: 0.15, onComplete:() => {
+      projectLink.remove();
+    }})
   }
+
+  menu.showBar();
+  // menu.hide();
+
+  if (document.querySelector('.homeProjectList')){
+    console.log('home projected');
+    homeProj = new HomeProject();
+  }
+
 
   if (document.querySelector('.about')) {
     // let text = new Console('About Page');
@@ -416,19 +539,16 @@ function init() {
     // let text = new Console('Contact Page');
     // ...
   }
-
-  // if (document.querySelector("a[data-swup-transition='project']")) {
-  //   // let text = new Console('Contact Page');
-  //   document.querySelectorAll("a[data-swup-transition='project']").forEach((element) => {
-  //     // console.log('this is a project link ' + element);
-  //   });
-  //     // ...
-  // }
 }
 
 // document cleanup function for Javascript stuff
 function unload() {
   gsap.globalTimeline.clear();
+
+  if (homeProj != null){
+     homeProj.kill();
+     homeProj = null;
+  }
 
   if (document.querySelector('#carousel')) {
     // could use but be careful on effects on transition?
@@ -438,10 +558,36 @@ function unload() {
   }
 }
 
+
+
+
+
 swup.on('clickLink', (e) => {
-  // console.log(e.target);
-  projectLink = e.target;
+  console.log('target clicked is ' + e.delegateTarget);
+  let link = e.delegateTarget.getAttribute('data-swup-transition');
+  if (link == 'project'){
+    projectLink = e.target;
+  }
 });
+
+swup.on('samePageWithHash', (e) => {
+  console.log('target clicked is ' + e.delegateTarget);
+  console.log(e);
+  // let link = e.delegateTarget.getAttribute('data-swup-transition');
+  // if (link == 'project'){
+  //   projectLink = e.target;
+  let target = e.delegateTarget;
+  let id = target.getAttribute('href');
+  console.log(id);
+  let offset = document.querySelector(id).offsetHeight;
+  console.log(offset);
+  gsap.to(window,0.5,{scrollTo:id});
+  // }
+});
+
+
+
+
 
 
 

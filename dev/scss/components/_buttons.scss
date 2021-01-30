@@ -7,6 +7,10 @@ button{
   border: 0;
 }
 
+*{
+  transition-timing-function: ease-in-out;
+}
+
 .link{
   font-weight: bold;
   font-size: 1.5rem;
@@ -28,4 +32,62 @@ button{
   background-color: var(--text-color);
   color: var(--bg-color);
   padding: 0.25rem;
+}
+
+.roundArrow{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--textColor);
+  border-radius: 100%;
+  --rotateSVG: 0deg;
+  --strokeSVG: var(--textColor);
+  --translateSVG: 0;
+  width: 10rem;
+  height: 10rem;
+  overflow: hidden;
+  color: transparent;
+  transition: color 0.25s, background 0.1s;
+  font-family: bee, sans-serif;
+  font-size: 3rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+
+  @include md{
+    font-size: 3rem;
+    width: 12rem;
+    height: 12rem;
+  }
+  //
+  // @include lg{
+  //   width: 10rem;
+  //   height: 10rem;
+  // }
+
+  @include xl{
+    width: 13vw;
+    height: 13vw;
+    font-size: 3vw;
+  }
+
+  >svg{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    fill: none;
+    stroke: var(--strokeSVG);
+    width: 80%;
+    height: 80%;
+    transition: transform 0.25s;
+    transform: rotate(var(--rotateSVG)) translateX(var(--translateSVG));
+  }
+
+  &:hover, &:active, &:focus{
+    color: var(--bgColor);
+    background-color: var(--textColor);
+    --strokeSVG: var(--bgColor);
+    --translateSVG: 120%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
 }
