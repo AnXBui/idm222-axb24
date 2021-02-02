@@ -31,7 +31,7 @@ body {
 }
 @media (min-width: 992px) {
   body {
-    --mgLeft: 14vw;
+    --mgLeft: 7vw;
   }
 }
 
@@ -451,7 +451,7 @@ p, a {
 }
 @media (min-width: 1200px) {
   p, a {
-    font-size: max(1.1vw, 1.1rem);
+    font-size: max(1.3vw, 1.1rem);
   }
 }
 
@@ -1015,7 +1015,7 @@ main:focus {
 @media (min-width: 992px) {
   .homeIntro {
     min-height: 50vw;
-    margin-bottom: 25vw;
+    margin-bottom: 30vw;
   }
 }
 
@@ -1032,8 +1032,8 @@ main:focus {
 }
 @media (min-width: 992px) {
   .homeIntroTitle {
-    bottom: -25vw;
-    width: 76vw;
+    bottom: -30vw;
+    width: 86vw;
   }
 }
 .homeIntroTitle:before {
@@ -1054,8 +1054,8 @@ main:focus {
 }
 @media (min-width: 992px) {
   .homeIntroTitle:before {
-    left: 30%;
-    top: calc(-100vmax + 20.5vw);
+    left: 34%;
+    top: calc(-100vmax + 22.5vw);
   }
 }
 .homeIntroTitle h1 {
@@ -1072,7 +1072,7 @@ main:focus {
 }
 @media (min-width: 992px) {
   .homeIntroTitle h1 {
-    font-size: 24vw;
+    font-size: 27vw;
   }
 }
 .homeIntroTitle h1 span {
@@ -1088,7 +1088,7 @@ main:focus {
 }
 @media (min-width: 992px) {
   .homeIntroTitle h1 span:nth-child(1) {
-    padding-left: 1em;
+    padding-left: 1.1em;
   }
 }
 .homeIntroTitle h1 span:nth-child(3) {
@@ -1097,7 +1097,7 @@ main:focus {
 }
 @media (min-width: 992px) {
   .homeIntroTitle h1 span:nth-child(3) {
-    padding-left: 0.85em;
+    padding-left: 0.95em;
   }
 }
 .homeIntroTitle h1 span b {
@@ -1124,7 +1124,7 @@ main:focus {
 }
 @media (min-width: 992px) {
   .homeIntroTitle p {
-    margin-left: calc(30% + 3vw);
+    margin-left: calc(30% + 5vw);
   }
 }
 .homeIntroTitle .roundArrow {
@@ -1149,8 +1149,8 @@ main:focus {
     height: 15vw;
     left: auto;
     top: auto;
-    right: calc(60% + 9vw);
-    bottom: 38vw;
+    right: calc(57% + 9vw);
+    bottom: 44vw;
   }
 }
 
@@ -1178,7 +1178,7 @@ main:focus {
 }
 @media (min-width: 992px) {
   .masterGrid::before {
-    left: 38%;
+    left: 35.7%;
   }
 }
 .masterGrid::after {
@@ -1188,7 +1188,7 @@ main:focus {
   height: 100%;
   position: absolute;
   top: 0;
-  right: 37.9%;
+  right: 35.6%;
   display: none;
 }
 @media (min-width: 992px) {
@@ -1268,12 +1268,12 @@ main:focus {
 @media (min-width: 768px) {
   .homeAbout > div:nth-of-type(1) {
     margin-right: 2rem;
-    text-align: right;
   }
 }
 @media (min-width: 992px) {
   .homeAbout > div:nth-of-type(1) {
     border-bottom: 0;
+    text-align: right;
   }
 }
 @media (min-width: 768px) {
@@ -1363,12 +1363,12 @@ main:focus {
 }
 @media (min-width: 768px) {
   .homeProject .homeProjectHeadings > div {
-    text-align: right;
     margin-bottom: 50vh;
   }
 }
 @media (min-width: 992px) {
   .homeProject .homeProjectHeadings > div {
+    text-align: right;
     margin-bottom: 0;
   }
 }
@@ -1467,11 +1467,10 @@ main:focus {
 }
 @media (min-width: 992px) {
   .projectIndex {
-    font-size: 28vw;
+    font-size: 35vw;
     margin-bottom: 2vw;
     margin-left: 0;
     line-height: 0.65;
-    writing-mode: vertical-rl;
   }
 }
 
@@ -1514,6 +1513,11 @@ main:focus {
 }
 .homeContact h2 span {
   color: var(--accentColor);
+}
+@media (min-width: 768px) {
+  .homeContact h2 {
+    text-align: right;
+  }
 }
 @media (min-width: 768px) {
   .homeContact > div {

@@ -53,7 +53,7 @@ main {
   }
   @include lg {
     min-height: 50vw;
-    margin-bottom: 25vw;
+    margin-bottom: 30vw;
   }
 }
 
@@ -67,8 +67,9 @@ main {
     // width: calc(100vw - (2 * var(--mgleft)))
   }
   @include lg {
-    bottom: -25vw;
-    width: 76vw;
+    bottom: -30vw;
+    width: 86vw;
+    // border: red 1px solid;
   }
 
   &:before {
@@ -85,8 +86,8 @@ main {
       top: calc(-100vmax + 3rem);
     }
     @include lg {
-      left: 30%;
-      top: calc(-100vmax + 20.5vw);
+      left: 34%;
+      top: calc(-100vmax + 22.5vw);
     }
   }
 
@@ -100,7 +101,7 @@ main {
       font-size: 28vw;
     }
     @include lg {
-      font-size: 24vw;
+      font-size: 27vw;
     }
 
     span {
@@ -112,7 +113,7 @@ main {
           padding-left: 0.6em;
         }
         @include lg {
-          padding-left: 1em;
+          padding-left: 1.1em;
         }
       }
 
@@ -120,7 +121,7 @@ main {
         padding-left: 0.5em;
         color: var(--accentColor);
         @include lg {
-          padding-left: 0.85em;
+          padding-left: 0.95em;
         }
       }
 
@@ -148,7 +149,7 @@ main {
       margin-left: calc(50% + 2rem);
     }
     @include lg {
-      margin-left: calc(30% + 3vw);
+      margin-left: calc(30% + 5vw);
     }
   }
 
@@ -170,8 +171,8 @@ main {
       height: 15vw;
       left: auto;
       top: auto;
-      right: calc(60% + 9vw);
-      bottom: 38vw;
+      right: calc(57% + 9vw);
+      bottom: 44vw;
     }
   }
 }
@@ -198,7 +199,7 @@ main {
       display: block;
     }
     @include lg {
-      left: 38%;
+      left: 35.7%;
     }
   }
 
@@ -209,7 +210,7 @@ main {
     height: 100%;
     position: absolute;
     top: 0;
-    right: 37.9%;
+    right: 35.6%;
     display: none;
     @include lg {
       display: block;
@@ -282,10 +283,10 @@ main {
     &:nth-of-type(1) {
       @include md {
         margin-right: 2rem;
-        text-align: right;
       }
       @include lg {
         border-bottom: 0;
+        text-align: right;
       }
     }
 
@@ -371,11 +372,11 @@ main {
       padding-right: 2rem;
 
       @include md{
-        text-align: right;
         margin-bottom: 50vh;
       }
 
       @include lg{
+        text-align: right;
         margin-bottom: 0;
       }
     }
@@ -475,11 +476,11 @@ main {
     font-size: 50vw;
   }
   @include lg {
-    font-size: 28vw;
+    font-size: 35vw;
     margin-bottom: 2vw;
     margin-left: 0;
     line-height: 0.65;
-    writing-mode: vertical-rl;
+    // writing-mode: vertical-rl;
   }
 }
 
@@ -519,6 +520,10 @@ main {
     margin-right: 2rem;
     span{
       color: var(--accentColor);
+    }
+
+    @include md{
+      text-align: right;
     }
   }
 
