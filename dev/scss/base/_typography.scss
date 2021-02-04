@@ -12,7 +12,7 @@
   --textColor: var(--bgColor);
 }
 
-h1,h2,h3,h4,h5{
+h1,h2,h3{
   font-family: bee, sans-serif;
   font-size: 5rem;
   *{
@@ -26,15 +26,33 @@ h1,h2,h3{
 
   >span{
     display: block;
+    font-size: 1em;
   }
 }
 
 p,a{
   font-size: 1.1rem;
-  line-height: 130%;
+  line-height: 140%;
 
   @include xl{
     font-size: max(1.3vw, 1.1rem);
+  }
+}
+
+h1, .h1{
+  font-size: clamp(6rem,30vw,30vw);
+  font-weight: 700;
+
+  @include md{
+    font-size: 28vw;
+  }
+
+  @include lg{
+    font-size: 10vw;
+  }
+
+  span{
+    font-size: 1em;
   }
 }
 
@@ -42,6 +60,7 @@ p,a{
 h2{
   font-size: clamp(4rem,25vw,21vw);
   font-weight: 700;
+  line-height: 80%;
 
   @include md{
     font-size: 15vw;
@@ -52,7 +71,7 @@ h2{
   }
 }
 
-h3{
+h3, .h3{
   font-size: clamp(2rem,15vw,20vw);
   letter-spacing: 0.05em;
   font-weight: 600;
@@ -72,6 +91,15 @@ h3{
   }
 }
 
+h4{
+  font-size: 1.3rem;
+  font-weight: 800;
+
+  @include xl{
+    font-size: max(1.3vw, 1.1rem);
+  }
+}
+
 .outlineText{
    color: var(--bgColor);
    font-family: bee, sans-serif;
@@ -83,6 +111,10 @@ h3{
     -webkit-text-stroke: 1px var(--textColor);
     -webkit-text-fill-color: var(--bgColor);
   }
+}
+
+.accent{
+  color: var(--accentColor)
 }
 
 .tightText{

@@ -21,7 +21,8 @@ $dark: #1b2354;
 $gradientLight: linear-gradient(to top, $light 0%, rgba($light, 0.45) 100%);
 
 :root{
-  --bgColor: #0C0B12;
+  // --bgColor: #0C0B12;
+  --bgColor: black;
   --textColor: #BFBFBF;
   --accentColor: #E07425;
   color: var(--textColor);
@@ -31,13 +32,13 @@ body{
   // --bgColor: white
   background-color: var(--bgColor);
   color: var(--textColor);
-
+  --mgBot2: 4rem;
   --mgBot: 2rem;
   --mgBotd2: 1rem;
   --mgLeft: max(20px,5%);
 
   @include md{
-    --mgLeft: 10vw;
+    --mgLeft: 7vw;
   }
 
   @include lg{

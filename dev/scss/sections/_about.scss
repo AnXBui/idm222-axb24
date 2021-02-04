@@ -1,0 +1,245 @@
+/* =============
+    About
+============= */
+
+.sectionPad{
+  padding: 2rem 0;
+
+  @include md{
+    padding: 8rem 0;
+  }
+
+  @include lg {
+    padding: 10vw 0;
+  }
+}
+
+
+.introSection{
+  padding: 4rem var(--mgLeft);
+  position: relative;
+
+
+  &::before{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background-color: var(--textColor);
+    display: none;
+    grid-row: 2 / 3;
+  }
+
+  @include md{
+    display: grid;
+    padding: var(--mgLeft);
+    padding-bottom: 0;
+    grid-row-gap: 2rem;
+    // grid-template-columns: 1fr 1fr;
+
+    &::before{
+      display: block;
+    }
+  }
+
+  @include lg{
+    grid-template-columns: 2fr 1fr;
+
+    &::before{
+      grid-row: 1 / 2;
+      left: 64.3%;
+    }
+  }
+}
+
+.introTitle{
+
+  @include md{
+    margin-right: 2rem;
+    grid-column: 1 / -1;
+  }
+
+  @include lg{
+    grid-column: 1 / 2;
+    padding-bottom: 2rem;
+  }
+
+  h1{
+
+    a{
+      margin-top: 2rem;
+      @include md{
+        margin: 0;
+        width: 3em;
+        height: 3em;
+        display: inline-block;
+      }
+
+      @include lg{
+        width: 4.25em;
+        height: 4.25em;
+      }
+    }
+
+    @include md{
+      font-size: 28vw;
+    }
+
+
+    @include lg{
+      font-size: 21.5vw;
+    }
+  }
+
+}
+
+.introContent{
+  padding: var(--mgBot) 0;
+
+  @include md{
+    margin-left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+  }
+
+  @include lg{
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 100%;
+  }
+
+  >*{
+    margin-bottom: var(--mgBot);
+    @include lg{
+      margin-left: 2rem;
+    }
+  }
+
+  >*:last-child{
+    margin-bottom: 0;
+
+    @include md{
+      margin-left: 2rem;
+    }
+  }
+
+  >a{
+    @include lg{
+      order: 10;
+      margin-top: var(--mgBot);
+    }
+  }
+}
+
+.about.masterGrid{
+    &::after{
+      grid-row: 1 / 2;
+    }
+}
+
+
+.resumeTitle{
+  margin-bottom: var(--mgBot);
+
+  @include md{
+    grid-column: 1 / 2;
+    grid-row: 1 / 5;
+    height: 100%;
+  }
+  h2{
+    font-size: 30vw;
+    margin-bottom: var(--mgBot);
+
+    @include md{
+      font-size: 17vw;
+    }
+
+    @include lg{
+      font-size: 11vw;
+    }
+  }
+
+  >div{
+
+    @media screen and (min-height: 890px){
+      position: sticky;
+      top: 10%;
+    }
+  }
+}
+
+.resumeSection{
+  padding: var(--mgBot) 0;
+
+  &:last-child{
+    padding-bottom: 0;
+  }
+
+  @include md{
+    grid-column: 2 / 3;
+    padding-left: 2rem;
+  }
+
+  @include lg{
+    padding-right: 2rem;
+  }
+  h3{
+    margin-bottom: var(--mgBotd2);
+    padding-bottom: var(--mgBotd2);
+    border-bottom: 1px solid var(--textColor);
+  }
+
+  h4{
+    margin-bottom: calc(var(--mgBotd2) / 4);
+  }
+
+  >ul{
+    >li{
+      padding: var(--mgBotd2) 0;
+      &:last-child{
+        padding-bottom: 0;
+      }
+
+        li{
+          padding: calc(var(--mgBotd2) / 2) 0;
+          &:last-child{
+            padding-bottom: 0;
+          }
+        }
+    }
+  }
+}
+
+.resumeSkill{
+  @include lg{
+    grid-column: 3 / 4;
+  }
+}
+
+.resumeAchievements{
+
+  @include lg{
+    grid-column: 2 / 4;
+
+    ul{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 4rem;
+    }
+  }
+}
+
+.resumeExp{
+  @include lg{
+    grid-column: 2 / 4;
+
+    >ul{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 4rem;
+    }
+  }
+}

@@ -25,6 +25,28 @@ button{
   }
 }
 
+.linkExt{
+  // font-weight: bold;
+  // font-size: 1.5rem;
+  position: relative;
+  display: flex;
+  &::before{
+    height: var(--border-wght);
+    background-color: var(--text-color);
+    content:'';
+    position: absolute;
+    bottom: -0.5rem;
+    width: 100%;
+  }
+
+  >svg{
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    margin-left: 0.5em;
+  }
+}
+
 .fillButton{
   font-weight: bold;
   font-size: 1.2rem;
@@ -59,17 +81,13 @@ button{
     width: 12rem;
     height: 12rem;
   }
-  //
-  // @include lg{
-  //   width: 10rem;
-  //   height: 10rem;
-  // }
 
-  @include xl{
-    width: 13vw;
-    height: 13vw;
-    font-size: 3vw;
+  @include lg{
+    width: 15vw;
+    height: 15vw;
+    font-size: 3.2vw;
   }
+
 
   >svg{
     position: absolute;
@@ -90,4 +108,8 @@ button{
     --translateSVG: 120%;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
+}
+
+.roundArrow.down{
+  --rotateSVG: 90deg;
 }

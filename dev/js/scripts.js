@@ -188,7 +188,7 @@ const swupJS = [{
 
 
       let target = projectLink;
-      console.log('target animated is ' + target);
+      // console.log('target animated is ' + target);
       let state = Flip.getState(target);
       transitioning = true;
       // addClass(target,'fullScreen');
@@ -202,7 +202,8 @@ const swupJS = [{
       let tl = gsap.timeline();
 
       let flip = Flip.from(state, {
-        duration: 0.75,
+        duration: 1,
+        ease: 'expo',
         zIndex: 5,
         onComplete: () => {
           next();
@@ -457,8 +458,8 @@ class HomeProject {
   start() {
     this.active = true;
     let obj = this;
-    console.log('starting home anim');
-    console.log(obj);
+    // console.log('starting home anim');
+    // console.log(obj);
     ScrollTrigger.matchMedia({
       // desktop only
       "(min-width: 992px)": () => {
@@ -512,7 +513,7 @@ function init() {
   // menu.hide();
 
   if (document.querySelector('.homeProjectList')) {
-    console.log('home projected');
+    // console.log('home projected');
     homeProj = new HomeProject();
   }
 
@@ -551,7 +552,7 @@ function unload() {
 
 
 swup.on('clickLink', (e) => {
-  console.log('target clicked is ' + e.delegateTarget);
+  // console.log('target clicked is ' + e.delegateTarget);
   let link = e.delegateTarget.getAttribute('data-swup-transition');
   if (link == 'project') {
     projectLink = e.target;
@@ -559,16 +560,13 @@ swup.on('clickLink', (e) => {
 });
 
 swup.on('samePageWithHash', (e) => {
-  console.log('target clicked is ' + e.delegateTarget);
-  console.log(e);
-  // let link = e.delegateTarget.getAttribute('data-swup-transition');
-  // if (link == 'project'){
-  //   projectLink = e.target;
+  // console.log('target clicked is ' + e.delegateTarget);
+  // console.log(e);
   let target = e.delegateTarget;
   let id = target.getAttribute('href');
-  console.log(id);
+  // console.log(id);
   let offset = document.querySelector(id).offsetHeight;
-  console.log(offset);
+  // console.log(offset);
   gsap.to(window, 0.5, {
     scrollTo: id
   });

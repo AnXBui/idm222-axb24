@@ -1,0 +1,20 @@
+/* =============
+    Contact
+============= */
+
+.contactInfo{
+
+  
+
+  @include md{
+    grid-column: 2 / 3;
+    margin-left: 2rem;
+  }
+  >div{
+    margin-bottom: var(--mgBot2);
+
+    >*{
+      margin-bottom: var(--mgBotd2);
+    }
+  }
+}
