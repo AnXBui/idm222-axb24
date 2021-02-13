@@ -11,6 +11,7 @@
 
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" as="style">
   <link rel="preload" href="https://use.typekit.net/wcz3ore.css" as="style">
+  <link rel="preload" as="style" href="css/styles.css">
   <link rel="preload" as="script" href="js/scripts-min.js">
 
 
@@ -90,19 +91,19 @@
 
   <main id="swup" class="transition-fade home">
 
-    <section class="homeIntro">
+    <section class="homeIntro parallaxSection">
       <div class="homeSplash"></div>
       <div class="homeIntroTitle">
-        <p>
+        <p data-depth='2'>
           <span>Welcome to a digital </span>
           <span>portfolio by An X. Bui</span>
         </p>
         <h1>
-          <span>Giving voice</span>
-          <span>to the st<b>o</b>ry</span>
-          <span>you tell.</span>
+          <span data-depth='0.5'>Giving voice</span>
+          <span data-depth='0.25'>to the st<b>o</b>ry</span>
+          <span data-depth='0.125'>you tell.</span>
         </h1>
-        <a class="roundArrow" href="#start">
+        <a class="roundArrow" href="#start" data-depth='1'>
           Explore
           <svg viewBox="0 0 105.17 36.854">
             <path d="M0 17.279h96.05"/>
@@ -113,12 +114,12 @@
     </section>
 
     <section class="masterGrid home">
-      <section id="start" class="homeAbout grid">
-        <div>
+      <section id="start" class="homeAbout grid parallaxSection">
+        <div data-depth='0.25'>
           <h2>About me</h1>
           <p>Visual Story-teller</p>
         </div>
-        <div>
+        <div data-depth='0.5'>
           <p>I specialize in:</p>
           <ul>
             <li><p>Graphic Design</p></li>
@@ -127,7 +128,7 @@
             <li><p>Illustration</p></li>
           </ul>
         </div>
-        <div>
+        <div data-depth='0.7'>
           <p>Hi there, my name is An Bui, graphic designer and visual story-teller. Welcome to my portfolio! Have a look around. And perhaps get to know me better.</p>
           <a data-swup-transition='fade' data-swup-link href="about.html" class="roundArrow">
             Learn more
@@ -149,151 +150,160 @@
         <div class="homeProjectList">
 
           <div class="homeProjectGroup">
-            <div class="projectItem">
+            <div class="projectItem parallaxSection">
               <div class="projectInfo">
-                <p class="projectIndex outlineText tightText">01/</p>
+                <p data-depth='0.15' class="projectIndex outlineText tightText">01/</p>
                 <h3>Ento Bug Snack</h3>
                 <p>Branding / Packaging</p>
                 <p>2020</p>
               </div>
               <div class="projectCoverWrapper">
-                <a class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
+                <a data-depth='-0.2' class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
                   <picture class="imageContent projectImage">
-                    <source type="image/webp" srcset="img/projects/ento/ento16.webp 1600w" sizes="100vw">
-                    <source type="image/png" srcset="img/projects/ento/ento16.png 1600w" sizes="100vw">
-                    <img style='--leftPos: 18%' src="img/projects/ento/ento16.png" width="100%" height="800px" alt="Ento Boxes mid-air">
+                    <source type="image/avif" srcset="img/projects/ento/ento02_1920.avif 1920w, img/projects/ento/ento02_1080.avif 1080w, img/projects/ento/ento02_768.avif 768w, img/projects/ento/ento02_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" srcset="img/projects/ento/ento02_1920.webp 1920w, img/projects/ento/ento02_1080.webp 1080w, img/projects/ento/ento02_768.webp 768w, img/projects/ento/ento02_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" srcset="img/projects/ento/ento02_1920.jp2 1920w, img/projects/ento/ento02_1080.jp2 1080w, img/projects/ento/ento02_768.jp2 768w, img/projects/ento/ento02_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" srcset="img/projects/ento/ento02_1920.png 1920w, img/projects/ento/ento02_1080.png 1080w, img/projects/ento/ento02_768.png 768w, img/projects/ento/ento02_250.png 250w" sizes="100vw">
+                    <img style='--leftPos: 18%;' src="img/projects/ento/ento02_1920.png" width="1920" height="1080" loading="lazy" alt="Ento Boxes mid-air">
                   </picture>
                 </a>
               </div>
             </div>
-            <div class="projectItem">
+            <div class="projectItem parallaxSection">
               <div class="projectInfo">
-                <p class="projectIndex outlineText">02/</p>
+                <p data-depth='0.1' class="projectIndex outlineText">02/</p>
                 <h3>Shleep Kit</h3>
                 <p>Branding / Packaging</p>
                 <p>2020</p>
               </div>
               <div class="projectCoverWrapper">
-                <a class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
+                <a data-depth='-0.2' class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
                   <picture class="imageContent projectImage">
-                    <source type="image/webp" srcset="img/projects/ento/ento16.webp 1600w" sizes="100vw">
-                    <source type="image/png" srcset="img/projects/ento/ento16.png 1600w" sizes="100vw">
-                    <img style='--leftPos: 18%' src="img/projects/ento/ento16.png" width="100%" height="800px" alt="Ento Boxes mid-air">
+                    <source type="image/avif" srcset="img/projects/ento/ento02_1920.avif 1920w, img/projects/ento/ento02_1080.avif 1080w, img/projects/ento/ento02_768.avif 768w, img/projects/ento/ento02_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" srcset="img/projects/ento/ento02_1920.webp 1920w, img/projects/ento/ento02_1080.webp 1080w, img/projects/ento/ento02_768.webp 768w, img/projects/ento/ento02_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" srcset="img/projects/ento/ento02_1920.jp2 1920w, img/projects/ento/ento02_1080.jp2 1080w, img/projects/ento/ento02_768.jp2 768w, img/projects/ento/ento02_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" srcset="img/projects/ento/ento02_1920.png 1920w, img/projects/ento/ento02_1080.png 1080w, img/projects/ento/ento02_768.png 768w, img/projects/ento/ento02_250.png 250w" sizes="100vw">
+                    <img style='--leftPos: 18%;' src="img/projects/ento/ento02_1920.png" width="1920" height="1080" loading="lazy" alt="Ento Boxes mid-air">
                   </picture>
                 </a>
               </div>
             </div>
-            <div class="projectItem">
+            <div class="projectItem parallaxSection">
               <div class="projectInfo">
-                <p class="projectIndex outlineText">03/</p>
+                <p data-depth='0.1' class="projectIndex outlineText">03/</p>
                 <h3>Shleep Kit</h3>
                 <p>Branding / Packaging</p>
                 <p>2020</p>
               </div>
               <div class="projectCoverWrapper">
-                <a class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
+                <a data-depth='-0.2' class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
                   <picture class="imageContent projectImage">
-                    <source type="image/webp" srcset="img/projects/ento/ento16.webp 1600w" sizes="100vw">
-                    <source type="image/png" srcset="img/projects/ento/ento16.png 1600w" sizes="100vw">
-                    <img style='--leftPos: 18%' src="img/projects/ento/ento16.png" width="100%" height="800px" alt="Ento Boxes mid-air">
+                    <source type="image/avif" srcset="img/projects/ento/ento02_1920.avif 1920w, img/projects/ento/ento02_1080.avif 1080w, img/projects/ento/ento02_768.avif 768w, img/projects/ento/ento02_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" srcset="img/projects/ento/ento02_1920.webp 1920w, img/projects/ento/ento02_1080.webp 1080w, img/projects/ento/ento02_768.webp 768w, img/projects/ento/ento02_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" srcset="img/projects/ento/ento02_1920.jp2 1920w, img/projects/ento/ento02_1080.jp2 1080w, img/projects/ento/ento02_768.jp2 768w, img/projects/ento/ento02_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" srcset="img/projects/ento/ento02_1920.png 1920w, img/projects/ento/ento02_1080.png 1080w, img/projects/ento/ento02_768.png 768w, img/projects/ento/ento02_250.png 250w" sizes="100vw">
+                    <img style='--leftPos: 18%;' src="img/projects/ento/ento02_1920.png" width="1920" height="1080" loading="lazy" alt="Ento Boxes mid-air">
                   </picture>
                 </a>
               </div>
             </div>
-
-          </div>
-
-          <div class="homeProjectGroup groupWrapper">
-            <div class="groupScroller">
-              <div class="projectItem">
-                <div class="projectInfo">
-                  <p class="projectIndex outlineText">04/</p>
-                  <h3>Ento Bug Snack</h3>
-                  <p>Branding / Packaging</p>
-                  <p>2020</p>
-                </div>
-                <div class="projectCoverWrapper">
-                  <a class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
-                    <picture class="imageContent projectImage">
-                      <source type="image/webp" srcset="img/projects/ento/ento16.webp 1600w" sizes="100vw">
-                      <source type="image/png" srcset="img/projects/ento/ento16.png 1600w" sizes="100vw">
-                      <img style='--leftPos: 18%' src="img/projects/ento/ento16.png" width="100%" height="800px" alt="Ento Boxes mid-air">
-                    </picture>
-                  </a>
-                </div>
+            <div class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.1' class="projectIndex outlineText">04/</p>
+                <h3>Ento Bug Snack</h3>
+                <p>Branding / Packaging</p>
+                <p>2020</p>
               </div>
-              <div class="projectItem">
-                <div class="projectInfo">
-                  <p class="projectIndex outlineText">05/</p>
-                  <h3>Shleep Kit</h3>
-                  <p>Branding / Packaging</p>
-                  <p>2020</p>
-                </div>
-                <div class="projectCoverWrapper">
-                  <a class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
-                    <picture class="imageContent projectImage">
-                      <source type="image/webp" srcset="img/projects/ento/ento16.webp 1600w" sizes="100vw">
-                      <source type="image/png" srcset="img/projects/ento/ento16.png 1600w" sizes="100vw">
-                      <img style='--leftPos: 18%' src="img/projects/ento/ento16.png" width="100%" height="800px" alt="Ento Boxes mid-air">
-                    </picture>
-                  </a>
-                </div>
-              </div>
-              <div class="projectItem">
-                <div class="projectInfo">
-                  <p class="projectIndex outlineText">06/</p>
-                  <h3>Shleep Kit</h3>
-                  <p>Branding / Packaging</p>
-                  <p>2020</p>
-                </div>
-                <div class="projectCoverWrapper">
-                  <a class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
-                    <picture class="imageContent projectImage">
-                      <source type="image/webp" srcset="img/projects/ento/ento16.webp 1600w" sizes="100vw">
-                      <source type="image/png" srcset="img/projects/ento/ento16.png 1600w" sizes="100vw">
-                      <img style='--leftPos: 18%' src="img/projects/ento/ento16.png" width="100%" height="800px" alt="Ento Boxes mid-air">
-                    </picture>
-                  </a>
-                </div>
-              </div>
-              <div class="projectItem">
-                <div class="projectInfo">
-                  <p class="projectIndex outlineText">07/</p>
-                  <h3>Shleep Kit</h3>
-                  <p>Branding / Packaging</p>
-                  <p>2020</p>
-                </div>
-                <div class="projectCoverWrapper">
-                  <a class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
-                    <picture class="imageContent projectImage">
-                      <source type="image/webp" srcset="img/projects/ento/ento16.webp 1600w" sizes="100vw">
-                      <source type="image/png" srcset="img/projects/ento/ento16.png 1600w" sizes="100vw">
-                      <img style='--leftPos: 18%' src="img/projects/ento/ento16.png" width="100%" height="800px" alt="Ento Boxes mid-air">
-                    </picture>
-                  </a>
-                </div>
-              </div>
-              <div class="projectMore">
-                <h3>See more projects <span>and WIP at <a href="">@altans</a></span></h3>
-                <a class="roundArrow" href="">
-                  See more
-                  <svg viewBox="0 0 105.17 36.854">
-                    <path d="M0 17.279h96.05"/>
-                    <path d="M68.355.079s1.362 17.2 36.816 17.2c0 0-35.79 0-35.79 19.575" data-name="Path 36"/>
-                </svg>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2' class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" srcset="img/projects/ento/ento02_1920.avif 1920w, img/projects/ento/ento02_1080.avif 1080w, img/projects/ento/ento02_768.avif 768w, img/projects/ento/ento02_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" srcset="img/projects/ento/ento02_1920.webp 1920w, img/projects/ento/ento02_1080.webp 1080w, img/projects/ento/ento02_768.webp 768w, img/projects/ento/ento02_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" srcset="img/projects/ento/ento02_1920.jp2 1920w, img/projects/ento/ento02_1080.jp2 1080w, img/projects/ento/ento02_768.jp2 768w, img/projects/ento/ento02_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" srcset="img/projects/ento/ento02_1920.png 1920w, img/projects/ento/ento02_1080.png 1080w, img/projects/ento/ento02_768.png 768w, img/projects/ento/ento02_250.png 250w" sizes="100vw">
+                    <img style='--leftPos: 18%;' src="img/projects/ento/ento02_1920.png" width="1920" height="1080" loading="lazy" alt="Ento Boxes mid-air">
+                  </picture>
                 </a>
               </div>
             </div>
-
+            <div class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.1' class="projectIndex outlineText">05/</p>
+                <h3>Shleep Kit</h3>
+                <p>Branding / Packaging</p>
+                <p>2020</p>
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2' class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" srcset="img/projects/ento/ento02_1920.avif 1920w, img/projects/ento/ento02_1080.avif 1080w, img/projects/ento/ento02_768.avif 768w, img/projects/ento/ento02_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" srcset="img/projects/ento/ento02_1920.webp 1920w, img/projects/ento/ento02_1080.webp 1080w, img/projects/ento/ento02_768.webp 768w, img/projects/ento/ento02_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" srcset="img/projects/ento/ento02_1920.jp2 1920w, img/projects/ento/ento02_1080.jp2 1080w, img/projects/ento/ento02_768.jp2 768w, img/projects/ento/ento02_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" srcset="img/projects/ento/ento02_1920.png 1920w, img/projects/ento/ento02_1080.png 1080w, img/projects/ento/ento02_768.png 768w, img/projects/ento/ento02_250.png 250w" sizes="100vw">
+                    <img style='--leftPos: 18%;' src="img/projects/ento/ento02_1920.png" width="1920" height="1080" loading="lazy" alt="Ento Boxes mid-air">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.1' class="projectIndex outlineText">06/</p>
+                <h3>Shleep Kit</h3>
+                <p>Branding / Packaging</p>
+                <p>2020</p>
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2'class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" srcset="img/projects/ento/ento02_1920.avif 1920w, img/projects/ento/ento02_1080.avif 1080w, img/projects/ento/ento02_768.avif 768w, img/projects/ento/ento02_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" srcset="img/projects/ento/ento02_1920.webp 1920w, img/projects/ento/ento02_1080.webp 1080w, img/projects/ento/ento02_768.webp 768w, img/projects/ento/ento02_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" srcset="img/projects/ento/ento02_1920.jp2 1920w, img/projects/ento/ento02_1080.jp2 1080w, img/projects/ento/ento02_768.jp2 768w, img/projects/ento/ento02_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" srcset="img/projects/ento/ento02_1920.png 1920w, img/projects/ento/ento02_1080.png 1080w, img/projects/ento/ento02_768.png 768w, img/projects/ento/ento02_250.png 250w" sizes="100vw">
+                    <img style='--leftPos: 18%;' src="img/projects/ento/ento02_1920.png" width="1920" height="1080" loading="lazy" alt="Ento Boxes mid-air">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.1' class="projectIndex outlineText">07/</p>
+                <h3>Shleep Kit</h3>
+                <p>Branding / Packaging</p>
+                <p>2020</p>
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2' class="projectCover" data-swup-transition='project' data-swup-link href='ento-bug-snack.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" srcset="img/projects/ento/ento02_1920.avif 1920w, img/projects/ento/ento02_1080.avif 1080w, img/projects/ento/ento02_768.avif 768w, img/projects/ento/ento02_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" srcset="img/projects/ento/ento02_1920.webp 1920w, img/projects/ento/ento02_1080.webp 1080w, img/projects/ento/ento02_768.webp 768w, img/projects/ento/ento02_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" srcset="img/projects/ento/ento02_1920.jp2 1920w, img/projects/ento/ento02_1080.jp2 1080w, img/projects/ento/ento02_768.jp2 768w, img/projects/ento/ento02_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" srcset="img/projects/ento/ento02_1920.png 1920w, img/projects/ento/ento02_1080.png 1080w, img/projects/ento/ento02_768.png 768w, img/projects/ento/ento02_250.png 250w" sizes="100vw">
+                    <img style='--leftPos: 18%;' src="img/projects/ento/ento02_1920.png" width="1920" height="1080" loading="lazy" alt="Ento Boxes mid-air">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div class="projectMore parallaxSection">
+              <h3 data-depth='1'>See more projects <span>and WIP at <a href="">@altans</a></span></h3>
+              <a data-depth='0.25' class="roundArrow" href="">
+                See more
+                <svg viewBox="0 0 105.17 36.854">
+                  <path d="M0 17.279h96.05"/>
+                  <path d="M68.355.079s1.362 17.2 36.816 17.2c0 0-35.79 0-35.79 19.575" data-name="Path 36"/>
+              </svg>
+              </a>
+            </div>
           </div>
+<!--
+          <div class="homeProjectGroup">
 
-
+          </div> -->
         </div>
       </section>
 
-      <section class="homeContact grid">
-          <h2>So, what's<span>your story?</span></h2>
-          <div>
+      <section class="homeContact grid parallaxSection">
+          <h2 data-depth='1'>So, what's<span>your story?</span></h2>
+          <div data-depth='1.25'>
             <p>Like what you see? Have an idea or story you are burning to tell? A voice you want to be heard? Or campaign or website you want to realize? Let's make it real.</p>
             <a class="roundArrow" data-swup-transition='fade' data-swup-link href="contact.html">
               See more
@@ -309,6 +319,7 @@
 
   </main>
 
+  <script src="js/lazysizes.min.js" async></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" crossorigin="anonymous"></script>
   <!-- <script src="js/DrawSVGPlugin.min.js"></script>

@@ -1,8 +1,28 @@
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Flip);
 
-
 function reParent(target, parent) {
   parent.appendChild(target);
+}
+
+function getWidthTotal(targets) {
+  let total = 0;
+  targets.forEach(target => {
+    console.log(target.clientWidth);
+    total += target.clientWidth;
+    // total -= 32;
+    // console.log('total is ' + total);
+  });
+  // console.log(total);
+  // console.log(total);
+  return total;
+}
+
+// function fadeIn(element){
+//   gsap.to(element, 0.25, {})
+// }
+
+function hasClass(element, clss) {
+  return element.classList.contains(clss);
 }
 
 function addClass(element, clss) {
@@ -103,6 +123,7 @@ let durmin3 = dur / 4;
 let lastScrollTop = 0;
 let delta = 30;
 let transitioning = false;
+let firstPage = true;
 // let navBarHeight = document.querySelector('.menuBar').offsetHeight;
 // console.log(navBarHeight);
 
@@ -138,29 +159,6 @@ const swupJS = [{
   },
   {
     from: '(.*)',
-    to: 'scale',
-    in: (next) => {
-      // console.log('code worked!');
-      gsap.fromTo(document.querySelector('#swup'), 0.25, {
-        scale: 0
-      }, {
-        scale: 1,
-        onComplete: next
-      });
-    },
-    out: (next) => {
-      // console.log('code out');
-      document.querySelector('#swup').style.opacity = 1;
-      gsap.fromTo(document.querySelector('#swup'), 0.25, {
-        scale: 1
-      }, {
-        scale: 0,
-        onComplete: next
-      });
-    }
-  },
-  {
-    from: '(.*)',
     to: 'project',
     in: (next) => {
       disableBodyScroll();
@@ -168,6 +166,7 @@ const swupJS = [{
       tl.to(document, 0.5, {
         scrollTo: 0
       });
+
       if (projectLink != null) {
         tl.to(projectLink, 0.5, {
           alpha: 0,
@@ -181,17 +180,15 @@ const swupJS = [{
             }
           }
         })
+      } else {
+        next();
       }
 
     },
     out: (next) => {
-
-
       let target = projectLink;
-      // console.log('target animated is ' + target);
       let state = Flip.getState(target);
       transitioning = true;
-      // addClass(target,'fullScreen');
       document.querySelector('.fixedCoverWrapper').appendChild(target);
       addClass(projectLink, 'fullScreen');
 
@@ -199,16 +196,16 @@ const swupJS = [{
         scrollTo: scrollPosition
       });
 
-      let tl = gsap.timeline();
+      let tl = gsap.timeline({onComplete:() => {
+        next();
+      }});
 
       let flip = Flip.from(state, {
         duration: 1,
         ease: 'expo',
-        zIndex: 5,
-        onComplete: () => {
-          next();
+        zIndex: 5
         }
-      });
+      );
 
       tl.fromTo('#swup', 0.5, {
         opacity: 1
@@ -219,9 +216,6 @@ const swupJS = [{
         scrollTo: 0
       });
       tl.add(flip, "start")
-
-
-
     }
   }
 ]
@@ -233,22 +227,6 @@ const swupOptions = {
 
 const swup = new Swup(swupOptions);
 
-
-// Create function and classes to define here, include clean up function
-// class Console{
-//   constructor(input){
-//     let text = input;
-//     console.log('this page is ' + input);
-//   }
-//
-//   cleanup(){
-//     let text = null;
-//   }
-//
-//   reset(){
-//
-//   }
-// }
 
 class Menu {
   constructor(header) {
@@ -445,45 +423,267 @@ class Menu {
 
 let viewSize = getViewport()[0]
 
-class HomeProject {
+class PageEffects {
   constructor() {
-    this.main = document.querySelector('.homeProjectList');
-    this.target = this.main.querySelector('.groupScroller');
-    this.tl = gsap.timeline();
-    this.active = false;
 
-    this.start();
+    this.fxArray = [];
+    this.paraArray = [];
+    this.saveStyles = [];
+    this.killList = [];
+    // console.log(this.fxArray);
+
+    this.refetch();
   }
 
-  start() {
-    this.active = true;
-    let obj = this;
-    // console.log('starting home anim');
-    // console.log(obj);
+  fetchSections() {
+    if (document.querySelector('.effectWrapper')) {
+      document.querySelectorAll('.effectWrapper').forEach(element => {
+        const effect = new EffectSection(element);
+        this.fxArray.push(effect);
+      })
+    }
+
+    if (document.querySelector('.parallaxSection')) {
+      document.querySelectorAll('.parallaxSection').forEach(element => {
+        // console.log('parallax created');
+        const parallax = new ParallaxSection(element);
+
+        if (parallax.active) {
+          parallax.layers.forEach(layer => {
+            this.saveStyles.push(layer);
+            this.paraArray.push(parallax);
+          })
+        }
+      })
+    }
+  }
+
+  killAll() {
+    // console.log('killing all page effects');
+
+    this.killList.forEach(effect => {
+      effect.kill();
+    })
+    ScrollTrigger.clearMatchMedia();
+    this.fxArray = [];
+    this.paraArray = [];
+    this.saveStyles = [];
+    this.killList = [];
+  }
+
+  refetch() {
+    // console.log('restarting page animation');
+    this.fetchSections();
+    this.applyEffects()
+  }
+
+  applyEffects() {
+    ScrollTrigger.saveStyles(this.saveStyles);
+    // console.log('applying page effects');
     ScrollTrigger.matchMedia({
       // desktop only
       "(min-width: 992px)": () => {
-        obj.tl.to(obj.target, 0.5, {
-          yPercent: -100,
-          ease: 'linear',
-          scrollTrigger: {
-            trigger: obj.main,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: true
-          }
-        });
+        this.fxArray.forEach(fx => {
+          fx.getEffects('desktop');
+          this.killList.push(fx);
+        })
+
+        this.paraArray.forEach(parallax => {
+          // console.log('playing parallax');
+          parallax.getParallax();
+          // console.log('parallax played');
+          this.killList.push(parallax);
+          // fx.getEffects('desktop');
+        })
+
+        return () => {
+          console.log('killing via media');
+          this.killList.forEach(effect => {
+            effect.kill();
+            this.killList.shift();
+          })
+        }
+      },
+
+      "all": () => {
+        this.fxArray.forEach(fx => {
+          fx.getEffects();
+        })
       }
     });
   }
 
+}
+
+class EffectSection {
+  constructor(section) {
+    this.wrapper = section;
+    this.elements = this.wrapper.querySelectorAll('[data-effect]');
+    this.killList = [];
+    this.tl = gsap.timeline();
+  }
+
+  fadeout(el) {
+    let effect = gsap.to(el, 0.5, {
+      alpha: 0
+    })
+
+    let scroll = ScrollTrigger.create({
+      trigger: this.wrapper,
+      start: "top top",
+      end: getViewport()[1],
+      animation: effect,
+      scrub: true
+    });
+
+    this.killList.push(effect);
+    this.killList.push(scroll);
+  }
+
+  autoSlide(el) {
+    console.log('autoSlider');
+    // console.log(this.wrapper);
+    let endPoint = '90% top';
+    let startPoint = '10% bottom';
+    if (hasClass(this.wrapper, 'autoSticky')) {
+      startPoint = 'top top';
+      endPoint = 'bottom bottom';
+    }
+    if (el.querySelector('.lazyload')){
+      el.querySelectorAll('.lazyload').forEach(image => {
+        addClass(image, 'lazypreload');
+      })
+    }
+
+    let slide = gsap.timeline();
+    let scroll = ScrollTrigger.create({
+      trigger: this.wrapper,
+      start: startPoint,
+      end: endPoint,
+      animation: slide,
+      onEnter: () => {
+        ScrollTrigger.refresh();
+      },
+      scrub: true
+    });
+
+    let zoom = el.dataset.scale;
+    let children = el.querySelectorAll('picture');
+    if (zoom) {
+      slide.to(children, 0.1, {
+        scale: 0.75
+      })
+    }
+
+    if (hasClass(this.wrapper, 'autoSticky')) {
+      slide.to(el, 1, {
+        xPercent: -100,
+        x: '+=100vw',
+        ease: 'linear'
+      });
+    }else {
+      slide.fromTo(el, 1,{x:'+=40vw', xPercent: 0},{
+        xPercent: -100,
+        x: '+=20vw',
+        ease: 'linear'
+      });
+    }
+
+
+
+    if (zoom) {
+      slide.to(children, 0.1, {
+        scale: 1
+      })
+    }
+
+    this.killList.push(slide);
+    this.killList.push(scroll);
+  }
+
+  getEffects(media = 'all') {
+    this.elements.forEach((element) => {
+      let effect = element.dataset.effect;
+      switch (effect) {
+        case 'fadeout':
+          if (media == 'all') {
+            this.fadeout(element);
+          }
+          break;
+
+        case 'autoSlide':
+          if (media == 'desktop') {
+            this.autoSlide(element);
+          }
+          break;
+
+        default:
+          console.log('no effect');
+      }
+    })
+  }
+
   kill() {
-    this.active = false;
-    this.tl.kill();
-    this.main = null;
-    this.target = null;
+    this.killList.forEach(effect => {
+      effect.kill();
+    });
   }
 }
+
+class ParallaxSection {
+  constructor(wrapper) {
+    this.wrapper = wrapper;
+    this.active = false;
+    this.killList = [];
+
+    if (this.wrapper.querySelectorAll('[data-depth]')) {
+      this.active = true;
+      this.layers = this.wrapper.querySelectorAll('[data-depth]');
+    }
+  }
+
+  getParallax() {
+    // console.log('parallaxed')
+    this.tl = gsap.timeline({});
+    let scroll = ScrollTrigger.create({
+      trigger: this.wrapper,
+      start: "top bottom",
+      end: "bottom top",
+      animation: this.tl,
+      scrub: true
+    });
+
+    gsap.utils.toArray(this.layers).forEach(layer => {
+      let depth = layer.dataset.depth;
+      let chain = 0;
+      if (layer.dataset.hasOwnProperty('chain')) {
+        chain = (layer.dataset.chain - 1) * 0.25;
+      }
+      let mov = -(100 * depth);
+      this.tl.fromTo(layer, 0.25, {
+        yPercent: -mov
+      }, {
+        yPercent: mov,
+        ease: 'linear'
+      }, 0);
+    });
+    this.killList.push(scroll);
+    this.killList.push(this.tl);
+  }
+
+  kill() {
+    if (this.active) {
+      console.log('killing parallax');
+      this.killList.forEach(effect => {
+        effect.kill();
+      })
+    }
+  }
+}
+
+
+
+
 
 
 let menu = new Menu(document.querySelector('header'));
@@ -491,8 +691,12 @@ let homeProj;
 // console.log(menu);
 
 
+
 // document init function, based on page #id or object inside page
 function init() {
+  console.log('init');
+  ScrollTrigger.refresh();
+
   gsap.to(window, 0.01, {
     scrollTo: 0
   });
@@ -510,11 +714,22 @@ function init() {
   }
 
   menu.showBar();
-  // menu.hide();
 
-  if (document.querySelector('.homeProjectList')) {
-    // console.log('home projected');
-    homeProj = new HomeProject();
+  // if (document.querySelector('.effectWrapper')) {
+  // }
+
+  if (document.querySelector('.lazyload')) {
+    document.querySelectorAll('.lazyload').forEach(element => {
+      element.onload = () => {
+        gsap.fromTo(element, 0.5, {
+          alpha: 0,
+          yPercent: 10
+        }, {
+          alpha: 1,
+          yPercent: 0
+        });
+      }
+    })
   }
 
 
@@ -532,7 +747,9 @@ function init() {
 
 // document cleanup function for Javascript stuff
 function unload() {
-  gsap.globalTimeline.clear();
+  pageEffects.killAll();
+  // gsap.globalTimeline.clear();
+
 
   if (homeProj != null) {
     homeProj.kill();
@@ -580,5 +797,12 @@ swup.on('samePageWithHash', (e) => {
 
 
 init();
-swup.on('contentReplaced', init);
+let pageEffects = new PageEffects();
+
+swup.on('contentReplaced', () => {
+  console.log('contentReplaced');
+  firstPage = false;
+  init();
+  pageEffects.refetch();
+});
 swup.on('willReplaceContent', unload);

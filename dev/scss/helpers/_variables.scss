@@ -35,14 +35,14 @@ body{
   --mgBot2: 4rem;
   --mgBot: 2rem;
   --mgBotd2: 1rem;
-  --mgLeft: max(20px,5%);
+  --mgLeft: max(30px,5%);
 
   @include md{
     --mgLeft: 7vw;
   }
 
   @include lg{
-    --mgLeft: 7vw;
+    --mgLeft: 5vw;
   }
 
 }
