@@ -36,6 +36,10 @@ header{
     z-index: -1;
     transform: translateY(0) translateZ(0);
     transition: transform 0.15s;
+
+    @include lg{
+      background: transparent;
+    }
   }
 }
 
@@ -54,12 +58,21 @@ header{
   --fillColor: var(--textColor);
   transform: translateY(0) translateZ(0);
   transition: transform 0.25s, background 0.25s;
+
+  @include lg{
+    height: 3rem;
+    padding: 0;
+  }
 }
 
 .menuBar.dark{
   --fillColor: var(--bgColor);
   background-color: var(--accentColor);
   @include md{
+    background-color: transparent;
+  }
+
+  .menuLogo, .menuButton{
     background-color: transparent;
   }
 }
@@ -86,6 +99,18 @@ header.up{
     width: 100%;
     fill: var(--fillColor);
     transition: fill 0.15s;
+
+    @include lg{
+      width: 3rem;
+      height: 2rem;
+    }
+  }
+
+  @include lg{
+    background-color: var(--bgColor);
+    padding: 0.5rem;
+    height: 3rem;
+    width: 4.5rem;
   }
 }
 
@@ -97,11 +122,21 @@ header.up{
     width: 100%;
     fill: var(--fillColor);
     transition: fill 0.15s;
-
-
     >*{
       transform-origin: center;
     }
+
+    @include lg{
+      height: 80%;
+      width: 80%;
+    }
+  }
+
+  @include lg{
+    height: 2rem;
+    box-sizing: content-box;
+    background-color: var(--bgColor);
+    padding: 0.5rem;
   }
 }
 

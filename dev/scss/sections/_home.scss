@@ -8,6 +8,7 @@ picture {
   object-fit: cover;
   object-position: var(--leftPos);
   width: 100%;
+  max-width: 100vw;
 }
 
 main {

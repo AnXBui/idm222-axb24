@@ -4,6 +4,10 @@ function reParent(target, parent) {
   parent.appendChild(target);
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function getWidthTotal(targets) {
   let total = 0;
   targets.forEach(target => {
@@ -222,11 +226,10 @@ const swupJS = [{
 
 const swupOptions = {
   linkSelector: 'a[href^="' + window.location.origin + '"]:not([data-no-swup]), a[href^="/"]:not([data-no-swup]), a[data-swup-link]:not([data-no-swup]), a[href^="#"]:not([data-no-swup])',
-  plugins: [new SwupJsPlugin(swupJS), new SwupA11YPlugin()]
+  plugins: [new SwupJsPlugin(swupJS), new SwupA11YPlugin(), new SwupPreloadPlugin()]
 }
 
 const swup = new Swup(swupOptions);
-
 
 class Menu {
   constructor(header) {
@@ -433,12 +436,22 @@ class PageEffects {
     // console.log(this.fxArray);
 
     this.refetch();
+
+    const refactor = this.refactor();
+
+    document.addEventListener('resize', refactor);
   }
 
   fetchSections() {
     if (document.querySelector('.effectWrapper')) {
       document.querySelectorAll('.effectWrapper').forEach(element => {
         const effect = new EffectSection(element);
+        const preStyles = effect.getPreStyles();
+        if (preStyles != null){
+          preStyles.forEach(style => {
+            this.saveStyles.push(style);
+          })
+        }
         this.fxArray.push(effect);
       })
     }
@@ -461,9 +474,13 @@ class PageEffects {
   killAll() {
     // console.log('killing all page effects');
 
-    this.killList.forEach(effect => {
-      effect.kill();
-    })
+    if (this.killList){
+      this.killList.forEach(effect => {
+        effect.kill();
+      })
+    }
+
+
     ScrollTrigger.clearMatchMedia();
     this.fxArray = [];
     this.paraArray = [];
@@ -471,11 +488,19 @@ class PageEffects {
     this.killList = [];
   }
 
-  refetch() {
-    // console.log('restarting page animation');
+  refetch(){
+    if (this.saveStyles){
+      this.saveStyles = [];
+    }
     this.fetchSections();
-    this.applyEffects()
+    this.applyEffects();
   }
+
+  refactor(){
+    console.log('refactored');
+    ScrollTrigger.refresh();
+  }
+
 
   applyEffects() {
     ScrollTrigger.saveStyles(this.saveStyles);
@@ -498,10 +523,6 @@ class PageEffects {
 
         return () => {
           console.log('killing via media');
-          this.killList.forEach(effect => {
-            effect.kill();
-            this.killList.shift();
-          })
         }
       },
 
@@ -520,10 +541,13 @@ class EffectSection {
     this.wrapper = section;
     this.elements = this.wrapper.querySelectorAll('[data-effect]');
     this.killList = [];
+    this.saveStyles = [];
     this.tl = gsap.timeline();
   }
 
   fadeout(el) {
+    let media = 'all';
+    console.log('fadeout');
     let effect = gsap.to(el, 0.5, {
       alpha: 0
     })
@@ -536,24 +560,19 @@ class EffectSection {
       scrub: true
     });
 
-    this.killList.push(effect);
-    this.killList.push(scroll);
+    this.killList.push({media:'all', fx: effect});
+    this.killList.push({media:'all', fx: scroll});
   }
 
   autoSlide(el) {
-    console.log('autoSlider');
-    // console.log(this.wrapper);
     let endPoint = '90% top';
     let startPoint = '10% bottom';
     if (hasClass(this.wrapper, 'autoSticky')) {
       startPoint = 'top top';
       endPoint = 'bottom bottom';
     }
-    if (el.querySelector('.lazyload')){
-      el.querySelectorAll('.lazyload').forEach(image => {
-        addClass(image, 'lazypreload');
-      })
-    }
+
+    console.log('autoSliding elements');
 
     let slide = gsap.timeline();
     let scroll = ScrollTrigger.create({
@@ -561,8 +580,10 @@ class EffectSection {
       start: startPoint,
       end: endPoint,
       animation: slide,
+      markers: true,
       onEnter: () => {
         ScrollTrigger.refresh();
+        console.log('recalculating autoslide');
       },
       scrub: true
     });
@@ -597,9 +618,30 @@ class EffectSection {
       })
     }
 
-    this.killList.push(slide);
-    this.killList.push(scroll);
+    this.killList.push({media:'desktop', fx: slide});
+    this.killList.push({media:'desktop', fx: scroll});
   }
+
+  getPreStyles() {
+    this.elements.forEach((element) => {
+      let effect = element.dataset.effect;
+      switch (effect) {
+        case 'fadeout':
+            // this.saveStyles.push(element);
+          break;
+
+        case 'autoSlide':
+            this.saveStyles.push(element);
+          break;
+
+        default:
+          console.log('no effect');
+      }
+    })
+    return this.saveStyles;
+  }
+
+
 
   getEffects(media = 'all') {
     this.elements.forEach((element) => {
@@ -614,6 +656,7 @@ class EffectSection {
         case 'autoSlide':
           if (media == 'desktop') {
             this.autoSlide(element);
+            console.log('autoSlide');
           }
           break;
 
@@ -623,10 +666,16 @@ class EffectSection {
     })
   }
 
-  kill() {
-    this.killList.forEach(effect => {
-      effect.kill();
-    });
+  kill(media = 'all') {
+    if (this.killList){
+      this.killList.forEach(effect => {
+        if (effect.media == media || media == 'all'){
+          console.log(effect);
+          effect.fx.kill();
+          console.log('effect killed');
+        }
+      });
+    }
   }
 }
 

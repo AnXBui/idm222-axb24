@@ -233,7 +233,7 @@
   z-index: 2;
   grid-column: 2 / 3;
   padding-top: 4rem;
-  min-height: 20vmin;
+  min-height: 15rem;
   height: auto;
   @include md {
     grid-column: 2 / 6;
@@ -244,15 +244,15 @@
     padding-top: 7vw;
   }
 
-  &:last-of-type:not(.projectAutoSlider) {
-    padding-bottom: 4rem;
-    @include md {
-      padding-bottom: 6rem;
-    }
-    @include lg {
-      padding-bottom: 7vw;
-    }
-  }
+  // &:last-of-type:not(.projectAutoSlider) {
+  //   padding-bottom: 4rem;
+  //   @include md {
+  //     padding-bottom: 6rem;
+  //   }
+  //   @include lg {
+  //     padding-bottom: 7vw;
+  //   }
+  // }
 }
 
 .projectSection.full {
@@ -600,6 +600,96 @@
         position: sticky;
         top: 0;
         height: 100vh;
+      }
+    }
+
+  }
+
+
+  .projectTopButton{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--bgColor);
+    border: 1px solid var(--textColor);
+    border-right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+    z-index: 5;
+
+    @include lg{
+      border-bottom: 0;
+    }
+
+    >svg{
+      width: 70%;
+      height: 70%;
+      fill: transparent;
+      stroke: var(--textColor) ;
+      stroke-width: 0.25rem;
+      transform: rotate(-90deg);
+    }
+  }
+
+  .nextProject{
+    z-index: 6;
+    background-color: var(--bgColor);
+    grid-column: 1 / -1;
+    padding: 0 var(--mgLeft);
+
+
+    .nextProjectInfo{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--mgLeft) 0;
+      border-top: 1px solid var(--textColor);
+      flex-wrap: wrap;
+
+      >*{
+
+        &:nth-child(2){
+          text-align: center;
+        }
+
+        @include lg{
+          width: 33%;
+        }
+      }
+
+      h4{
+        margin-top: 0.5em;
+
+        @include lg{
+          text-align: right;
+          margin-top: 0;
+        }
+      }
+    }
+
+    .projectNextImage{
+      display: block;
+      padding-bottom: 50vh;
+      position: relative;
+
+
+      img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        object-position: top;
+        opacity: 0.5;
+        transition: opacity 0.25s;
+
+        &:hover, &:active{
+          opacity: 1;
+        }
       }
     }
 
