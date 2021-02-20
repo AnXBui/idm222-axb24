@@ -21,9 +21,6 @@ function getWidthTotal(targets) {
   return total;
 }
 
-// function fadeIn(element){
-//   gsap.to(element, 0.25, {})
-// }
 
 function hasClass(element, clss) {
   return element.classList.contains(clss);
@@ -166,27 +163,12 @@ const swupJS = [{
     to: 'project',
     in: (next) => {
       disableBodyScroll();
-      let tl = gsap.timeline();
-      tl.to(document, 0.5, {
-        scrollTo: 0
-      });
 
-      if (projectLink != null) {
-        tl.to(projectLink, 0.5, {
-          alpha: 0,
-          onComplete: () => {
-            if (projectLink != null) {
-              projectLink.remove();
-              enableBodyScroll();
-              next();
-              tl.kill();
-              transitioning = false;
-            }
-          }
-        })
-      } else {
+      gsap.fromTo('#swup',0.5,{opacity: 0},{opacity: 1, onComplete: () => {
+        transitioning = false;
+        enableBodyScroll();
         next();
-      }
+      }});
 
     },
     out: (next) => {
@@ -195,10 +177,6 @@ const swupJS = [{
       transitioning = true;
       document.querySelector('.fixedCoverWrapper').appendChild(target);
       addClass(projectLink, 'fullScreen');
-
-      gsap.set(document, {
-        scrollTo: scrollPosition
-      });
 
       let tl = gsap.timeline({onComplete:() => {
         next();
@@ -216,9 +194,6 @@ const swupJS = [{
       }, {
         opacity: 0
       }, "start");
-      tl.to(document, 0.5, {
-        scrollTo: 0
-      });
       tl.add(flip, "start")
     }
   }
@@ -424,7 +399,28 @@ class Menu {
   }
 }
 
-let viewSize = getViewport()[0]
+let viewSize = getViewport()[0];
+let observerList = [];
+
+const scrollHandler = (entries, observer) => {
+  entries.forEach(entry => {
+    let elem = entry.target;
+    observerList.push(elem);
+    if (entry.isIntersecting) {
+      console.log('entry viewed');
+      ScrollTrigger.refresh();
+      effectObserver.unobserve(elem);
+      const index = entries.indexOf(elem);
+      if (index > -1){
+        observerList.splice(index,1);
+      }
+    }
+  })
+}
+
+var effectObserver = new IntersectionObserver (scrollHandler);
+
+
 
 class PageEffects {
   constructor() {
@@ -433,7 +429,6 @@ class PageEffects {
     this.paraArray = [];
     this.saveStyles = [];
     this.killList = [];
-    // console.log(this.fxArray);
 
     this.refetch();
 
@@ -441,6 +436,7 @@ class PageEffects {
 
     document.addEventListener('resize', refactor);
   }
+
 
   fetchSections() {
     if (document.querySelector('.effectWrapper')) {
@@ -480,12 +476,19 @@ class PageEffects {
       })
     }
 
+    if (observerList != null){
+      observerList.forEach(elem => {
+        effectObserver.unobserve(elem);
+      })
+    }
 
     ScrollTrigger.clearMatchMedia();
     this.fxArray = [];
     this.paraArray = [];
     this.saveStyles = [];
     this.killList = [];
+
+
   }
 
   refetch(){
@@ -498,7 +501,6 @@ class PageEffects {
 
   refactor(){
     console.log('refactored');
-    ScrollTrigger.refresh();
   }
 
 
@@ -564,6 +566,24 @@ class EffectSection {
     this.killList.push({media:'all', fx: scroll});
   }
 
+  fadein(el){
+    let media = 'all';
+    console.log('fadein');
+    let effect = gsap.fromTo(el, 0.5, {
+      alpha: 0
+    },{alpha: 1})
+    //
+    let scroll = ScrollTrigger.create({
+      trigger: this.wrapper,
+      start: "top center",
+      animation: effect,
+      once: true
+    });
+    //
+    this.killList.push({media:'all', fx: effect});
+    this.killList.push({media:'all', fx: scroll});
+  }
+
   autoSlide(el) {
     let endPoint = '90% top';
     let startPoint = '10% bottom';
@@ -571,6 +591,10 @@ class EffectSection {
       startPoint = 'top top';
       endPoint = 'bottom bottom';
     }
+
+    this.wrapper.querySelectorAll('.lazyload').forEach(img => {
+      addClass(img,'lazypreload');
+    })
 
     console.log('autoSliding elements');
 
@@ -580,11 +604,6 @@ class EffectSection {
       start: startPoint,
       end: endPoint,
       animation: slide,
-      markers: true,
-      onEnter: () => {
-        ScrollTrigger.refresh();
-        console.log('recalculating autoslide');
-      },
       scrub: true
     });
 
@@ -618,6 +637,8 @@ class EffectSection {
       })
     }
 
+    effectObserver.observe(this.wrapper);
+
     this.killList.push({media:'desktop', fx: slide});
     this.killList.push({media:'desktop', fx: scroll});
   }
@@ -626,9 +647,6 @@ class EffectSection {
     this.elements.forEach((element) => {
       let effect = element.dataset.effect;
       switch (effect) {
-        case 'fadeout':
-            // this.saveStyles.push(element);
-          break;
 
         case 'autoSlide':
             this.saveStyles.push(element);
@@ -644,7 +662,7 @@ class EffectSection {
 
 
   getEffects(media = 'all') {
-    this.elements.forEach((element) => {
+    this.elements.forEach(element => {
       let effect = element.dataset.effect;
       switch (effect) {
         case 'fadeout':
@@ -652,6 +670,12 @@ class EffectSection {
             this.fadeout(element);
           }
           break;
+
+        case 'fadein':
+            if (media == 'all') {
+              this.fadein(element);
+            }
+            break;
 
         case 'autoSlide':
           if (media == 'desktop') {
@@ -664,17 +688,25 @@ class EffectSection {
           console.log('no effect');
       }
     })
+
+
   }
 
   kill(media = 'all') {
     if (this.killList){
       this.killList.forEach(effect => {
         if (effect.media == media || media == 'all'){
-          console.log(effect);
           effect.fx.kill();
           console.log('effect killed');
         }
       });
+    }
+
+    if (media == 'all'){
+      this.wrapper = null;
+      this.elements = null;
+      this.killList = null;
+      this.saveStyles = null;
     }
   }
 }
@@ -744,73 +776,34 @@ let homeProj;
 // document init function, based on page #id or object inside page
 function init() {
   console.log('init');
+
+  document.querySelectorAll('[data-swup-preload]').forEach(link => {
+    const url = link.getAttribute("href");
+    swup.preloadPage(url);
+  })
+
   ScrollTrigger.refresh();
 
-  gsap.to(window, 0.01, {
-    scrollTo: 0
-  });
-  // rmvClass(document.querySelector('main'),'bodyLock');
   enableBodyScroll();
   lastScrollTop = 0;
   if (projectLink != null) {
-    gsap.to(projectLink, 0.15, {
+    gsap.to(projectLink, 1, {
       alpha: 0,
-      delay: 0.15,
+      delay: 0.5,
       onComplete: () => {
         projectLink.remove();
       }
     })
   }
-
   menu.showBar();
 
   // if (document.querySelector('.effectWrapper')) {
   // }
-
-  if (document.querySelector('.lazyload')) {
-    document.querySelectorAll('.lazyload').forEach(element => {
-      element.onload = () => {
-        gsap.fromTo(element, 0.5, {
-          alpha: 0,
-          yPercent: 10
-        }, {
-          alpha: 1,
-          yPercent: 0
-        });
-      }
-    })
-  }
-
-
-  if (document.querySelector('.about')) {
-    // let text = new Console('About Page');
-
-    // something like $('#lightbox').lightbox()
-  }
-
-  if (document.querySelector('.contact')) {
-    // let text = new Console('Contact Page');
-    // ...
-  }
 }
 
 // document cleanup function for Javascript stuff
 function unload() {
   pageEffects.killAll();
-  // gsap.globalTimeline.clear();
-
-
-  if (homeProj != null) {
-    homeProj.kill();
-    homeProj = null;
-  }
-
-  if (document.querySelector('#carousel')) {
-    // could use but be careful on effects on transition?
-    // clearing all timeline and tween in page
-
-    // carousel.destroy()
-  }
 }
 
 

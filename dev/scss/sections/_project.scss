@@ -225,6 +225,7 @@
   @include lg {
     font-size: 43.5vw;
     grid-column: 2 / 8;
+    margin-top: calc(var(--mgLeft) + 2vw);
   }
 }
 
@@ -241,7 +242,7 @@
   }
   @include lg {
     grid-column: 2 / 8;
-    padding-top: 7vw;
+    padding-top: 10vw;
   }
 
   // &:last-of-type:not(.projectAutoSlider) {
@@ -608,7 +609,7 @@
 
   .projectTopButton{
     position: fixed;
-    bottom: 0;
+    bottom: 3rem;
     right: 0;
     width: 3rem;
     height: 3rem;
@@ -622,6 +623,7 @@
     z-index: 5;
 
     @include lg{
+      bottom: 0;
       border-bottom: 0;
     }
 

@@ -44,11 +44,18 @@ body{
   justify-content: space-between;
 }
 
-// .lazyload,
-// .lazyloading {
-// 	opacity: 0;
-//   transition: opacity 300ms;
-// }
-// .lazyloaded {
-// 	opacity: 1;
-// }
+.lazyload,
+.lazyloading {
+	opacity: 0;
+  transition: opacity 1s;
+}
+
+.lazyloading{
+  opacity: 0.5;
+  background: rgba(white,0.2) url('../img/loader.svg') no-repeat center;
+}
+
+.lazyloaded {
+	opacity: 1;
+  transition: opacity 1s;
+}
