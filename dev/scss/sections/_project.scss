@@ -105,7 +105,8 @@
 }
 
 .introContent {
-  padding: var(--mgBot) 0;
+  padding: calc(var(--mgBot) / 2) 0;
+  display: grid;
   @include md {
     margin-left: 0;
     display: grid;
@@ -119,7 +120,7 @@
   }
 
   > * {
-    margin-bottom: var(--mgBot);
+    margin-bottom: calc(var(--mgBot) / 2);
     @include lg {
       margin-left: 2rem;
     }
@@ -133,9 +134,27 @@
   }
 
   > a {
+    width: 9rem;
+    height: 9rem;
     @include lg {
       order: 10;
+      width: 18vw;
+      height: 18vw;
       margin-top: var(--mgBot);
+    }
+  }
+
+  ul{
+    padding: calc(var(--mgBot) / 2) 0;
+    border-top: 1px solid $light;
+    border-bottom: 1px solid $light;
+    width: fit-content;
+
+    li{
+      margin-bottom: 0.5rem;
+      &:last-child{
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -218,9 +237,11 @@
   line-height: 0.65;
   z-index: 1;
   position: relative;
+  margin-top: 4rem;
   @include md {
     font-size: 42vw;
     grid-column: 2 / 6;
+    margin-top: 4rem;
   }
   @include lg {
     font-size: 43.5vw;

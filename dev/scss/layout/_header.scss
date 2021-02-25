@@ -89,9 +89,11 @@ header.up{
 }
 
 .menuLogo{
-  display: block;
   height: 100%;
   width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 
   >svg{
@@ -101,22 +103,25 @@ header.up{
     transition: fill 0.15s;
 
     @include lg{
-      width: 3rem;
-      height: 2rem;
+      width: 2rem;
+      height: 1.5rem;
     }
   }
 
   @include lg{
     background-color: var(--bgColor);
-    padding: 0.5rem;
     height: 3rem;
-    width: 4.5rem;
+    width: 3rem;
   }
 }
 
 .menuButton{
   height: 100%;
   width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   >svg{
     height: 90%;
     width: 100%;
@@ -127,16 +132,15 @@ header.up{
     }
 
     @include lg{
-      height: 80%;
-      width: 80%;
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 
   @include lg{
-    height: 2rem;
-    box-sizing: content-box;
+    height: 3rem;
+    width: 3rem;
     background-color: var(--bgColor);
-    padding: 0.5rem;
   }
 }
 
