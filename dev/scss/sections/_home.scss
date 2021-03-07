@@ -405,9 +405,10 @@ main {
         display: flex;
         align-items: flex-end;
         flex-direction: column;
+        top: 2rem;
 
 
-        @media (min-aspect-ratio: 16/9) {
+        @media (min-aspect-ratio: 17/9) {
           position: absolute;
           top: 0;
         }

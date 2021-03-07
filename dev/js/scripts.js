@@ -150,6 +150,9 @@ const swupJS = [{
     out: (next) => {
       // console.log('code out');
       document.querySelector('#swup').style.opacity = 1;
+      gsap.set(window,{
+        scrollTo: 0
+      });
       gsap.fromTo(document.querySelector('#swup'), 0.25, {
         opacity: 1
       }, {
@@ -429,6 +432,7 @@ class PageEffects {
     this.paraArray = [];
     this.saveStyles = [];
     this.killList = [];
+    this.nextProject = null;
 
     this.refetch();
 
@@ -452,20 +456,39 @@ class PageEffects {
       })
     }
 
-    if (document.querySelector('.parallaxSection')) {
-      document.querySelectorAll('.parallaxSection').forEach(element => {
-        // console.log('parallax created');
-        const parallax = new ParallaxSection(element);
+    if (document.querySelector('.nextProject')){
+      this.nextProject = document.querySelector('.nextProject');
+      let tl = gsap.timeline();
 
-        if (parallax.active) {
-          parallax.layers.forEach(layer => {
-            this.saveStyles.push(layer);
-          })
+      const scroll = ScrollTrigger.create({
+        trigger: this.nextProject,
+        start: "top bottom",
+        animation: tl,
+        toggleActions: "play complete restart reset"
+      });
 
-          this.paraArray.push(parallax);
-        }
-      })
+      tl.to('.projectControls',dur,{alpha: 0, onComplete:() => {
+        console.log('fade controls');
+      }});
+
+      this.killList.push(scroll);
     }
+
+    // disabling parallax until smoothing is solved...
+    // if (document.querySelector('.parallaxSection')) {
+    //   document.querySelectorAll('.parallaxSection').forEach(element => {
+    //     // console.log('parallax created');
+    //     const parallax = new ParallaxSection(element);
+    //
+    //     if (parallax.active) {
+    //       parallax.layers.forEach(layer => {
+    //         this.saveStyles.push(layer);
+    //       })
+    //
+    //       this.paraArray.push(parallax);
+    //     }
+    //   })
+    // }
   }
 
   killAll() {
@@ -488,8 +511,7 @@ class PageEffects {
     this.paraArray = [];
     this.saveStyles = [];
     this.killList = [];
-
-
+    this.nextProject = null;
   }
 
   refetch(){
@@ -847,9 +869,10 @@ swup.on('samePageWithHash', (e) => {
 
 
 
-
-
-
+gsap.set('body', {alpha: 0});
+window.addEventListener('load', () => {
+  gsap.to('body', 0.5,{alpha: 1});
+});
 init();
 let pageEffects = new PageEffects();
 
