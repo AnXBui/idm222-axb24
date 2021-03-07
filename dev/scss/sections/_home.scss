@@ -56,6 +56,10 @@ main {
   @include lg {
     margin-bottom: 28vw;
     min-height: 50vw;
+<<<<<<< HEAD
+=======
+    margin-bottom: 25vw;
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
   }
 }
 
@@ -75,9 +79,8 @@ main {
     // width: calc(100vw - (2 * var(--mgleft)))
   }
   @include lg {
-    bottom: -30vw;
-    width: 86vw;
-    // border: red 1px solid;
+    bottom: -25vw;
+    width: 76vw;
   }
 
   &:before {
@@ -95,8 +98,13 @@ main {
       top: calc(-100vmax + 3rem);
     }
     @include lg {
+<<<<<<< HEAD
       left: 34%;
       top: calc(-100vmax + 24.5vw);
+=======
+      left: 30%;
+      top: calc(-100vmax + 20.5vw);
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
     }
   }
 
@@ -110,7 +118,7 @@ main {
       font-size: 28vw;
     }
     @include lg {
-      font-size: 27vw;
+      font-size: 24vw;
     }
 
     span {
@@ -122,7 +130,7 @@ main {
           padding-left: 0.6em;
         }
         @include lg {
-          padding-left: 1.1em;
+          padding-left: 1em;
         }
       }
 
@@ -130,7 +138,7 @@ main {
         color: var(--accentColor);
         padding-left: 0.5em;
         @include lg {
-          padding-left: 0.95em;
+          padding-left: 0.85em;
         }
       }
 
@@ -168,7 +176,7 @@ main {
       margin-left: calc(50% + 2rem);
     }
     @include lg {
-      margin-left: calc(30% + 5vw);
+      margin-left: calc(30% + 3vw);
     }
   }
 
@@ -189,9 +197,15 @@ main {
       bottom: 44vw;
       height: 15vw;
       left: auto;
+<<<<<<< HEAD
       right: calc(57% + 9vw);
       top: auto;
       width: 15vw;
+=======
+      top: auto;
+      right: calc(60% + 9vw);
+      bottom: 38vw;
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
     }
   }
 }
@@ -219,7 +233,11 @@ main {
       display: block;
     }
     @include lg {
+<<<<<<< HEAD
       left: 35%;
+=======
+      left: 38%;
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
     }
   }
 
@@ -231,8 +249,13 @@ main {
     position: absolute;
     right: 35%;
     top: 0;
+<<<<<<< HEAD
     width: 0;
     opacity: 0.25;
+=======
+    right: 37.9%;
+    display: none;
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
     @include lg {
       display: block;
     }
@@ -312,10 +335,10 @@ main {
     &:nth-of-type(1) {
       @include md {
         margin-right: 2rem;
+        text-align: right;
       }
       @include lg {
         border-bottom: 0;
-        text-align: right;
       }
     }
 
@@ -396,10 +419,21 @@ main {
       padding-right: 2rem;
       position: sticky;
       top: 10%;
+<<<<<<< HEAD
       @include md {
         margin-bottom: 50vh;
       }
       @include lg {
+=======
+      padding-right: 2rem;
+
+      @include md{
+        text-align: right;
+        margin-bottom: 50vh;
+      }
+
+      @include lg{
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
         margin-bottom: 0;
         text-align: right;
         display: flex;
@@ -512,12 +546,20 @@ main {
     font-size: 50vw;
   }
   @include lg {
+<<<<<<< HEAD
     font-size: 35vw;
     line-height: 0.65;
     margin-bottom: 3.5vw;
     margin-left: 0;
     margin-top: 2.5vw;
     // writing-mode: vertical-rl;
+=======
+    font-size: 28vw;
+    margin-bottom: 2vw;
+    margin-left: 0;
+    line-height: 0.65;
+    writing-mode: vertical-rl;
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
   }
 }
 
@@ -559,9 +601,12 @@ main {
     span {
       color: var(--accentColor);
     }
+<<<<<<< HEAD
     @include md {
       text-align: right;
     }
+=======
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
   }
 
   > div {

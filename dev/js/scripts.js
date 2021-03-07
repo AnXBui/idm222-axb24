@@ -35,46 +35,45 @@ function rmvClass(element, clss) {
 }
 
 function debounce(func, wait, immediate) {
-  var timeout;
-  return function() {
-    var context = this,
-      args = arguments;
-    var later = function() {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
 }
 
 function getViewport() {
 
-  var viewPortWidth;
-  var viewPortHeight;
+ var viewPortWidth;
+ var viewPortHeight;
 
-  // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
-  if (typeof window.innerWidth != 'undefined') {
-    viewPortWidth = window.innerWidth,
-      viewPortHeight = window.innerHeight
-  }
+ // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
+ if (typeof window.innerWidth != 'undefined') {
+   viewPortWidth = window.innerWidth,
+   viewPortHeight = window.innerHeight
+ }
 
-  // IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
-  else if (typeof document.documentElement != 'undefined' &&
-    typeof document.documentElement.clientWidth !=
-    'undefined' && document.documentElement.clientWidth != 0) {
+// IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
+ else if (typeof document.documentElement != 'undefined'
+ && typeof document.documentElement.clientWidth !=
+ 'undefined' && document.documentElement.clientWidth != 0) {
     viewPortWidth = document.documentElement.clientWidth,
-      viewPortHeight = document.documentElement.clientHeight
-  }
+    viewPortHeight = document.documentElement.clientHeight
+ }
 
-  // older versions of IE
-  else {
-    viewPortWidth = document.getElementsByTagName('body')[0].clientWidth,
-      viewPortHeight = document.getElementsByTagName('body')[0].clientHeight
-  }
-  return [viewPortWidth, viewPortHeight];
+ // older versions of IE
+ else {
+   viewPortWidth = document.getElementsByTagName('body')[0].clientWidth,
+   viewPortHeight = document.getElementsByTagName('body')[0].clientHeight
+ }
+ return [viewPortWidth, viewPortHeight];
 }
 
 function enableBodyScroll() {
@@ -92,9 +91,7 @@ function enableBodyScroll() {
   }
 }
 
-function disableBodyScroll({
-  savePosition = false
-} = {}) {
+function disableBodyScroll({ savePosition = false } = {}) {
   if (document.readyState === 'complete') {
     if (document.body.scrollHeight > window.innerHeight) {
       if (savePosition) document.body.style.marginTop = `-${window.pageYOffset}px`;
@@ -102,9 +99,7 @@ function disableBodyScroll({
       document.body.style.overflowY = 'scroll';
     }
   } else {
-    window.addEventListener('load', () => disableBodyScroll({
-      savePosition
-    }));
+    window.addEventListener('load', () => disableBodyScroll({ savePosition }));
   }
 }
 
@@ -163,12 +158,30 @@ const swupJS = [{
     to: 'project',
     in: (next) => {
       disableBodyScroll();
+<<<<<<< HEAD
 
       gsap.fromTo('#swup',0.5,{opacity: 0},{opacity: 1, onComplete: () => {
         transitioning = false;
         enableBodyScroll();
         next();
       }});
+=======
+      let tl = gsap.timeline();
+      tl.to(document, 0.5, {
+        scrollTo: 0
+      });
+      if (projectLink != null){
+        tl.to(projectLink,0.5,{alpha:0,onComplete: () => {
+          if (projectLink != null) {
+            projectLink.remove();
+            enableBodyScroll();
+            next();
+            tl.kill();
+            transitioning = false;
+          }
+        }})
+      }
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
 
     },
     out: (next) => {
@@ -210,7 +223,7 @@ class Menu {
   constructor(header) {
     this.menu = header;
     this.main = header.querySelector('.menuMain');
-    this.bar = header.querySelector('.menuBar');
+    this.bar= header.querySelector('.menuBar');
     this.animate = header.querySelectorAll('*[data-animate]');
     // this.animate2 = header.querySelectorAll('*[data-animate="2"]');
     // this.animate3 = header.querySelectorAll('*[data-animate="3"]');
@@ -245,9 +258,7 @@ class Menu {
         paused: true,
         onComplete: () => {
           this.animating = false;
-          disableBodyScroll({
-            savePosition: true
-          });
+          disableBodyScroll({ savePosition: true });
         }
       })
       .to(this.button.top, dur, {
@@ -330,7 +341,7 @@ class Menu {
       element.addEventListener('click', () => {
         let href = element.href;
         if (!this.animating && this.active) {
-          if (href.indexOf(window.location.href) > -1) {
+          if(href.indexOf(window.location.href) > -1) {
             this.hide();
           }
         }
@@ -355,36 +366,36 @@ class Menu {
     let st = window.pageYOffset || document.documentElement.scrollTop;
 
     if (Math.abs(lastScrollTop - st) <= delta)
-      return;
+    return;
 
     if (this.active || this.animating) return;
 
     if (st > lastScrollTop) {
-      addClass(this.menu, 'up');
+      addClass(this.menu,'up');
       // Scroll Down
     } else {
       // Scroll Up
-      rmvClass(this.menu, 'up');
+      rmvClass(this.menu,'up');
     }
 
     lastScrollTop = st;
   }
 
-  showBar() {
-    rmvClass(this.menu, 'up');
+  showBar(){
+    rmvClass(this.menu,'up');
     lastScrollTop = 0;
   }
 
   hide() {
     // if (this.active){
-    this.animating = true;
-    enableBodyScroll();
+      this.animating = true;
+      enableBodyScroll();
 
-    // rmvClass(document.querySelector('main'),'bodyLock');
+      // rmvClass(document.querySelector('main'),'bodyLock');
 
-    rmvClass(this.bar, 'dark');
-    this.out.restart();
-    this.active = false;
+      rmvClass(this.bar, 'dark');
+      this.out.restart();
+      this.active = false;
     // }
   }
 
@@ -421,6 +432,7 @@ const scrollHandler = (entries, observer) => {
 var effectObserver = new IntersectionObserver (scrollHandler);
 
 
+<<<<<<< HEAD
 
 class PageEffects {
   constructor() {
@@ -772,6 +784,71 @@ class ParallaxSection {
         effect.kill();
       })
     }
+=======
+class HomeProject{
+  constructor(){
+    this.main = document.querySelector('.homeProjectList');
+    this.target = this.main.querySelector('.groupScroller');
+    this.active = false;
+    let that = this;
+    console.log(that);
+
+
+    if (viewSize >= 992){
+      this.start();
+    }
+
+    window.addEventListener('resize', debounce(() => {
+      viewSize = getViewport()[0];
+      console.log(viewSize);
+      console.log('refactoring');
+      if (viewSize >= 992){
+        if (!this.active){
+          this.start();
+        }
+      } else {
+        if (this.active){
+          this.end();
+        }
+      }
+    }, 150));
+  }
+
+  start(){
+    this.active = true;
+    this.tl = gsap.to(this.target, 0.5, {yPercent: -100, ease: 'linear', scrollTrigger:{
+      trigger: this.main,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true
+    }});
+  }
+
+  end(){
+    this.active = false;
+    this.tl.kill();
+    gsap.set(this.target,{yPercent: 0});
+  }
+
+  kill(){
+    window.removeEventListener('resize', debounce(() => {
+      viewSize = getViewport()[0];
+      console.log(viewSize);
+      console.log('refactoring');
+      if (viewSize >= 992){
+        if (!this.active){
+          this.start();
+        }
+      } else {
+        if (this.active){
+          this.end();
+        }
+      }
+    }, 150));
+    this.main = null;
+    this.target = null;
+    this.tl = null;
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
   }
 }
 
@@ -797,8 +874,9 @@ function init() {
   ScrollTrigger.refresh();
 
   enableBodyScroll();
-  lastScrollTop = 0;
+  lastScrollTop =  0;
   if (projectLink != null) {
+<<<<<<< HEAD
     gsap.to(projectLink, 1, {
       alpha: 0,
       delay: 0.5,
@@ -806,8 +884,23 @@ function init() {
         projectLink.remove();
       }
     })
+=======
+    gsap.to(projectLink,0.15,{alpha:0, delay: 0.15, onComplete:() => {
+      projectLink.remove();
+    }})
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
   }
   menu.showBar();
+<<<<<<< HEAD
+=======
+  // menu.hide();
+
+  if (document.querySelector('.homeProjectList')){
+    console.log('home projected');
+    homeProj = new HomeProject();
+  }
+
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
 
   // if (document.querySelector('.effectWrapper')) {
   // }
@@ -815,7 +908,23 @@ function init() {
 
 // document cleanup function for Javascript stuff
 function unload() {
+<<<<<<< HEAD
   pageEffects.killAll();
+=======
+  gsap.globalTimeline.clear();
+
+  if (homeProj != null){
+     homeProj.kill();
+     homeProj = null;
+  }
+
+  if (document.querySelector('#carousel')) {
+    // could use but be careful on effects on transition?
+    // clearing all timeline and tween in page
+
+    // carousel.destroy()
+  }
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
 }
 
 
@@ -825,7 +934,7 @@ function unload() {
 swup.on('clickLink', (e) => {
   // console.log('target clicked is ' + e.delegateTarget);
   let link = e.delegateTarget.getAttribute('data-swup-transition');
-  if (link == 'project') {
+  if (link == 'project'){
     projectLink = e.target;
   }
 });
@@ -837,10 +946,15 @@ swup.on('samePageWithHash', (e) => {
   let id = target.getAttribute('href');
   // console.log(id);
   let offset = document.querySelector(id).offsetHeight;
+<<<<<<< HEAD
   // console.log(offset);
   gsap.to(window, 0.5, {
     scrollTo: id
   });
+=======
+  console.log(offset);
+  gsap.to(window,0.5,{scrollTo:id});
+>>>>>>> parent of 16cef64 (Bug Fixes and add Project HTMLs)
   // }
 });
 
