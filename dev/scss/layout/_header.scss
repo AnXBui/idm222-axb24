@@ -59,6 +59,7 @@ header{
   transform: translateY(0) translateZ(0);
   transition: transform 0.25s, background 0.25s;
 
+
   @include lg{
     height: 3rem;
     padding: 0;

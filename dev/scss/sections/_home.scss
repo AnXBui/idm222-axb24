@@ -144,6 +144,16 @@ main {
         top: 0.02em;
         width: 0.67em;
       }
+
+      video{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
     }
   }
 
@@ -375,6 +385,7 @@ main {
     margin-bottom: 4rem;
     padding-left: var(--mgLeft);
     padding-top: 2rem;
+    position: relative;
     // border-top: 1px solid var(--textColor);
     @include md {
       grid-column: 1 / 3;
@@ -394,13 +405,29 @@ main {
         display: flex;
         align-items: flex-end;
         flex-direction: column;
+
+
+        @media (min-aspect-ratio: 16/9) {
+          position: absolute;
+          top: 0;
+        }
       }
 
       h2{
         max-width: 15ch;
         @include lg{
           max-width: 10ch;
+          font-size: 12vw;
           text-align: right;
+        }
+      }
+
+      svg{
+        margin-top: 2rem;
+        display: none;
+        @include lg{
+          display: block;
+          width: 24vw;
         }
       }
     }
@@ -457,7 +484,7 @@ main {
       height: 120%;
       position: absolute;
       top: -10%;
-      transition: none;
+      // transition: 0;
     }
   }
 }

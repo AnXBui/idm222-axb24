@@ -347,7 +347,7 @@ class Menu {
         this.hasScrolled();
         this.didScroll = false;
       }
-    }, 250);
+    }, 150);
 
   }
 
@@ -432,9 +432,9 @@ class PageEffects {
 
     this.refetch();
 
-    const refactor = this.refactor();
+    // const refactor = this.refactor();
 
-    document.addEventListener('resize', refactor);
+    // document.addEventListener('resize', refactor);
   }
 
 
@@ -460,8 +460,9 @@ class PageEffects {
         if (parallax.active) {
           parallax.layers.forEach(layer => {
             this.saveStyles.push(layer);
-            this.paraArray.push(parallax);
           })
+
+          this.paraArray.push(parallax);
         }
       })
     }
@@ -499,9 +500,9 @@ class PageEffects {
     this.applyEffects();
   }
 
-  refactor(){
-    console.log('refactored');
-  }
+  // refactor(){
+  //   console.log('refactored');
+  // }
 
 
   applyEffects() {
@@ -619,13 +620,13 @@ class EffectSection {
       slide.to(el, 1, {
         xPercent: -100,
         x: '+=100vw',
-        ease: 'linear'
+        ease: 'none'
       });
     }else {
       slide.fromTo(el, 1,{x:'+=40vw', xPercent: 0},{
         xPercent: -100,
         x: '+=20vw',
-        ease: 'linear'
+        ease: 'none'
       });
     }
 
@@ -715,41 +716,53 @@ class ParallaxSection {
   constructor(wrapper) {
     this.wrapper = wrapper;
     this.active = false;
+    this.running = false;
     this.killList = [];
 
     if (this.wrapper.querySelectorAll('[data-depth]')) {
       this.active = true;
       this.layers = this.wrapper.querySelectorAll('[data-depth]');
+      this.tl = gsap.timeline({paused:true});
     }
   }
 
   getParallax() {
+
+    if (!this.running){
+      this.running = true;
+      console.log('running');
+    } else {
+      console.log('already running this parallax:');
+      console.log(this.wrapper);
+    }
     // console.log('parallaxed')
-    this.tl = gsap.timeline({});
-    let scroll = ScrollTrigger.create({
+    const scroll = ScrollTrigger.create({
       trigger: this.wrapper,
       start: "top bottom",
       end: "bottom top",
       animation: this.tl,
+      markers: true,
       scrub: true
     });
 
-    gsap.utils.toArray(this.layers).forEach(layer => {
-      let depth = layer.dataset.depth;
-      let chain = 0;
-      if (layer.dataset.hasOwnProperty('chain')) {
-        chain = (layer.dataset.chain - 1) * 0.25;
-      }
-      let mov = -(100 * depth);
-      this.tl.fromTo(layer, 0.25, {
-        yPercent: -mov
+    // console.log(this.wrapper)
+    // console.log(' parallaxing layers...')
+    // console.log(this.layers);
+
+    this.layers.forEach((layer, index) => {
+      const depth = layer.dataset.depth;
+      const mov = -(100 * depth);
+
+      this.tl.fromTo(layer, 1, {
+        yPercent: -mov,
+        ease: 'none'
       }, {
         yPercent: mov,
-        ease: 'linear'
-      }, 0);
+        ease: 'none'
+      }, "start");
     });
     this.killList.push(scroll);
-    this.killList.push(this.tl);
+    // this.killList.push(this.tl);
   }
 
   kill() {
@@ -768,7 +781,6 @@ class ParallaxSection {
 
 
 let menu = new Menu(document.querySelector('header'));
-let homeProj;
 // console.log(menu);
 
 
