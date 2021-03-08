@@ -30,6 +30,7 @@ button{
   // font-size: 1.5rem;
   position: relative;
   display: flex;
+  transition: color 0.25s;
   &::before{
     height: var(--border-wght);
     background-color: var(--text-color);
@@ -44,6 +45,14 @@ button{
     height: 1em;
     fill: currentColor;
     margin-left: 0.5em;
+    transition: fill 0.25s;
+  }
+
+  &:hover, &:active{
+    color: var(--accentColor);
+    >svg{
+      fill: var(--accentColor);
+    }
   }
 }
 
@@ -75,6 +84,9 @@ button{
   letter-spacing: 0.05em;
   text-transform: uppercase;
   position: relative;
+  max-width: none;
+  cursor: url("../img/cursor.svg") 25 14.5, pointer !important;
+
 
   @include md{
     font-size: 3rem;
@@ -98,6 +110,7 @@ button{
     width: 80%;
     height: 80%;
     transition: transform 0.25s;
+    cursor: url("../img/cursor.svg") 25 14.5, pointer !important;
     transform: rotate(var(--rotateSVG)) translateX(var(--translateSVG));
   }
 
@@ -112,4 +125,43 @@ button{
 
 .roundArrow.down{
   --rotateSVG: 90deg;
+}
+
+
+.hover-reveal {
+	position: fixed;
+	width: 10vw;
+	height: 10vw;
+  min-width: 120px;
+  min-height: 120px;
+	top: 0%;
+	left: 0%;
+	pointer-events: none;
+  border-radius: 100%;
+	opacity: 0;
+  // transform-origin: center;
+  z-index: 1000;
+  background-color: var(--textColor);
+  animation: rotateLoop 10s infinite linear;
+
+
+  &:before{
+    content:'';
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    background-image: url('../img/explore.svg');
+    background-size: 95%;
+    border-radius: 100%;
+    pointer-events: none;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+
+a[data-swup-transition='project']{
+  cursor: url("../img/cursor.svg") 25 8.3, pointer !important;
 }

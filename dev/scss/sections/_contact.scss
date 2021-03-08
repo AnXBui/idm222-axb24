@@ -3,18 +3,101 @@
 ============= */
 
 .contactInfo{
-
-  
-
   @include md{
     grid-column: 2 / 3;
     margin-left: 2rem;
   }
+
+  @include lg{
+    margin-right: 2rem;
+  }
   >div{
-    margin-bottom: var(--mgBot2);
+    margin-bottom: var(--mgBot);
+    padding-bottom: var(--mgBot);
+    border-bottom: 1px solid var(--textColor);
+
+    &:last-child{
+      border-bottom: 0;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
 
     >*{
       margin-bottom: var(--mgBotd2);
+
+      &:last-child{
+        margin-bottom: 0;
+      }
     }
+  }
+}
+
+.introSection.contactIntro{
+  a{
+    @media only screen and (max-width: 700px) {
+      height: 1.75em;
+      width: 1.75em;
+      margin-top: 0;
+    }
+  }
+}
+
+.latestWork{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 6rem;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--bgColor);
+  border-radius: 100%;
+  z-index: 2;
+
+  @include md{
+    width: 8rem;
+    height: 8rem;
+  }
+
+  >img{
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0.5;
+    transition: opacity 0.25s;
+  }
+
+  &:before{
+    content:'';
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    background-image: url('../img/latest.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: rotateLoop 10s infinite linear;
+    animation-play-state: paused;
+    opacity: 0.5;
+    transition: opacity 0.25s;
+  }
+
+  &:hover, &:active{
+    // background-color: var(--textColor);
+    filter: invert(1);
+
+    >img{
+      opacity: 1;
+    }
+
+    &:before{
+      opacity: 1;
+      animation-play-state:running;
+    }
+
   }
 }

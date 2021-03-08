@@ -18,6 +18,7 @@ h1,h2,h3{
   *{
     font-family: bee, sans-serif;
   }
+  cursor: default;
 }
 
 h1,h2,h3{
@@ -30,7 +31,7 @@ h1,h2,h3{
   }
 }
 
-p{
+p,a{
   font-size: 1.1rem;
   line-height: 150%;
   max-width: 45ch;

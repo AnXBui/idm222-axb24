@@ -10,6 +10,7 @@ picture {
   object-position: var(--leftPos) var(--topPos);
   width: 100%;
   max-width: 100vw;
+  transition: transform 0.25s, filter 0.25s;
 }
 
 main {
@@ -25,7 +26,6 @@ main {
   position: fixed;
   top: 0;
   width: 100vw;
-
 }
 
 .full {
@@ -49,6 +49,8 @@ main {
   min-height: 100vw;
   position: relative;
   width: 100%;
+  z-index: 3;
+  background-color: var(--bgColor);
   @include md {
     // margin-bottom: 31vw;
     min-height: 80vw;
@@ -62,7 +64,7 @@ main {
 .homeSplash {
   height: 100vh;
   width: 100%;
-  // border: 2px solid blue;
+
 }
 
 .homeIntroTitle {
@@ -135,7 +137,7 @@ main {
       }
 
       b {
-        background-color: grey;
+        // background-color: var(--textColor);
         color: transparent;
         display: inline-block;
         height: 0.67em;
@@ -153,6 +155,12 @@ main {
         height: 100%;
         object-fit: cover;
         object-position: center;
+        border-radius: 100%;
+        // animation: rotateLoop 10s infinite linear;
+
+        &:hover, &:active{
+          animation-play-state: paused;
+        }
       }
     }
   }
@@ -294,7 +302,7 @@ main {
 }
 
 .homeAbout {
-  padding: 4rem 2rem 4rem 0;
+  padding: 4rem 0 4rem 0;
   @include md {
     grid-template-rows: auto 1fr;
     padding: 10rem 0;
@@ -359,10 +367,9 @@ main {
 }
 
 .homeProject {
-  padding-bottom: 4rem;
+  padding: 4rem 0;
   @include md {
     grid-template-rows: auto;
-    padding-bottom: 10rem;
   }
   @include lg {
     grid-auto-rows: auto;
@@ -398,6 +405,11 @@ main {
       top: 10%;
       @include md {
         margin-bottom: 50vh;
+
+        @media (min-aspect-ratio: 17/9) {
+          position: absolute;
+          top: 0;
+        }
       }
       @include lg {
         margin-bottom: 0;
@@ -407,11 +419,12 @@ main {
         flex-direction: column;
         top: 2rem;
 
-
         @media (min-aspect-ratio: 17/9) {
           position: absolute;
           top: 0;
         }
+
+
       }
 
       h2{
@@ -426,6 +439,11 @@ main {
       svg{
         margin-top: 2rem;
         display: none;
+
+        @include md{
+          display: block;
+          width: 30vw;
+        }
         @include lg{
           display: block;
           width: 24vw;
@@ -436,15 +454,16 @@ main {
 }
 
 .homeProjectGroup {
-  margin-bottom: 4rem;
+  // margin-bottom: 4rem;
   @include md {
-    margin-bottom: 6rem;
+    // margin-bottom: 6rem;
   }
   @include lg {
     display: grid;
     grid-auto-rows: auto;
     grid-column: 1 / 3;
     grid-template-columns: 1fr 1fr;
+    margin-bottom: 0;
   }
 }
 
@@ -470,6 +489,11 @@ main {
       align-self: flex-end;
       height: fit-content;
       margin-bottom: 0;
+
+      .featureProject{
+        left: -7.5vw ;
+        right: auto;
+      }
     }
   }
 
@@ -487,17 +511,29 @@ main {
       top: -10%;
       // transition: 0;
     }
+
+    a{
+      max-width: none;
+
+      &:hover{
+        img{
+          filter: brightness(0.75);
+        }
+      }
+    }
   }
 }
 
 .projectMore {
+  padding: 2rem 0;
+  border-top: 1px solid var(--textColor);
   @include md {
-    padding: 0 2rem;
+    margin: 0 2rem;
   }
   @include lg {
     align-self: flex-end;
     height: fit-content;
-    padding-bottom: 2rem;
+    padding-bottom: 0;
 
     h3 {
       margin-bottom: 3vw;
@@ -509,6 +545,7 @@ main {
 .projectIndex {
   font-family: bee, sans-serif;
   font-size: 100vw;
+  cursor:default;
   @include md {
     font-size: 50vw;
   }
@@ -528,6 +565,7 @@ main {
   justify-content: space-between;
   margin-bottom: 1rem;
   width: 100%;
+  position:relative;
   @include md {
     margin-bottom: 1.5rem;
   }
@@ -541,21 +579,91 @@ main {
 
 }
 
+.featureProject{
+  width: 8rem;
+  height: 8rem;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  z-index: 4;
+  background-color: var(--bgColor);
+  right: 1rem;
+  top: 18vw;
+
+  @include sm{
+    top: auto;
+    bottom: 4rem;
+    width: 6rem;
+    height: 6rem;
+  }
+
+  @include md{
+    left: -5rem;
+    top: 20%;
+    right: auto;
+  }
+
+  @include lg{
+    width: 10vw;
+    height: 10vw;
+    top: 20%;
+    // left: -7.5vw;
+    right: -7.5vw;
+  }
+
+  img{
+    width: 40%;
+    height: 40%;
+    opacity: 0.75;
+    transition: opacity 0.25s;
+  }
+
+  &::before{
+    content:'';
+    top: 0;
+    background-image: url('../img/feature.svg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    animation: rotateLoop 10s infinite linear;
+    opacity: 0.75;
+    transition: opacity 0.25s;
+  }
+
+  &:hover{
+    img, &::before{
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes rotateLoop{
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
 .homeContact {
   grid-template-rows: auto 1fr;
-  min-height: 100vh;
-  padding: 2rem 0 6rem;
+  // min-height: 100vh;
+  padding: 6rem 0 6rem;
   @include md {
-    padding: 2rem 0 10rem;
+    padding: 10rem 0 10rem;
   }
   @include lg {
-    padding: 20vh 0 35vh;
+    padding: 15vw 0 15vw;
   }
 
   h2 {
     margin-bottom: 1rem;
     margin-right: 2rem;
-    margin-top: 20vh;
+    // margin-top: 20vh;
 
     span {
       color: var(--accentColor);
@@ -568,7 +676,6 @@ main {
   > div {
     @include md {
       margin-left: 2rem;
-      margin-top: 20vh;
     }
   }
 

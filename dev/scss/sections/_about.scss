@@ -127,6 +127,7 @@
 }
 
 .resumeExp{
+
   @include lg{
     grid-column: 2 / 4;
 
@@ -134,6 +135,24 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 4rem;
+
+        >li{
+          margin-bottom: 2rem;
+        }
+    }
+  }
+
+  >ul{
+    ul{
+      border-left: 1px solid white;
+      padding-left: 1rem;
+      margin: 1rem 0 0;
+
+      li{
+        &:first-child{
+          padding-top: 0;
+        }
+      }
     }
   }
 }

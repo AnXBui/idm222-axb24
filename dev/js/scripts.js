@@ -4,6 +4,24 @@ function reParent(target, parent) {
   parent.appendChild(target);
 }
 
+
+	const cursor = document.querySelector('.customCursor');
+
+	const getMousePos = (e) => {
+        let posx = 0;
+        let posy = 0;
+		if (!e) e = window.event;
+		if (e.pageX || e.pageY) {
+            posx = e.pageX;
+			posy = e.pageY;
+		}
+		else if (e.clientX || e.clientY) 	{
+			posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+			posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+		}
+        return { x : posx, y : posy }
+    }
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -810,6 +828,8 @@ let menu = new Menu(document.querySelector('header'));
 // document init function, based on page #id or object inside page
 function init() {
   console.log('init');
+  document.querySelectorAll("[data-swup-transition='project']").forEach(link => new HoverImgF(link));
+
 
   document.querySelectorAll('[data-swup-preload]').forEach(link => {
     const url = link.getAttribute("href");
@@ -865,6 +885,67 @@ swup.on('samePageWithHash', (e) => {
   });
   // }
 });
+
+class HoverImgF {
+          constructor(el) {
+              this.DOM = {el: el};
+              this.DOM.reveal = document.createElement('div');
+              this.DOM.reveal.className = 'hover-reveal';
+              this.DOM.el.appendChild(this.DOM.reveal);
+              this.initEvents();
+          }
+          initEvents() {
+              this.positionElement = (ev) => {
+                  const mousePos = getMousePos(ev);
+                  const docScrolls = {
+                      left : document.body.scrollLeft + document.documentElement.scrollLeft,
+                      top : document.body.scrollTop + document.documentElement.scrollTop
+                  };
+                  const objectWidth = this.DOM.reveal.offsetWidth / 2;
+                  const objectHeight = this.DOM.reveal.offsetHeight / 2;
+                  this.DOM.reveal.style.top = `${mousePos.y-objectHeight-docScrolls.top}px`;
+                  this.DOM.reveal.style.left = `${mousePos.x-objectWidth-docScrolls.left}px`;
+              };
+              this.mouseenterFn = (ev) => {
+                  this.positionElement(ev);
+                  this.showImage();
+              };
+              this.mousemoveFn = ev => requestAnimationFrame(() => {
+                  this.positionElement(ev);
+              });
+              this.mouseleaveFn = () => {
+                  this.hideImage();
+              };
+
+              this.DOM.el.addEventListener('mouseenter', this.mouseenterFn);
+              this.DOM.el.addEventListener('mousemove', this.mousemoveFn);
+              this.DOM.el.addEventListener('mouseleave', this.mouseleaveFn);
+          }
+          showImage() {
+              this.tl = gsap.timeline({
+              })
+              .add('begin')
+              .fromTo(this.DOM.reveal, 0.25, {alpha: 0, scale: 0},{
+                  alpha: 1,
+                  scale: 1
+              }, 'begin')
+
+              gsap.to(cursor,0.25,{scaleX:0, scaleY:0});
+          }
+          hideImage() {
+              this.tl = gsap.timeline({
+                  onComplete: () => {
+                      gsap.set(this.DOM.reveal, {opacity: 0});
+                  }
+              })
+              .add('begin')
+              .to(this.DOM.reveal, 0.25, {
+                  opacity: 0,
+                  scale: 0
+
+              }, 'begin')
+          }
+      }
 
 
 
