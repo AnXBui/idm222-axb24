@@ -890,9 +890,12 @@ class HoverImgF {
           constructor(el) {
               this.DOM = {el: el};
               this.DOM.reveal = document.createElement('div');
-              this.DOM.reveal.className = 'hover-reveal';
+              this.DOM.reveal.innerHTML = `<div class="hoverInner"></div>`;
+              this.DOM.reveal.className = 'hoverReveal';
               this.DOM.el.appendChild(this.DOM.reveal);
               this.initEvents();
+              console.log(this.DOM.reveal);
+              this.DOM.reveal.style.visibility = "hidden";
           }
           initEvents() {
               this.positionElement = (ev) => {
@@ -903,39 +906,44 @@ class HoverImgF {
                   };
                   const objectWidth = this.DOM.reveal.offsetWidth / 2;
                   const objectHeight = this.DOM.reveal.offsetHeight / 2;
-                  this.DOM.reveal.style.top = `${mousePos.y-objectHeight-docScrolls.top}px`;
-                  this.DOM.reveal.style.left = `${mousePos.x-objectWidth-docScrolls.left}px`;
+                  const topY = mousePos.y-objectHeight-docScrolls.top;
+                  const topX = mousePos.x-objectWidth-docScrolls.left;
+                  gsap.set(this.DOM.reveal,{x:topX, y:topY})
               };
               this.mouseenterFn = (ev) => {
                   this.positionElement(ev);
                   this.showImage();
+                  this.DOM.el.addEventListener('mousemove', this.mousemoveFn);
+                  this.DOM.el.addEventListener('mouseleave', this.mouseleaveFn);
               };
               this.mousemoveFn = ev => requestAnimationFrame(() => {
                   this.positionElement(ev);
               });
               this.mouseleaveFn = () => {
                   this.hideImage();
+                  this.DOM.el.removeEventListener('mousemove', this.mousemoveFn);
+                  this.DOM.el.removeEventListener('mouseleave', this.mouseleaveFn);
               };
 
               this.DOM.el.addEventListener('mouseenter', this.mouseenterFn);
-              this.DOM.el.addEventListener('mousemove', this.mousemoveFn);
-              this.DOM.el.addEventListener('mouseleave', this.mouseleaveFn);
+
           }
           showImage() {
               this.tl = gsap.timeline({
+                onStart: () => {
+                  this.DOM.reveal.style.visibility = "visible";
+                }
               })
               .add('begin')
               .fromTo(this.DOM.reveal, 0.25, {alpha: 0, scale: 0},{
                   alpha: 1,
                   scale: 1
               }, 'begin')
-
-              gsap.to(cursor,0.25,{scaleX:0, scaleY:0});
           }
           hideImage() {
               this.tl = gsap.timeline({
                   onComplete: () => {
-                      gsap.set(this.DOM.reveal, {opacity: 0});
+                      this.DOM.reveal.style.visibility = "hidden";
                   }
               })
               .add('begin')
