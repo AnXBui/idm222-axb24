@@ -551,6 +551,17 @@
   }
 }
 
+.projectImageStagger + .projectImageStagger{
+  @include lg{
+    padding-top: 0;
+  }
+}
+.grid2 + .grid2{
+  @include lg{
+    padding-top: 0;
+  }
+}
+
 .projectImageStagger3 {
   row-gap: 2rem;
   @include lg {
