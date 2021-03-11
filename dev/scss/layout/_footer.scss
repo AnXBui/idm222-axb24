@@ -1,30 +1,3 @@
 /* =============
     Footer
 ============= */
-
-main{
-  position: relative;
-}
-
-footer{
-  padding: 0 var(--mgLeft);
-  display: flex;
-  position: relative;
-  align-items: center;
-  border-top: 0.5px solid var(--textColor);
-  background-color: var(--textColor);
-  z-index: 10;
-  height:2rem;
-
-  p{
-    color: var(--bgColor);
-  }
-  // background-color: var(--bgColor);
-
-  @include md{
-    justify-content: center;
-  }
-
-  @include lg{
-  }
-}

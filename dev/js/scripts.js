@@ -157,25 +157,33 @@ const swupJS = [{
     from: '(.*)',
     to: '(.*)',
     in: (next) => {
-      menu.hide();
-      gsap.fromTo(document.querySelector('#swup'), 0.25, {
+      if (menu.active){
+        menu.hide();
+      }
+      // disableBodyScroll();
+      gsap.fromTo(document.querySelector('#swup'), 0.75, {
         opacity: 0
       }, {
         opacity: 1,
-        onComplete: next
+        onComplete: () => {
+          next();
+        }
       });
     },
     out: (next) => {
       // console.log('code out');
       document.querySelector('#swup').style.opacity = 1;
-      gsap.set(window,{
-        scrollTo: 0
-      });
-      gsap.fromTo(document.querySelector('#swup'), 0.25, {
+
+      gsap.fromTo(document.querySelector('#swup'), 0.75, {
         opacity: 1
       }, {
         opacity: 0,
-        onComplete: next
+        onComplete: () => {
+          gsap.set(window,{
+            scrollTo: 0
+          });
+          next();
+        }
       });
     }
   },
@@ -183,11 +191,14 @@ const swupJS = [{
     from: '(.*)',
     to: 'project',
     in: (next) => {
+      if (menu.active){
+        menu.hide();
+      }
       disableBodyScroll();
 
-      gsap.fromTo('#swup',0.5,{opacity: 0},{opacity: 1, onComplete: () => {
+      gsap.fromTo('#swup',1,{opacity: 0},{opacity: 1, onComplete: () => {
         transitioning = false;
-        enableBodyScroll();
+        // enableBodyScroll();
         next();
       }});
 
@@ -204,13 +215,13 @@ const swupJS = [{
       }});
 
       let flip = Flip.from(state, {
-        duration: 1,
+        duration: 0.75,
         ease: 'expo',
         zIndex: 5
         }
       );
 
-      tl.fromTo('#swup', 0.5, {
+      tl.fromTo('#swup', 0.75, {
         opacity: 1
       }, {
         opacity: 0
@@ -838,16 +849,19 @@ function init() {
 
   ScrollTrigger.refresh();
 
-  enableBodyScroll();
   lastScrollTop = 0;
+
   if (projectLink != null) {
-    gsap.to(projectLink, 1, {
+    gsap.to(projectLink, 0.5, {
       alpha: 0,
       delay: 0.5,
       onComplete: () => {
         projectLink.remove();
+        enableBodyScroll();
       }
     })
+  } else {
+    enableBodyScroll();
   }
   menu.showBar();
 

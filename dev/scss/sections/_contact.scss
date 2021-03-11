@@ -81,7 +81,7 @@
     background-position: center;
     background-repeat: no-repeat;
     animation: rotateLoop 10s infinite linear;
-    animation-play-state: paused;
+    animation-play-state:running;
     opacity: 0.5;
     transition: opacity 0.25s;
   }
@@ -96,7 +96,8 @@
 
     &:before{
       opacity: 1;
-      animation-play-state:running;
+      animation-play-state: paused;
+
     }
 
   }
