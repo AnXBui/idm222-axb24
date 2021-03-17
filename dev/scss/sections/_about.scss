@@ -81,9 +81,9 @@
     padding-right: 2rem;
   }
   h3{
+    border-bottom: 1px solid var(--textColor);
     margin-bottom: var(--mgBotd2);
     padding-bottom: var(--mgBotd2);
-    border-bottom: 1px solid var(--textColor);
   }
 
   h4{
@@ -119,9 +119,9 @@
     grid-column: 2 / 4;
 
     ul{
+        grid-column-gap: 4rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-column-gap: 4rem;
     }
   }
 }
@@ -132,9 +132,9 @@
     grid-column: 2 / 4;
 
     >ul{
+        grid-column-gap: 4rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-column-gap: 4rem;
 
         >li{
           margin-bottom: 2rem;
@@ -145,8 +145,8 @@
   >ul{
     ul{
       border-left: 1px solid white;
-      padding-left: 1rem;
       margin: 1rem 0 0;
+      padding-left: 1rem;
 
       li{
         &:first-child{

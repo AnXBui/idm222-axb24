@@ -1,26 +1,44 @@
+let projectLink;
+let scrollPosition = 0;
+let dur = 0.25;
+let dur2 = dur * 2;
+let dur3 = dur * 4;
+let durmin2 = dur / 2;
+let durmin3 = dur / 4;
+let lastScrollTop = 0;
+let delta = 30;
+let transitioning = false;
+let firstPage = true;
+
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Flip);
+gsap.defaults({
+  ease: "power2",
+  duration: dur
+});
 
 function reParent(target, parent) {
   parent.appendChild(target);
 }
 
 
-	const cursor = document.querySelector('.customCursor');
 
-	const getMousePos = (e) => {
-        let posx = 0;
-        let posy = 0;
-		if (!e) e = window.event;
-		if (e.pageX || e.pageY) {
-            posx = e.pageX;
-			posy = e.pageY;
-		}
-		else if (e.clientX || e.clientY) 	{
-			posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-			posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-		}
-        return { x : posx, y : posy }
-    }
+const getMousePos = (e) => {
+  let posx = 0;
+  let posy = 0;
+  if (!e) e = window.event;
+  if (e.pageX || e.pageY) {
+    posx = e.pageX;
+    posy = e.pageY;
+  } else if (e.clientX || e.clientY) {
+    posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+    posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+  }
+  return {
+    x: posx,
+    y: posy
+  }
+}
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -29,13 +47,8 @@ function sleep(ms) {
 function getWidthTotal(targets) {
   let total = 0;
   targets.forEach(target => {
-    console.log(target.clientWidth);
     total += target.clientWidth;
-    // total -= 32;
-    // console.log('total is ' + total);
   });
-  // console.log(total);
-  // console.log(total);
   return total;
 }
 
@@ -73,13 +86,11 @@ function getViewport() {
   var viewPortWidth;
   var viewPortHeight;
 
-  // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
   if (typeof window.innerWidth != 'undefined') {
     viewPortWidth = window.innerWidth,
       viewPortHeight = window.innerHeight
   }
 
-  // IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
   else if (typeof document.documentElement != 'undefined' &&
     typeof document.documentElement.clientWidth !=
     'undefined' && document.documentElement.clientWidth != 0) {
@@ -87,7 +98,6 @@ function getViewport() {
       viewPortHeight = document.documentElement.clientHeight
   }
 
-  // older versions of IE
   else {
     viewPortWidth = document.getElementsByTagName('body')[0].clientWidth,
       viewPortHeight = document.getElementsByTagName('body')[0].clientHeight
@@ -129,35 +139,11 @@ function disableBodyScroll({
 
 
 // Page Transitions
-// Each object in array is a animation, from generic to specific.
-// from, to could be String (matched route), Regex, string of custom transition (from data-swup-transition)
-// use onComplete next or next() after animation to trigger transition.
-let projectLink;
-let scrollPosition = 0;
-let dur = 0.25;
-let dur2 = dur * 2;
-let dur3 = dur * 4;
-let durmin2 = dur / 2;
-let durmin3 = dur / 4;
-let lastScrollTop = 0;
-let delta = 30;
-let transitioning = false;
-let firstPage = true;
-// let navBarHeight = document.querySelector('.menuBar').offsetHeight;
-// console.log(navBarHeight);
-
-
-gsap.defaults({
-  ease: "power2",
-  duration: dur
-});
-
-
 const swupJS = [{
     from: '(.*)',
     to: '(.*)',
     in: (next) => {
-      if (menu.active){
+      if (menu.active) {
         menu.hide();
       }
       // disableBodyScroll();
@@ -171,7 +157,6 @@ const swupJS = [{
       });
     },
     out: (next) => {
-      // console.log('code out');
       document.querySelector('#swup').style.opacity = 1;
 
       gsap.fromTo(document.querySelector('#swup'), 0.75, {
@@ -179,7 +164,7 @@ const swupJS = [{
       }, {
         opacity: 0,
         onComplete: () => {
-          gsap.set(window,{
+          gsap.set(window, {
             scrollTo: 0
           });
           next();
@@ -191,16 +176,21 @@ const swupJS = [{
     from: '(.*)',
     to: 'project',
     in: (next) => {
-      if (menu.active){
+      if (menu.active) {
         menu.hide();
       }
       disableBodyScroll();
 
-      gsap.fromTo('#swup',1,{opacity: 0},{opacity: 1, onComplete: () => {
-        transitioning = false;
-        // enableBodyScroll();
-        next();
-      }});
+      gsap.fromTo('#swup', 1, {
+        opacity: 0
+      }, {
+        opacity: 1,
+        onComplete: () => {
+          transitioning = false;
+          // enableBodyScroll();
+          next();
+        }
+      });
 
     },
     out: (next) => {
@@ -210,16 +200,17 @@ const swupJS = [{
       document.querySelector('.fixedCoverWrapper').appendChild(target);
       addClass(projectLink, 'fullScreen');
 
-      let tl = gsap.timeline({onComplete:() => {
-        next();
-      }});
+      let tl = gsap.timeline({
+        onComplete: () => {
+          next();
+        }
+      });
 
       let flip = Flip.from(state, {
         duration: 0.75,
         ease: 'expo',
         zIndex: 5
-        }
-      );
+      });
 
       tl.fromTo('#swup', 0.75, {
         opacity: 1
@@ -345,8 +336,6 @@ class Menu {
   }
 
   init() {
-    // console.log('init');
-
     this.button.main.addEventListener('click', () => {
       if (!this.animating) {
         if (this.active) {
@@ -411,13 +400,15 @@ class Menu {
     // if (this.active){
     this.animating = true;
     enableBodyScroll();
-
-    // rmvClass(document.querySelector('main'),'bodyLock');
+    if (document.querySelector('.projectControlTitle')){
+      gsap.to('.projectControlTitle',0.25,{opacity: 1, yPercent: 0});
+      gsap.to('.projectControlPrev',0.25,{opacity: 1, xPercent: 0});
+      gsap.to('.projectControlNext',0.25,{opacity: 1, xPercent: 0});
+    }
 
     rmvClass(this.bar, 'dark');
     this.out.restart();
     this.active = false;
-    // }
   }
 
   show() {
@@ -428,6 +419,12 @@ class Menu {
     addClass(this.bar, 'dark');
     this.in.restart();
     this.active = true;
+
+    if (document.querySelector('.projectControlTitle')){
+      gsap.to('.projectControlTitle',0.25,{opacity: 0, yPercent: -100});
+      gsap.to('.projectControlPrev',0.25,{opacity: 0, xPercent: -100});
+      gsap.to('.projectControlNext',0.25,{opacity: 0, xPercent: 100});
+    }
   }
 }
 
@@ -439,18 +436,17 @@ const scrollHandler = (entries, observer) => {
     let elem = entry.target;
     observerList.push(elem);
     if (entry.isIntersecting) {
-      console.log('entry viewed');
       ScrollTrigger.refresh();
       effectObserver.unobserve(elem);
       const index = entries.indexOf(elem);
-      if (index > -1){
-        observerList.splice(index,1);
+      if (index > -1) {
+        observerList.splice(index, 1);
       }
     }
   })
 }
 
-var effectObserver = new IntersectionObserver (scrollHandler);
+var effectObserver = new IntersectionObserver(scrollHandler);
 
 
 
@@ -476,7 +472,7 @@ class PageEffects {
       document.querySelectorAll('.effectWrapper').forEach(element => {
         const effect = new EffectSection(element);
         const preStyles = effect.getPreStyles();
-        if (preStyles != null){
+        if (preStyles != null) {
           preStyles.forEach(style => {
             this.saveStyles.push(style);
           })
@@ -485,51 +481,34 @@ class PageEffects {
       })
     }
 
-    if (document.querySelector('.nextProject')){
-      this.nextProject = document.querySelector('.nextProject');
+    if (document.querySelector('.projectConclusion')) {
+      this.nextProject = document.querySelector('.projectConclusion');
       let tl = gsap.timeline();
 
       const scroll = ScrollTrigger.create({
         trigger: this.nextProject,
         start: "top bottom",
         animation: tl,
+        // markers: true,
         toggleActions: "play complete restart reset"
       });
 
-      tl.to('.projectControls',dur,{alpha: 0, onComplete:() => {
-        console.log('fade controls');
-      }});
+      tl.to('.projectControls', dur, {
+        alpha: 0
+      });
 
       this.killList.push(scroll);
     }
-
-    // disabling parallax until smoothing is solved...
-    // if (document.querySelector('.parallaxSection')) {
-    //   document.querySelectorAll('.parallaxSection').forEach(element => {
-    //     // console.log('parallax created');
-    //     const parallax = new ParallaxSection(element);
-    //
-    //     if (parallax.active) {
-    //       parallax.layers.forEach(layer => {
-    //         this.saveStyles.push(layer);
-    //       })
-    //
-    //       this.paraArray.push(parallax);
-    //     }
-    //   })
-    // }
   }
 
   killAll() {
-    // console.log('killing all page effects');
-
-    if (this.killList){
+    if (this.killList) {
       this.killList.forEach(effect => {
         effect.kill();
       })
     }
 
-    if (observerList != null){
+    if (observerList != null) {
       observerList.forEach(elem => {
         effectObserver.unobserve(elem);
       })
@@ -543,22 +522,17 @@ class PageEffects {
     this.nextProject = null;
   }
 
-  refetch(){
-    if (this.saveStyles){
+  refetch() {
+    if (this.saveStyles) {
       this.saveStyles = [];
     }
     this.fetchSections();
     this.applyEffects();
   }
 
-  // refactor(){
-  //   console.log('refactored');
-  // }
-
 
   applyEffects() {
     ScrollTrigger.saveStyles(this.saveStyles);
-    // console.log('applying page effects');
     ScrollTrigger.matchMedia({
       // desktop only
       "(min-width: 992px)": () => {
@@ -568,15 +542,12 @@ class PageEffects {
         })
 
         this.paraArray.forEach(parallax => {
-          // console.log('playing parallax');
           parallax.getParallax();
-          // console.log('parallax played');
           this.killList.push(parallax);
-          // fx.getEffects('desktop');
         })
 
         return () => {
-          console.log('killing via media');
+          // console.log('killing via media');
         }
       },
 
@@ -601,7 +572,6 @@ class EffectSection {
 
   fadeout(el) {
     let media = 'all';
-    console.log('fadeout');
     let effect = gsap.to(el, 0.5, {
       alpha: 0
     })
@@ -614,16 +584,23 @@ class EffectSection {
       scrub: true
     });
 
-    this.killList.push({media:'all', fx: effect});
-    this.killList.push({media:'all', fx: scroll});
+    this.killList.push({
+      media: 'all',
+      fx: effect
+    });
+    this.killList.push({
+      media: 'all',
+      fx: scroll
+    });
   }
 
-  fadein(el){
+  fadein(el) {
     let media = 'all';
-    console.log('fadein');
     let effect = gsap.fromTo(el, 0.5, {
       alpha: 0
-    },{alpha: 1})
+    }, {
+      alpha: 1
+    })
     //
     let scroll = ScrollTrigger.create({
       trigger: this.wrapper,
@@ -632,8 +609,14 @@ class EffectSection {
       once: true
     });
     //
-    this.killList.push({media:'all', fx: effect});
-    this.killList.push({media:'all', fx: scroll});
+    this.killList.push({
+      media: 'all',
+      fx: effect
+    });
+    this.killList.push({
+      media: 'all',
+      fx: scroll
+    });
   }
 
   autoSlide(el) {
@@ -645,10 +628,9 @@ class EffectSection {
     }
 
     this.wrapper.querySelectorAll('.lazyload').forEach(img => {
-      addClass(img,'lazypreload');
+      addClass(img, 'lazypreload');
     })
 
-    console.log('autoSliding elements');
 
     let slide = gsap.timeline();
     let scroll = ScrollTrigger.create({
@@ -673,8 +655,11 @@ class EffectSection {
         x: '+=100vw',
         ease: 'none'
       });
-    }else {
-      slide.fromTo(el, 1,{x:'+=40vw', xPercent: 0},{
+    } else {
+      slide.fromTo(el, 1, {
+        x: '+=40vw',
+        xPercent: 0
+      }, {
         xPercent: -100,
         x: '+=20vw',
         ease: 'none'
@@ -691,8 +676,14 @@ class EffectSection {
 
     effectObserver.observe(this.wrapper);
 
-    this.killList.push({media:'desktop', fx: slide});
-    this.killList.push({media:'desktop', fx: scroll});
+    this.killList.push({
+      media: 'desktop',
+      fx: slide
+    });
+    this.killList.push({
+      media: 'desktop',
+      fx: scroll
+    });
   }
 
   getPreStyles() {
@@ -701,11 +692,11 @@ class EffectSection {
       switch (effect) {
 
         case 'autoSlide':
-            this.saveStyles.push(element);
+          this.saveStyles.push(element);
           break;
 
         default:
-          console.log('no effect');
+          // console.log('no effect');
       }
     })
     return this.saveStyles;
@@ -724,20 +715,19 @@ class EffectSection {
           break;
 
         case 'fadein':
-            if (media == 'all') {
-              this.fadein(element);
-            }
-            break;
+          if (media == 'all') {
+            this.fadein(element);
+          }
+          break;
 
         case 'autoSlide':
           if (media == 'desktop') {
             this.autoSlide(element);
-            console.log('autoSlide');
           }
           break;
 
         default:
-          console.log('no effect');
+          // console.log('no effect');
       }
     })
 
@@ -745,16 +735,16 @@ class EffectSection {
   }
 
   kill(media = 'all') {
-    if (this.killList){
+    if (this.killList) {
       this.killList.forEach(effect => {
-        if (effect.media == media || media == 'all'){
+        if (effect.media == media || media == 'all') {
           effect.fx.kill();
-          console.log('effect killed');
+          // console.log('effect killed');
         }
       });
     }
 
-    if (media == 'all'){
+    if (media == 'all') {
       this.wrapper = null;
       this.elements = null;
       this.killList = null;
@@ -773,20 +763,14 @@ class ParallaxSection {
     if (this.wrapper.querySelectorAll('[data-depth]')) {
       this.active = true;
       this.layers = this.wrapper.querySelectorAll('[data-depth]');
-      this.tl = gsap.timeline({paused:true});
+      this.tl = gsap.timeline({
+        paused: true
+      });
     }
   }
 
   getParallax() {
 
-    if (!this.running){
-      this.running = true;
-      console.log('running');
-    } else {
-      console.log('already running this parallax:');
-      console.log(this.wrapper);
-    }
-    // console.log('parallaxed')
     const scroll = ScrollTrigger.create({
       trigger: this.wrapper,
       start: "top bottom",
@@ -796,9 +780,6 @@ class ParallaxSection {
       scrub: true
     });
 
-    // console.log(this.wrapper)
-    // console.log(' parallaxing layers...')
-    // console.log(this.layers);
 
     this.layers.forEach((layer, index) => {
       const depth = layer.dataset.depth;
@@ -818,7 +799,6 @@ class ParallaxSection {
 
   kill() {
     if (this.active) {
-      console.log('killing parallax');
       this.killList.forEach(effect => {
         effect.kill();
       })
@@ -832,13 +812,10 @@ class ParallaxSection {
 
 
 let menu = new Menu(document.querySelector('header'));
-// console.log(menu);
 
 
 
-// document init function, based on page #id or object inside page
 function init() {
-  console.log('init');
   document.querySelectorAll("[data-swup-transition='project']").forEach(link => new HoverImgF(link));
 
 
@@ -864,9 +841,6 @@ function init() {
     enableBodyScroll();
   }
   menu.showBar();
-
-  // if (document.querySelector('.effectWrapper')) {
-  // }
 }
 
 // document cleanup function for Javascript stuff
@@ -874,12 +848,7 @@ function unload() {
   pageEffects.killAll();
 }
 
-
-
-
-
 swup.on('clickLink', (e) => {
-  // console.log('target clicked is ' + e.delegateTarget);
   let link = e.delegateTarget.getAttribute('data-swup-transition');
   if (link == 'project') {
     projectLink = e.target;
@@ -887,13 +856,10 @@ swup.on('clickLink', (e) => {
 });
 
 swup.on('samePageWithHash', (e) => {
-  // console.log('target clicked is ' + e.delegateTarget);
-  // console.log(e);
+
   let target = e.delegateTarget;
   let id = target.getAttribute('href');
-  // console.log(id);
   let offset = document.querySelector(id).offsetHeight;
-  // console.log(offset);
   gsap.to(window, 0.5, {
     scrollTo: id
   });
@@ -901,86 +867,96 @@ swup.on('samePageWithHash', (e) => {
 });
 
 class HoverImgF {
-          constructor(el) {
-              this.DOM = {el: el};
-              this.DOM.reveal = document.createElement('div');
-              this.DOM.reveal.innerHTML = `<div class="hoverInner"></div>`;
-              this.DOM.reveal.className = 'hoverReveal';
-              this.DOM.el.appendChild(this.DOM.reveal);
-              this.initEvents();
-              console.log(this.DOM.reveal);
-              this.DOM.reveal.style.visibility = "hidden";
-          }
-          initEvents() {
-              this.positionElement = (ev) => {
-                  const mousePos = getMousePos(ev);
-                  const docScrolls = {
-                      left : document.body.scrollLeft + document.documentElement.scrollLeft,
-                      top : document.body.scrollTop + document.documentElement.scrollTop
-                  };
-                  const objectWidth = this.DOM.reveal.offsetWidth / 2;
-                  const objectHeight = this.DOM.reveal.offsetHeight / 2;
-                  const topY = mousePos.y-objectHeight-docScrolls.top;
-                  const topX = mousePos.x-objectWidth-docScrolls.left;
-                  gsap.set(this.DOM.reveal,{x:topX, y:topY})
-              };
-              this.mouseenterFn = (ev) => {
-                  this.positionElement(ev);
-                  this.showImage();
-                  this.DOM.el.addEventListener('mousemove', this.mousemoveFn);
-                  this.DOM.el.addEventListener('mouseleave', this.mouseleaveFn);
-              };
-              this.mousemoveFn = ev => requestAnimationFrame(() => {
-                  this.positionElement(ev);
-              });
-              this.mouseleaveFn = () => {
-                  this.hideImage();
-                  this.DOM.el.removeEventListener('mousemove', this.mousemoveFn);
-                  this.DOM.el.removeEventListener('mouseleave', this.mouseleaveFn);
-              };
+  constructor(el) {
+    this.DOM = {
+      el: el
+    };
+    this.DOM.reveal = document.createElement('div');
+    this.DOM.reveal.innerHTML = `<div class="hoverInner"></div>`;
+    this.DOM.reveal.className = 'hoverReveal';
+    this.DOM.el.appendChild(this.DOM.reveal);
+    this.initEvents();
+    this.DOM.reveal.style.visibility = "hidden";
+  }
+  initEvents() {
+    this.positionElement = (ev) => {
+      const mousePos = getMousePos(ev);
+      const docScrolls = {
+        left: document.body.scrollLeft + document.documentElement.scrollLeft,
+        top: document.body.scrollTop + document.documentElement.scrollTop
+      };
+      const objectWidth = this.DOM.reveal.offsetWidth / 2;
+      const objectHeight = this.DOM.reveal.offsetHeight / 2;
+      const topY = mousePos.y - objectHeight - docScrolls.top;
+      const topX = mousePos.x - objectWidth - docScrolls.left;
+      gsap.set(this.DOM.reveal, {
+        x: topX,
+        y: topY
+      })
+    };
+    this.mouseenterFn = (ev) => {
+      this.positionElement(ev);
+      this.showImage();
+      this.DOM.el.addEventListener('mousemove', this.mousemoveFn);
+      this.DOM.el.addEventListener('mouseleave', this.mouseleaveFn);
+    };
+    this.mousemoveFn = ev => requestAnimationFrame(() => {
+      this.positionElement(ev);
+    });
+    this.mouseleaveFn = () => {
+      this.hideImage();
+      this.DOM.el.removeEventListener('mousemove', this.mousemoveFn);
+      this.DOM.el.removeEventListener('mouseleave', this.mouseleaveFn);
+    };
 
-              this.DOM.el.addEventListener('mouseenter', this.mouseenterFn);
+    this.DOM.el.addEventListener('mouseenter', this.mouseenterFn);
 
-          }
-          showImage() {
-              this.tl = gsap.timeline({
-                onStart: () => {
-                  this.DOM.reveal.style.visibility = "visible";
-                }
-              })
-              .add('begin')
-              .fromTo(this.DOM.reveal, 0.25, {alpha: 0, scale: 0},{
-                  alpha: 1,
-                  scale: 1
-              }, 'begin')
-          }
-          hideImage() {
-              this.tl = gsap.timeline({
-                  onComplete: () => {
-                      this.DOM.reveal.style.visibility = "hidden";
-                  }
-              })
-              .add('begin')
-              .to(this.DOM.reveal, 0.25, {
-                  opacity: 0,
-                  scale: 0
+  }
+  showImage() {
+    this.tl = gsap.timeline({
+        onStart: () => {
+          this.DOM.reveal.style.visibility = "visible";
+        }
+      })
+      .add('begin')
+      .fromTo(this.DOM.reveal, 0.25, {
+        alpha: 0,
+        scale: 0
+      }, {
+        alpha: 1,
+        scale: 1
+      }, 'begin')
+  }
+  hideImage() {
+    this.tl = gsap.timeline({
+        onComplete: () => {
+          this.DOM.reveal.style.visibility = "hidden";
+        }
+      })
+      .add('begin')
+      .to(this.DOM.reveal, 0.25, {
+        opacity: 0,
+        scale: 0
 
-              }, 'begin')
-          }
-      }
+      }, 'begin')
+  }
+}
 
 
 
 
-gsap.set('body', {alpha: 0});
+gsap.set('body', {
+  alpha: 0
+});
 window.addEventListener('load', () => {
-  gsap.to('body', 0.5,{alpha: 1});
+  gsap.to('body', 0.5, {
+    alpha: 1
+  });
 });
 init();
 let pageEffects = new PageEffects();
 
 swup.on('contentReplaced', () => {
-  console.log('contentReplaced');
   firstPage = false;
   init();
   pageEffects.refetch();

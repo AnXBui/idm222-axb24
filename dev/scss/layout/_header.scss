@@ -2,19 +2,7 @@
     Header
 ============= */
 
-
-svg{
-  width: 100%;
-  height: 100%;
-}
-
-button{
-  &:focus{
-    outline: 0;
-  }
-}
-
-header{
+header {
   height: 3rem;
   padding: 0.5rem;
   position: fixed;
@@ -22,357 +10,386 @@ header{
   width: 100%;
   z-index: 10;
 
-  &::before{
-    content:'';
-    width: 100%;
-    height: 4rem;
-    // background-color: var(--bgColor);
-    // background-color: red;
+  &::before {
     background: linear-gradient(to bottom, rgba(#0C0B12,1) 0%,rgba(#0C0B12,0.5) 50%,rgba(#0C0B12,0) 100%);
+    content: '';
+    height: 6.5rem;
+    left: 0;
     mix-blend-mode: multiply;
     position: absolute;
     top: 0;
-    left: 0;
-    z-index: -1;
     transform: translateY(0) translateZ(0);
     transition: transform 0.15s;
-
-    @include lg{
+    width: 100%;
+    z-index: -1;
+    @include lg {
+      height: 4rem;
       background: transparent;
     }
   }
 }
 
-
-.menuBar{
-  width: 100%;
+.menuBar {
+  --fillColor: var(--textColor);
+  display: flex;
   height: 3.5rem;
-  position: absolute;
-  top: 0;
-  left:0;
+  justify-content: space-between;
+  left: 0;
   // padding: var(--mgLeft) var(--mgLeft) 0;
   padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  // background-color: ;
-  z-index: 12;
-  --fillColor: var(--textColor);
+  position: absolute;
+  top: 0;
   transform: translateY(0) translateZ(0);
   transition: transform 0.25s, background 0.25s;
-
-
+  width: 100%;
+  // background-color: ;
+  z-index: 12;
   @media only screen and (max-width: 700px) {
-    padding: var(--mgLeft) var(--mgLeft) 0;
+    padding: var(--mgLeft) var(--mgLeft);
+    height: 6.5rem;
   }
-
-
-  @include lg{
+  @include lg {
     height: 3rem;
     padding: 0;
   }
 }
 
-.menuBar.dark{
+.menuBar.dark {
   --fillColor: var(--bgColor);
   background-color: var(--accentColor);
-  @include md{
+  @include md {
     background-color: transparent;
   }
 
-  .menuLogo, .menuButton{
+  .menuButton,
+  .menuLogo {
     background-color: transparent;
+    --hoverColor: white;
   }
 }
 
-
-header.up{
-  .menuBar{
+header.up {
+  .menuBar {
     transform: translateY(-100%) translateZ(0);
   }
 
-  &::before{
+  &::before {
     transform: translateY(-100%) translateZ(0);
   }
 }
 
-.menuLogo{
-  height: 100%;
-  width: 3rem;
-  display: flex;
-  justify-content: center;
+.menuLogo {
   align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 3rem;
+  cursor: pointer;
+  --hoverColor: var(--accentColor);
 
-
-  >svg{
-    height: 100%;
-    width: 100%;
+  > svg {
     fill: var(--fillColor);
+    height: 100%;
     transition: fill 0.15s;
-
-    @include lg{
-      width: 2rem;
+    width: 100%;
+    @include lg {
       height: 1.5rem;
+      width: 2rem;
     }
   }
-
-  @include lg{
+  @include lg {
     background-color: var(--bgColor);
     height: 3rem;
     width: 3rem;
   }
+
+  &:hover, &:active{
+    >svg{
+      fill: var(--hoverColor);
+    }
+  }
 }
 
-.menuButton{
-  height: 100%;
-  width: 3rem;
-  display: flex;
-  justify-content: center;
+.menuButton {
   align-items: center;
   cursor: pointer;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 3rem;
+  --hoverColor: var(--accentColor);
 
-  >svg{
-    height: 90%;
-    width: 100%;
+
+  > svg {
     fill: var(--fillColor);
+    height: 90%;
     transition: fill 0.15s;
-    >*{
+    width: 100%;
+
+    > * {
       transform-origin: center;
     }
-
-    @include lg{
-      width: 1.5rem;
+    @include lg {
       height: 1.5rem;
+      width: 1.5rem;
     }
   }
-
-  @include lg{
+  @include lg {
+    background-color: var(--bgColor);
     height: 3rem;
     width: 3rem;
-    background-color: var(--bgColor);
+  }
+
+  &:hover, &:active{
+    >svg{
+      fill: var(--hoverColor);
+    }
   }
 }
 
-.menuWrapper{
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  left: 0;
-  top: 0;
+.menuWrapper {
+  align-items: center;
   // background-color: var(--accentColor);
   display: flex;
+  height: 100vh;
   justify-content: center;
-  align-items: center;
-
-}
-
-.menuMain{
-  width: 100%;
-  z-index: 11;
-  padding: 4rem var(--mgLeft);
-  padding-right: 10vw;
-  max-height: 100vh;
-  overflow-y: auto;
-
-
-    @include md{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto 1fr;
-      // grid-gap: 6%;
-    }
-
-    @include lg{
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 100%;
-    }
-
-    @include xl{
-      grid-template-columns: 3fr 4fr 3fr;
-    }
-
-
-
-  h3{
-    font-size: 2.5rem;
-    letter-spacing: 0.05em;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-}
-
-.menuMainPages{
-  margin: var(--mgBot) 0;
-
-  @include md{
-    margin: 0 10% var(--mgBot);
-    margin-left: 0;
-  }
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
 
   @include lg{
+    align-items: flex-start;
+    padding: 4rem var(--mgLeft) 4rem var(--mgLeft);
+    overflow-y: hidden;
+    max-height: 100vh;
+  }
+}
+
+.menuMain {
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 4rem 10vw 4rem var(--mgLeft);
+  width: 100%;
+  z-index: 11;
+  @include md {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  @include lg {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100%;
+    padding: 0;
+    max-height: calc(100vh - 4rem);
+  }
+  @include xl {
+    grid-template-rows: auto;
+    grid-template-columns: 3fr 4fr 3fr;
+  }
+
+  h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}
+
+.menuMainPages {
+  margin: var(--mgBot) 0;
+  @include md {
+    margin: 0 10% var(--mgBot) 0;
+  }
+  @include lg {
     margin: 0;
     padding-right: 15%;
+    height: fit-content;
+    position: sticky;
+    top: 0;
   }
 
-  p{
+  p {
     margin: calc(var(--mgBot) / 2) 0;
     max-width: 20ch;
-
-    @include md{
-      margin: 0 0 calc(var(--mgBot) / 2) ;
+    @include md {
+      margin: 0 0 calc(var(--mgBot) / 2);
     }
   }
 
-  ul{
-    border-top: var(--bgColor) 1px solid;
-    padding: var(--mgBot) 2rem;
-    padding-left: 0;
+  ul {
     border-bottom: var(--bgColor) 1px solid;
-
-    @include lg{
+    border-top: var(--bgColor) 1px solid;
+    padding: var(--mgBot) 2rem var(--mgBot) 0;
+    @include lg {
       border-bottom: 0;
       padding-right: 0;
+      padding-bottom: 0;
     }
   }
 
-  li{
-    overflow-y: hidden;
+  li {
     overflow-x: visible;
+    overflow-y: hidden;
   }
 
-  a{
+  a {
     display: block;
     font-family: bee, sans-serif;
-    line-height: 80%;
     font-size: 35vmin;
     font-weight: 800;
+    line-height: 80%;
     text-transform: uppercase;
+    transition: color 0.25s;
+    cursor: url("../img/cursor.svg") 25 8.3, pointer !important;
 
-    @include md{
+    @include md {
       font-size: 21vw;
     }
-
-    @include lg{
+    @include lg {
       font-size: 13.5vw;
+    }
+
+    &:hover, &:active{
+      color: white;
     }
   }
 }
 
-.menuProjects{
+.menuProjects {
   margin-bottom: var(--mgBot);
   position: relative;
 
-  &::before{
-    content:'';
-    width: 1px;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
+  &::before {
     background-color: var(--bgColor);
+    content: '';
     display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1px;
   }
 
-  &::after{
-    content:'';
-    width: 1px;
+  &::after {
+    background-color: var(--bgColor);
+    content: '';
+    display: none;
     height: 100%;
     position: absolute;
     right: 0;
     top: 0;
-    background-color: var(--bgColor);
-    display: none;
+    width: 1px;
   }
-  @include md{
-    grid-row: 1 / 3;
+  @include md {
     grid-column: 2 / 3;
+    grid-row: 1 / 3;
     padding: 0 10%;
 
-    &::before{
+    &::before {
       display: block;
     }
   }
-
-  @include lg{
+  @include lg {
     margin: 0;
     padding: 0 15%;
+    height: fit-content;
 
-    &::after{
+    &::after {
       display: block;
     }
   }
 
-  li{
-    padding: 1rem 1rem 1rem 0;
+  li {
     border-bottom: var(--bgColor) 1px solid;
     overflow-y: hidden;
+    padding: 1rem 1rem 1rem 0;
 
-    &:last-child{
+    &:last-child {
       border-bottom: 0;
     }
-
-    @include md{
+    @include md {
       padding: 1.25rem 0;
     }
-
   }
-  a{
+
+  a {
     font-family: bee, sans-serif;
     font-size: 3.5rem;
     letter-spacing: 0.04em;
     line-height: 80%;
+    display: inline-block;
+    cursor: url("../img/cursor.svg") 25 8.3, pointer !important;
 
-    @include md{
+    @include md {
       font-size: clamp(2rem, 6vw, 7vw);
     }
-
-    @include lg{
+    @include lg {
       font-size: clamp(2rem, 4vw, 7vw);
+      width: 100%;
+    }
+
+    &:hover, &:active{
+      color: white;
+
     }
   }
 }
 
-.menuSocial{
-  @include md{
+.menuSocial {
+  @include md {
     margin: 0 10% var(--mgBot) 0;
   }
-
-  @include lg{
+  @include lg {
     margin: 0 0 0 15%;
+    height: fit-content;
+    position: sticky;
+    top: 0;
   }
-  >div{
+
+  > div {
+    border-bottom: 1px solid var(--bgColor);
     margin-bottom: calc(var(--mgBot)/2);
     padding-bottom: calc(var(--mgBot)/2);
-    border-bottom: 1px solid var(--bgColor);
 
-    &:last-child{
+    &:last-child {
       border-bottom: 0;
       margin-bottom: 0;
       padding-bottom: 0;
     }
 
-    a{
-      text-transform: uppercase;
-      line-height: 140%;
+    h3{
+      margin-bottom: 0.2em;
+    }
+
+    a {
       display: block;
+      line-height: 140%;
+      text-transform: uppercase;
+      cursor: url("../img/cursor.svg") 25 8.3, pointer !important;
+
+
+      &:hover, &:active{
+        color: white;
+      }
     }
   }
 }
 
-.menuFill{
-  width: 150vmax;
-  height: 150vmax;
-  border-radius: 100%;
-  position: absolute;
-  top: -25vmax;
-  right: -25vmax;
+.menuFill {
   background-color: var(--accentColor);
-  // transform: scale(0);
+  border-radius: 100%;
+  height: 150vmax;
+  position: absolute;
+  right: -25vmax;
+  top: -25vmax;
+  width: 150vmax;
 }
 
-header.inactive{
-  .menuWrapper{
+header.inactive {
+  .menuWrapper {
     display: none;
-    visibility: hidden;
     pointer-events: none;
+    visibility: hidden;
   }
 }

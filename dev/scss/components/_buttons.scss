@@ -1,162 +1,167 @@
 /* =============
     Buttons
 ============= */
-
-button{
+button {
   background-color: transparent;
   border: 0;
 }
 
-*{
+* {
   transition-timing-function: ease-in-out;
 }
 
-.link{
-  font-weight: bold;
+.link {
   font-size: 1.5rem;
+  font-weight: bold;
   position: relative;
-  &::before{
-    height: var(--border-wght);
+
+  &::before {
     background-color: var(--text-color);
-    content:'';
-    position: absolute;
     bottom: -0.5rem;
+    content: '';
+    height: var(--border-wght);
+    position: absolute;
     width: 100%;
   }
 }
 
-.linkExt{
+.linkExt {
+  display: flex;
   // font-weight: bold;
   // font-size: 1.5rem;
   position: relative;
-  display: flex;
   transition: color 0.25s;
-  &::before{
-    height: var(--border-wght);
+
+  &::before {
     background-color: var(--text-color);
-    content:'';
-    position: absolute;
     bottom: -0.5rem;
+    content: '';
+    height: var(--border-wght);
+    position: absolute;
     width: 100%;
   }
 
-  >svg{
-    width: 1em;
-    height: 1em;
+  > svg {
     fill: currentColor;
+    height: 1em;
     margin-left: 0.5em;
     transition: fill 0.25s;
+    width: 1em;
   }
 
-  &:hover, &:active{
+  &:active,
+  &:hover {
     color: var(--accentColor);
-    >svg{
+
+    > svg {
       fill: var(--accentColor);
     }
   }
 }
 
-.fillButton{
-  font-weight: bold;
-  font-size: 1.2rem;
-  position: relative;
+.fillButton {
   background-color: var(--text-color);
   color: var(--bg-color);
+  font-size: 1.2rem;
+  font-weight: bold;
   padding: 0.25rem;
+  position: relative;
 }
 
-.roundArrow{
-  display: flex;
-  justify-content: center;
+.roundArrow {
+  --rotateSVG: 0;
+  --strokeSVG: var(--textColor);
+  --translateSVG: 0;
   align-items: center;
   border: 2px solid var(--textColor);
   border-radius: 100%;
-  --rotateSVG: 0deg;
-  --strokeSVG: var(--textColor);
-  --translateSVG: 0;
-  width: 10rem;
-  height: 10rem;
-  overflow: hidden;
   color: transparent;
-  transition: color 0.25s, background 0.1s;
+  cursor: url("../img/cursor.svg") 25 14.5, pointer !important;
+  display: flex;
   font-family: bee, sans-serif;
   font-size: 3rem;
+  height: 10rem;
+  justify-content: center;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
-  position: relative;
   max-width: none;
-  cursor: url("../img/cursor.svg") 25 14.5, pointer !important;
-
-
-  @include md{
+  overflow: hidden;
+  position: relative;
+  text-transform: uppercase;
+  transition: color 0.25s, background 0.1s;
+  width: 10rem;
+  @include md {
     font-size: 3rem;
-    width: 12rem;
     height: 12rem;
+    width: 12rem;
   }
-
-  @include lg{
-    width: 15vw;
-    height: 15vw;
+  @include lg {
     font-size: 3.2vw;
+    height: 15vw;
+    width: 15vw;
   }
 
-
-  >svg{
-    position: absolute;
-    top: 10%;
-    left: 10%;
+  > svg {
     fill: none;
     stroke: var(--strokeSVG);
-    width: 80%;
-    height: 80%;
-    transition: transform 0.25s;
     cursor: url("../img/cursor.svg") 25 14.5, pointer !important;
+    height: 80%;
+    left: 10%;
+    position: absolute;
+    top: 10%;
     transform: rotate(var(--rotateSVG)) translateX(var(--translateSVG));
+    transition: transform 0.25s;
+    width: 80%;
   }
 
-  &:hover, &:active, &:focus{
-    color: var(--bgColor);
-    background-color: var(--textColor);
+  &:active,
+  &:focus,
+  &:hover {
     --strokeSVG: var(--bgColor);
     --translateSVG: 120%;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+    background-color: var(--textColor);
+    color: var(--bgColor);
   }
 }
 
-.roundArrow.down{
+.roundArrow.down {
   --rotateSVG: 90deg;
 }
 
-
 .hoverReveal {
-	position: fixed;
-	width: 10vw;
-	height: 10vw;
-  min-width: 120px;
-  min-height: 120px;
-	top: 0%;
-	left: 0%;
-	pointer-events: none;
-  border-radius: 100%;
-	opacity: 0;
-  // transform-origin: center;
-  z-index: 1000;
   background-color: var(--textColor);
+  border-radius: 100%;
+  height: 10vw;
+  left: 0;
+  min-height: 120px;
+  min-width: 120px;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: 10vw;
+  z-index: 1000;
 }
 
-.hoverInner{
-  width: 100%;
-  height: 100%;
-  // animation: rotateLoop 10s infinite linear;
-  background-image: url('../img/explore.svg');
-  background-size: 90%;
-  border-radius: 100%;
-  pointer-events: none;
+.hoverInner {
+  background-image: url("../img/explore.svg");
   background-position: center center;
   background-repeat: no-repeat;
+  background-size: 90%;
+  border-radius: 100%;
+  height: 100%;
+  pointer-events: none;
+  width: 100%;
+
+  @media (pointer: none) {
+    display: none;
+  }
 }
 
-
-a[data-swup-transition='project']{
+a[data-swup-transition='project'] {
   cursor: url("../img/cursor.svg") 25 8.3, pointer !important;
+}
+
+a[target="_blank"]{
+  cursor: pointer;
 }
