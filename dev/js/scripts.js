@@ -511,7 +511,7 @@ class PageEffects {
       this.killList.push(scroll);
     }
 
-    if (document.querySelector('.videoPlayer')){
+    if (document.querySelector('.videoPlayer')) {
       let videos = document.querySelectorAll('.videoPlayer');
       this.players = [];
       console.log(videos);
@@ -520,28 +520,21 @@ class PageEffects {
         const player = new Plyr(video);
         this.players.push(player);
         this.killList.push(player);
+        console.log(player);
       })
     }
-    //
-    // if (document.querySelector('#scollerText')){
-    //   let homeScroller = document.querySelector('#scollerText');
-    //   const tl2 = gsap.timeline();
-    //
-    //   const scroller = ScrollTrigger.create({
-    //     trigger: document.querySelector('.homeProjectDeco'),
-    //     start: "top top",
-    //     end: "bottom bottom",
-    //     animation: tl2,
-    //     toggleClass: {targets:homeScroller, className:'active'},
-    //     toggleActions: "play complete restart reset"
-    //   });
-    // }
+
   }
 
   killAll() {
     if (this.killList) {
       this.killList.forEach(effect => {
-        effect.kill();
+        if (!effect.type && effect.type != 'video'){
+          effect.kill();
+        } else {
+          effect.destroy();
+        }
+
       })
     }
 
@@ -638,14 +631,17 @@ class EffectSection {
   fadein(el) {
     let media = 'all';
     let effect = gsap.fromTo(el, 0.5, {
-      alpha: 0
+      alpha: 0,
+      yPercent: 10
     }, {
-      alpha: 1
+      alpha: 1,
+      yPercent: 0,
+      stagger: 0.25
     })
     //
     let scroll = ScrollTrigger.create({
       trigger: this.wrapper,
-      start: "top center",
+      start: "top 80%",
       animation: effect,
       once: true
     });
@@ -746,6 +742,7 @@ class EffectSection {
 
 
   getEffects(media = 'all') {
+    this.fadeinGroup = [];
     this.elements.forEach(element => {
       let effect = element.dataset.effect;
       switch (effect) {
@@ -757,7 +754,9 @@ class EffectSection {
 
         case 'fadein':
           if (media == 'all') {
-            this.fadein(element);
+            console.log('fadein');
+            console.log(element);
+            this.fadeinGroup.push(element);
           }
           break;
 
@@ -771,6 +770,12 @@ class EffectSection {
           // console.log('no effect');
       }
     })
+
+    if (media == 'all' && this.fadeinGroup.length > 0){
+      this.fadein(this.fadeinGroup);
+    }
+
+
 
 
   }
@@ -857,7 +862,7 @@ let menu = new Menu(document.querySelector('header'));
 
 
 function init() {
-  document.querySelectorAll("[data-swup-transition='project']").forEach(link => new HoverImgF(link));
+  // document.querySelectorAll("[data-swup-transition='project']").forEach(link => new HoverImgF(link));
 
 
   document.querySelectorAll('[data-swup-preload]').forEach(link => {
@@ -923,16 +928,18 @@ class HoverImgF {
     this.positionElement = (ev) => {
       const mousePos = getMousePos(ev);
       const docScrolls = {
-        left: document.body.scrollLeft + document.documentElement.scrollLeft,
-        top: document.body.scrollTop + document.documentElement.scrollTop
+        top: document.body.scrollTop + document.documentElement.scrollTop,
+        left: document.body.scrollLeft + document.documentElement.scrollLeft
       };
-      const objectWidth = this.DOM.reveal.offsetWidth / 2;
       const objectHeight = this.DOM.reveal.offsetHeight / 2;
+      const objectWidth = this.DOM.reveal.offsetWidth / 2;
+
       const topY = mousePos.y - objectHeight - docScrolls.top;
       const topX = mousePos.x - objectWidth - docScrolls.left;
       gsap.set(this.DOM.reveal, {
-        x: topX,
-        y: topY
+        y: topY,
+        x: topX
+
       })
     };
     this.mouseenterFn = (ev) => {
@@ -962,10 +969,13 @@ class HoverImgF {
       .add('begin')
       .fromTo(this.DOM.reveal, 0.25, {
         alpha: 0,
-        scale: 0
+        scale: 0,
+        overwrite: true
       }, {
         alpha: 1,
+        overwrite: true,
         scale: 1
+
       }, 'begin')
   }
   hideImage() {
