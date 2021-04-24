@@ -1,6 +1,16 @@
 /* =============
     Project
 ============= */
+
+p, h4{
+  a{
+    color: var(--accentColor);
+
+    &:hover, &:active{
+      color: white;
+    }
+  }
+}
 .projectCoverFull {
   position: relative;
 
@@ -125,7 +135,7 @@
   z-index: 2;
   @include md {
     grid-column: 2 / 6;
-    padding-top: 6rem;
+    padding-top: var(--mgLeft);
   }
   @include lg {
     grid-column: 2 / 8;
@@ -147,6 +157,24 @@
   display: grid;
   grid-template-columns: 100%;
   width: 100%;
+
+  p{
+    picture{
+      margin-top: 2rem;
+      height: auto;
+      width: 100%;
+      position: relative;
+
+
+      img{
+        height: auto;
+        width: 100%;
+        position: relative;
+        opacity: 0.5;
+      }
+    }
+  }
+
   @include md {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -184,6 +212,17 @@
   grid-column: 1 / -1;
   @include lg {
     grid-column: 2 / 4;
+  }
+}
+
+.col34 {
+  grid-column: 1 / -1;
+
+  @include md{
+    grid-column: 2 / 3;
+  }
+  @include lg {
+    grid-column: 3 / 4;
   }
 }
 
@@ -665,4 +704,39 @@
       }
     }
   }
+}
+
+.videoSection{
+  width: 100%;
+  position: relative;
+  --plyr-color-main: black;
+  --plyr-range-fill-background: var(--accentColor);
+
+  .plyr__control--overlaid{
+    background: black;
+    padding: 2rem;
+    border: 2px solid white;
+    transition: background 0.25s, transform 0.25s;
+    transform-origin: center;
+
+    >svg{
+      width: 1.5rem;
+      height: 1.5rem;
+      transition: fill 0.25s;
+    }
+
+    &:hover, &:active{
+      background: var(--textColor);
+      transform: scale(1.25) translateX(-50%) translateY(-50%);
+      >svg{
+        fill: var(--bgColor);
+      }
+    }
+  }
+
+}
+
+.videoSection.videoPad{
+  width: 80%;
+  margin: 0 auto;
 }

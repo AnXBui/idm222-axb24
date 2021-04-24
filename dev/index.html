@@ -17,6 +17,10 @@
 
   <link rel="stylesheet" href="https://use.typekit.net/wcz3ore.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap">
+  <link rel="preload" href="https://cdn.plyr.io/3.6.7/plyr.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.plyr.io/3.6.7/plyr.css"/></noscript>
+
+
 
   <link rel="stylesheet" href="css/styles.css">
   <title>An Bui Portfolio</title>
@@ -67,13 +71,18 @@
         <div data-animate class="menuProjects">
           <h3>Projects</h3>
           <ul>
+            <li><a data-swup-transition='fade' data-swup-link href="portraits-trilogy.html">Portraits trilogy</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="love-death-robots.html">Love Death Robot</a></li>
             <li><a data-swup-transition='fade' data-swup-link href="shleep-kit.html">Shleep Kit</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="scopee.html">Scopee</a></li>
             <li><a data-swup-transition='fade' data-swup-link href="ento-bug-snack.html">Ento Bug Snack</a></li>
             <li><a data-swup-transition='fade' data-swup-link href="find-found-founded.html">Find Found Founded</a></li>
             <li><a data-swup-transition='fade' data-swup-link href="awbury-arboretum.html">Awbury Arboretum</a></li>
             <li><a data-swup-transition='fade' data-swup-link href="sacred-form-vibrant-soul.html">Sacred Form, <br>Vibrant Soul</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="ndeo-redesigned.html">NDEO Redesigned</a></li>
             <li><a data-swup-transition='fade' data-swup-link href="synesthesia-fantasia.html">Synesthesia Fantasia</a></li>
             <li><a data-swup-transition='fade' data-swup-link href="itsnk.html">Itsnk</a></li>
+            <li><a data-swup-transition='fade' data-swup-link href="jsolomun.html">J Solomun</a></li>
           </ul>
         </div>
 
@@ -110,8 +119,8 @@
           <span data-depth='0.5'>Giving voice</span>
           <span data-depth='0.25'>to the st<b>o
             <video preload='auto' autoplay loop poster="img/projects/shleep/shleep_box.png">
-                <source src="img/projects_box.webm"
-                        type="video/webm">
+                <source src="img/projects_box.webp"
+                        type="image/webp">
                 <img src="img/projects_box.gif" alt="gif showing my various projects">
             </video>
           </b>ry</span>
@@ -139,7 +148,9 @@
             <li><p>Graphic Design</p></li>
             <li><p>Digital Experience</p></li>
             <li><p>Branding Consultant</p></li>
+            <li><p>UI/UX Design</p></li>
             <li><p>Illustration</p></li>
+            <li><p>Frontend Development</p></li>
           </ul>
         </div>
         <div data-depth='0.7'>
@@ -158,7 +169,7 @@
         <div class="homeProjectHeadings">
           <div>
             <h2>Stories I've told so far:</h2>
-            <p>Freelance Projects and More...</p>
+            <p>Freelance Projects, Branding Campaigns, UI/UX Designs, Motion Graphics, and more...</p>
             <svg overflow="visible" viewBox="0 0 313.6 347">
               <path fill="none" stroke="#fff" stroke-miterlimit="20" d="M88.9.4S.8 43.7.5 100.7c-.3 64.3 124 43.8 194.8 15.7 63.2-25 135.9-54.1 112.1-98.6C267.6-56.6-30.2 134 3.5 231.4c14.3 41.3 123.4 33 186.6 9.8 58-21.3 132.8-55.8 122-92.1C291.2 79-65.8 264.3 11.7 329.5c74.8 63 291.6-68.7 291.6-68.7"/>
               <path fill="#fff" d="M276.8 258.6s10.3 4.7 36-3.3c0 0-24.1 16.2-22.3 33.8 0 0-2.2-16.7 12.9-28.3-.1 0-17.2 3.2-26.6-2.2z"/>
@@ -168,13 +179,51 @@
         <div class="homeProjectList">
 
           <div class="homeProjectGroup">
-            <div class="projectItem parallaxSection">
+            <div data-name='portraits' class="projectItem parallaxSection">
               <div class="projectInfo">
-                <p data-depth='0.15' class="projectIndex outlineText tightText">01/</p>
+                <p data-depth='0.1' class="projectIndex outlineText tightText">01/</p>
+                <h3>Portraits trilogy</h3>
+                <p>Illustration / Poster</p>
+                <p>2021</p>
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2' data-swup-preload class="projectCover" data-swup-transition='project' data-swup-link href='portraits-trilogy.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" data-srcset="img/projects/portrait/portrait_cover_1920.avif 1920w, img/projects/portrait/portrait_cover_1080.avif 1080w, img/projects/portrait/portrait_cover_768.avif 768w, img/projects/portrait/portrait_cover_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" data-srcset="img/projects/portrait/portrait_cover_1920.webp 1920w, img/projects/portrait/portrait_cover_1080.webp 1080w, img/projects/portrait/portrait_cover_768.webp 768w, img/projects/portrait/portrait_cover_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" data-srcset="img/projects/portrait/portrait_cover_1920.jp2 1920w, img/projects/portrait/portrait_cover_1080.jp2 1080w, img/projects/portrait/portrait_cover_768.jp2 768w, img/projects/portrait/portrait_cover_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" data-srcset="img/projects/portrait/portrait_cover_1920.png 1920w, img/projects/portrait/portrait_cover_1080.png 1080w, img/projects/portrait/portrait_cover_768.png 768w, img/projects/portrait/portrait_cover_250.png 250w" sizes="100vw">
+                    <img  class='lazyload' style='--topPos: 100%;' src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/projects/portrait/portrait_cover_1920.png" width="1920" height="1080" alt="Portraits trilogy Project cover">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div data-name='lovedeath' class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.15' class="projectIndex outlineText">02/</p>
+                <h3>Love Death Robot Intro</h3>
+                <p>Motion Graphics</p>
+                <p>2020</p>
+
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2'  data-swup-preload  class="projectCover" data-swup-transition='project' data-swup-link href='love-death-robots.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" data-srcset="img/projects/lovedeath/love_cover_1920.avif 1920w, img/projects/lovedeath/love_cover_1080.avif 1080w, img/projects/lovedeath/love_cover_768.avif 768w, img/projects/lovedeath/love_cover_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" data-srcset="img/projects/lovedeath/love_cover_1920.webp 1920w, img/projects/lovedeath/love_cover_1080.webp 1080w, img/projects/lovedeath/love_cover_768.webp 768w, img/projects/lovedeath/love_cover_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" data-srcset="img/projects/lovedeath/love_cover_1920.jp2 1920w, img/projects/lovedeath/love_cover_1080.jp2 1080w, img/projects/lovedeath/love_cover_768.jp2 768w, img/projects/lovedeath/love_cover_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" data-srcset="img/projects/lovedeath/love_cover_1920.png 1920w, img/projects/lovedeath/love_cover_1080.png 1080w, img/projects/lovedeath/love_cover_768.png 768w, img/projects/lovedeath/love_cover_250.png 250w" sizes="100vw">
+                    <img class='lazyload' data-src="img/projects/lovedeath/love_cover_1920.png" width="1920" height="1080" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Love Death Robot Intro Frame">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div data-name='shleepkit' class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.15' class="projectIndex outlineText">03/</p>
                 <h3>Shleep Kit</h3>
                 <p>Branding / Packaging</p>
                 <p>2020</p>
-
               </div>
               <div class="projectCoverWrapper">
                 <a data-depth='-0.2'  data-swup-preload  class="projectCover" data-swup-transition='project' data-swup-link href='shleep-kit.html'>
@@ -188,9 +237,47 @@
                 </a>
               </div>
             </div>
-            <div class="projectItem parallaxSection">
+            <div data-name='scopee' class="projectItem parallaxSection">
               <div class="projectInfo">
-                <p data-depth='0.1' class="projectIndex outlineText">02/</p>
+                <p data-depth='0.1' class="projectIndex outlineText">04/</p>
+                <h3>Scopee</h3>
+                <p>Illustration / UI Design</p>
+                <p>2019</p>
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2'  data-swup-preload  class="projectCover" data-swup-transition='project' data-swup-link href='scopee-app.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" data-srcset="img/projects/scopee/scopee_cover_1920.avif 1920w, img/projects/scopee/scopee_cover_1080.avif 1080w, img/projects/scopee/scopee_cover_768.avif 768w, img/projects/scopee/scopee_cover_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" data-srcset="img/projects/scopee/scopee_cover_1920.webp 1920w, img/projects/scopee/scopee_cover_1080.webp 1080w, img/projects/scopee/scopee_cover_768.webp 768w, img/projects/scopee/scopee_cover_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" data-srcset="img/projects/scopee/scopee_cover_1920.jp2 1920w, img/projects/scopee/scopee_cover_1080.jp2 1080w, img/projects/scopee/scopee_cover_768.jp2 768w, img/projects/scopee/scopee_cover_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" data-srcset="img/projects/scopee/scopee_cover_1920.png 1920w, img/projects/scopee/scopee_cover_1080.png 1080w, img/projects/scopee/scopee_cover_768.png 768w, img/projects/scopee/scopee_cover_250.png 250w" sizes="100vw">
+                    <img class='lazyload' data-src="img/projects/scopee/scopee_cover_1920.png" width="1920" height="1080" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Find Found Founded Map Closeup">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div data-name='findfound' class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.1' class="projectIndex outlineText">05/</p>
+                <h3>Find Found Founded</h3>
+                <p>Editorial / Wayfinding</p>
+                <p>2019</p>
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2'  data-swup-preload  class="projectCover" data-swup-transition='project' data-swup-link href='find-found-founded.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" data-srcset="img/projects/find/find4_1920.avif 1920w, img/projects/find/find4_1080.avif 1080w, img/projects/find/find4_768.avif 768w, img/projects/find/find4_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" data-srcset="img/projects/find/find4_1920.webp 1920w, img/projects/find/find4_1080.webp 1080w, img/projects/find/find4_768.webp 768w, img/projects/find/find4_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" data-srcset="img/projects/find/find4_1920.jp2 1920w, img/projects/find/find4_1080.jp2 1080w, img/projects/find/find4_768.jp2 768w, img/projects/find/find4_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" data-srcset="img/projects/find/find4_1920.png 1920w, img/projects/find/find4_1080.png 1080w, img/projects/find/find4_768.png 768w, img/projects/find/find4_250.png 250w" sizes="100vw">
+                    <img class='lazyload' data-src="img/projects/find/find4_1920.png" width="1920" height="1080" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Find Found Founded Map Closeup">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div data-name='ento' class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.1' class="projectIndex outlineText">06/</p>
                 <h3>Ento Bug Snack</h3>
                 <p>Branding / Packaging</p>
                 <p>2020</p>
@@ -210,28 +297,9 @@
                 </a>
               </div>
             </div>
-            <div class="projectItem parallaxSection">
+            <div data-name='awbury' class="projectItem parallaxSection">
               <div class="projectInfo">
-                <p data-depth='0.1' class="projectIndex outlineText">03/</p>
-                <h3>Find Found Founded</h3>
-                <p>Editorial / Wayfinding</p>
-                <p>2019</p>
-              </div>
-              <div class="projectCoverWrapper">
-                <a data-depth='-0.2'  data-swup-preload  class="projectCover" data-swup-transition='project' data-swup-link href='find-found-founded.html'>
-                  <picture class="imageContent projectImage">
-                    <source type="image/avif" data-srcset="img/projects/find/find4_1920.avif 1920w, img/projects/find/find4_1080.avif 1080w, img/projects/find/find4_768.avif 768w, img/projects/find/find4_250.avif 250w" sizes="100vw">
-                    <source type="image/webp" data-srcset="img/projects/find/find4_1920.webp 1920w, img/projects/find/find4_1080.webp 1080w, img/projects/find/find4_768.webp 768w, img/projects/find/find4_250.webp 250w" sizes="100vw">
-                    <source type="image/jp2" data-srcset="img/projects/find/find4_1920.jp2 1920w, img/projects/find/find4_1080.jp2 1080w, img/projects/find/find4_768.jp2 768w, img/projects/find/find4_250.jp2 250w" sizes="100vw">
-                    <source type="image/png" data-srcset="img/projects/find/find4_1920.png 1920w, img/projects/find/find4_1080.png 1080w, img/projects/find/find4_768.png 768w, img/projects/find/find4_250.png 250w" sizes="100vw">
-                    <img class='lazyload' data-src="img/projects/find/find4_1920.png" width="1920" height="1080" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Find Found Founded Map Closeup">
-                  </picture>
-                </a>
-              </div>
-            </div>
-            <div class="projectItem parallaxSection">
-              <div class="projectInfo">
-                <p data-depth='0.1' class="projectIndex outlineText">04/</p>
+                <p data-depth='0.1' class="projectIndex outlineText">07/</p>
                 <h3>Awbury Arboretum</h3>
                 <p>Branding</p>
                 <p>2019</p>
@@ -248,28 +316,9 @@
                 </a>
               </div>
             </div>
-            <div class="projectItem parallaxSection">
+            <div data-name='synesthesia' class="projectItem parallaxSection">
               <div class="projectInfo">
-                <p data-depth='0.1' class="projectIndex outlineText">05/</p>
-                <h3>Sacred Forms Vibrant Soul</h3>
-                <p>Book Design</p>
-                <p>2020</p>
-              </div>
-              <div class="projectCoverWrapper">
-                <a data-depth='-0.2'  data-swup-preload class="projectCover" data-swup-transition='project' data-swup-link href='sacred-form-vibrant-soul.html'>
-                  <picture class="imageContent projectImage">
-                    <source type="image/avif" data-srcset="img/projects/brooker/brooker1_1920.avif 1920w, img/projects/brooker/brooker1_1080.avif 1080w, img/projects/brooker/brooker1_768.avif 768w, img/projects/brooker/brooker1_250.avif 250w" sizes="100vw">
-                    <source type="image/webp" data-srcset="img/projects/brooker/brooker1_1920.webp 1920w, img/projects/brooker/brooker1_1080.webp 1080w, img/projects/brooker/brooker1_768.webp 768w, img/projects/brooker/brooker1_250.webp 250w" sizes="100vw">
-                    <source type="image/jp2" data-srcset="img/projects/brooker/brooker1_1920.jp2 1920w, img/projects/brooker/brooker1_1080.jp2 1080w, img/projects/brooker/brooker1_768.jp2 768w, img/projects/brooker/brooker1_250.jp2 250w" sizes="100vw">
-                    <source type="image/png" data-srcset="img/projects/brooker/brooker1_1920.png 1920w, img/projects/brooker/brooker1_1080.png 1080w, img/projects/brooker/brooker1_768.png 768w, img/projects/brooker/brooker1_250.png 250w" sizes="100vw">
-                    <img class='lazyload' data-src="img/projects/brooker/brooker1_1920.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="1920" height="1080" alt="Ento Boxes mid-air">
-                  </picture>
-                </a>
-              </div>
-            </div>
-            <div class="projectItem parallaxSection">
-              <div class="projectInfo">
-                <p data-depth='0.1' class="projectIndex outlineText">06/</p>
+                <p data-depth='0.1' class="projectIndex outlineText">08/</p>
                 <h3>Synesthesia Fantasia</h3>
                 <p>Experimental Book Design</p>
                 <p>2020</p>
@@ -286,9 +335,66 @@
                 </a>
               </div>
             </div>
-            <div class="projectItem parallaxSection">
+            <div data-name='ndeo' class="projectItem parallaxSection">
               <div class="projectInfo">
-                <p data-depth='0.1' class="projectIndex outlineText">07/</p>
+                <p data-depth='0.1' class="projectIndex outlineText">09/</p>
+                <h3>NDEO Redesigned</h3>
+                <p>UI Design / Front-end</p>
+                <p>2019</p>
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2'  data-swup-preload class="projectCover" data-swup-transition='project' data-swup-link href='ndeo-redesigned.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" data-srcset="img/projects/ndeo/ndeo_cover_1920.avif 1920w, img/projects/ndeo/ndeo_cover_1080.avif 1080w, img/projects/ndeo/ndeo_cover_768.avif 768w, img/projects/ndeo/ndeo_cover_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" data-srcset="img/projects/ndeo/ndeo_cover_1920.webp 1920w, img/projects/ndeo/ndeo_cover_1080.webp 1080w, img/projects/ndeo/ndeo_cover_768.webp 768w, img/projects/ndeo/ndeo_cover_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" data-srcset="img/projects/ndeo/ndeo_cover_1920.jp2 1920w, img/projects/ndeo/ndeo_cover_1080.jp2 1080w, img/projects/ndeo/ndeo_cover_768.jp2 768w, img/projects/ndeo/ndeo_cover_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" data-srcset="img/projects/ndeo/ndeo_cover_1920.png 1920w, img/projects/ndeo/ndeo_cover_1080.png 1080w, img/projects/ndeo/ndeo_cover_768.png 768w, img/projects/ndeo/ndeo_cover_250.png 250w" sizes="100vw">
+                    <img class='lazyload' data-src="img/projects/ndeo/ndeo_cover_1920.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="1920" height="1080" alt="Ento Boxes mid-air">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div data-name='jsolomun' class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.1' class="projectIndex outlineText">10/</p>
+                <h3>Jsolomun Website</h3>
+                <p>UI Design / Front-end</p>
+                <p>2020</p>
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2' data-swup-preload class="projectCover" data-swup-transition='project' data-swup-link href='jsolomun.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" data-srcset="img/projects/jsolomun/solomun_cover_1920.avif 1920w, img/projects/jsolomun/solomun_cover_1080.avif 1080w, img/projects/jsolomun/solomun_cover_768.avif 768w, img/projects/jsolomun/solomun_cover_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" data-srcset="img/projects/jsolomun/solomun_cover_1920.webp 1920w, img/projects/jsolomun/solomun_cover_1080.webp 1080w, img/projects/jsolomun/solomun_cover_768.webp 768w, img/projects/jsolomun/solomun_cover_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" data-srcset="img/projects/jsolomun/solomun_cover_1920.jp2 1920w, img/projects/jsolomun/solomun_cover_1080.jp2 1080w, img/projects/jsolomun/solomun_cover_768.jp2 768w, img/projects/jsolomun/solomun_cover_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" data-srcset="img/projects/jsolomun/solomun_cover_1920.png 1920w, img/projects/jsolomun/solomun_cover_1080.png 1080w, img/projects/jsolomun/solomun_cover_768.png 768w, img/projects/jsolomun/solomun_cover_250.png 250w" sizes="100vw">
+                    <img style='--leftPos: 50%;' class='lazyload' src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/projects/jsolomun/solomun_cover_1920.png" width="1920" height="1080" alt="J Solomun Photoshot">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div data-name='sacred' class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.1' class="projectIndex outlineText">11/</p>
+                <h3>Sacred Forms Vibrant Soul</h3>
+                <p>Book Design</p>
+                <p>2020</p>
+              </div>
+              <div class="projectCoverWrapper">
+                <a data-depth='-0.2'  data-swup-preload class="projectCover" data-swup-transition='project' data-swup-link href='sacred-form-vibrant-soul.html'>
+                  <picture class="imageContent projectImage">
+                    <source type="image/avif" data-srcset="img/projects/brooker/brooker1_1920.avif 1920w, img/projects/brooker/brooker1_1080.avif 1080w, img/projects/brooker/brooker1_768.avif 768w, img/projects/brooker/brooker1_250.avif 250w" sizes="100vw">
+                    <source type="image/webp" data-srcset="img/projects/brooker/brooker1_1920.webp 1920w, img/projects/brooker/brooker1_1080.webp 1080w, img/projects/brooker/brooker1_768.webp 768w, img/projects/brooker/brooker1_250.webp 250w" sizes="100vw">
+                    <source type="image/jp2" data-srcset="img/projects/brooker/brooker1_1920.jp2 1920w, img/projects/brooker/brooker1_1080.jp2 1080w, img/projects/brooker/brooker1_768.jp2 768w, img/projects/brooker/brooker1_250.jp2 250w" sizes="100vw">
+                    <source type="image/png" data-srcset="img/projects/brooker/brooker1_1920.png 1920w, img/projects/brooker/brooker1_1080.png 1080w, img/projects/brooker/brooker1_768.png 768w, img/projects/brooker/brooker1_250.png 250w" sizes="100vw">
+                    <img class='lazyload' data-src="img/projects/brooker/brooker1_1920.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="1920" height="1080" alt="Ento Boxes mid-air">
+                  </picture>
+                </a>
+              </div>
+            </div>
+            <div data-name='itsnk' class="projectItem parallaxSection">
+              <div class="projectInfo">
+                <p data-depth='0.1' class="projectIndex outlineText tightText">12/</p>
                 <h3>Itsnk</h3>
                 <p>Branding / Website Design</p>
                 <p>2020</p>
@@ -305,6 +411,7 @@
                 </a>
               </div>
             </div>
+
             <div class="projectMore parallaxSection">
               <h3 data-depth='1'>See more projects <span>and WIP at <b>@altans</b></span></h3>
               <a data-depth='0.25' class="roundArrow" target="_blank" href="https://www.instagram.com/alternative_answer/">
@@ -316,6 +423,12 @@
               </a>
             </div>
           </div>
+
+          <!-- <div class="homeProjectDeco">
+            <div>
+              <p id='scollerText'>Graphic Design / Web Design / Illustration / Motion Graphic / Brand Identity</p>
+            </div>
+          </div> -->
 
         </div>
       </section>
@@ -352,6 +465,7 @@
   <script src="js/SwupJSPlugin.min.js"></script>
   <script src="js/SwupPreloadPlugin.min.js"></script>
   <script src="js/SwupA11YPlugin.min.js"></script>
+  <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
   <script src="js/scripts-min.js"></script>
 </body>
 

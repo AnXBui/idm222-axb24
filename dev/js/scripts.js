@@ -89,16 +89,12 @@ function getViewport() {
   if (typeof window.innerWidth != 'undefined') {
     viewPortWidth = window.innerWidth,
       viewPortHeight = window.innerHeight
-  }
-
-  else if (typeof document.documentElement != 'undefined' &&
+  } else if (typeof document.documentElement != 'undefined' &&
     typeof document.documentElement.clientWidth !=
     'undefined' && document.documentElement.clientWidth != 0) {
     viewPortWidth = document.documentElement.clientWidth,
       viewPortHeight = document.documentElement.clientHeight
-  }
-
-  else {
+  } else {
     viewPortWidth = document.getElementsByTagName('body')[0].clientWidth,
       viewPortHeight = document.getElementsByTagName('body')[0].clientHeight
   }
@@ -400,10 +396,19 @@ class Menu {
     // if (this.active){
     this.animating = true;
     enableBodyScroll();
-    if (document.querySelector('.projectControlTitle')){
-      gsap.to('.projectControlTitle',0.25,{opacity: 1, yPercent: 0});
-      gsap.to('.projectControlPrev',0.25,{opacity: 1, xPercent: 0});
-      gsap.to('.projectControlNext',0.25,{opacity: 1, xPercent: 0});
+    if (document.querySelector('.projectControlTitle')) {
+      gsap.to('.projectControlTitle', 0.25, {
+        opacity: 1,
+        yPercent: 0
+      });
+      gsap.to('.projectControlPrev', 0.25, {
+        opacity: 1,
+        xPercent: 0
+      });
+      gsap.to('.projectControlNext', 0.25, {
+        opacity: 1,
+        xPercent: 0
+      });
     }
 
     rmvClass(this.bar, 'dark');
@@ -420,10 +425,19 @@ class Menu {
     this.in.restart();
     this.active = true;
 
-    if (document.querySelector('.projectControlTitle')){
-      gsap.to('.projectControlTitle',0.25,{opacity: 0, yPercent: -100});
-      gsap.to('.projectControlPrev',0.25,{opacity: 0, xPercent: -100});
-      gsap.to('.projectControlNext',0.25,{opacity: 0, xPercent: 100});
+    if (document.querySelector('.projectControlTitle')) {
+      gsap.to('.projectControlTitle', 0.25, {
+        opacity: 0,
+        yPercent: -100
+      });
+      gsap.to('.projectControlPrev', 0.25, {
+        opacity: 0,
+        xPercent: -100
+      });
+      gsap.to('.projectControlNext', 0.25, {
+        opacity: 0,
+        xPercent: 100
+      });
     }
   }
 }
@@ -461,9 +475,6 @@ class PageEffects {
 
     this.refetch();
 
-    // const refactor = this.refactor();
-
-    // document.addEventListener('resize', refactor);
   }
 
 
@@ -499,6 +510,32 @@ class PageEffects {
 
       this.killList.push(scroll);
     }
+
+    if (document.querySelector('.videoPlayer')){
+      let videos = document.querySelectorAll('.videoPlayer');
+      this.players = [];
+      console.log(videos);
+
+      videos.forEach(video => {
+        const player = new Plyr(video);
+        this.players.push(player);
+        this.killList.push(player);
+      })
+    }
+    //
+    // if (document.querySelector('#scollerText')){
+    //   let homeScroller = document.querySelector('#scollerText');
+    //   const tl2 = gsap.timeline();
+    //
+    //   const scroller = ScrollTrigger.create({
+    //     trigger: document.querySelector('.homeProjectDeco'),
+    //     start: "top top",
+    //     end: "bottom bottom",
+    //     animation: tl2,
+    //     toggleClass: {targets:homeScroller, className:'active'},
+    //     toggleActions: "play complete restart reset"
+    //   });
+    // }
   }
 
   killAll() {
@@ -560,6 +597,10 @@ class PageEffects {
   }
 
 }
+//
+// class ScrollerText{
+//
+// }
 
 class EffectSection {
   constructor(section) {
