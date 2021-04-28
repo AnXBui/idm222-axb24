@@ -1,6 +1,16 @@
 /* =============
     Home
 ============= */
+
+
+.noCursor {
+  // cursor: none;
+  //
+  // *{
+  //   cursor: none;
+  // }
+}
+
 .fullScreen {
   display: block;
   height: 100vh;
@@ -329,6 +339,11 @@
         grid-column: 3 / 4;
       }
     }
+  }
+
+  img{
+    width: 8rem;
+    height: 8rem;
   }
 
   li {
@@ -759,5 +774,17 @@
 
   p {
     margin-bottom: 2rem;
+  }
+}
+
+footer{
+  writing-mode: vertical-lr;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+
+  @include md{
+    bottom: 2rem;
+    left: 2rem;
   }
 }

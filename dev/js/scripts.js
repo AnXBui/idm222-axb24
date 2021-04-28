@@ -21,6 +21,10 @@ function reParent(target, parent) {
   parent.appendChild(target);
 }
 
+function lerp(a, b, n) {
+  return (1 - n) * a + n * b
+}
+
 
 
 const getMousePos = (e) => {
@@ -853,11 +857,79 @@ class ParallaxSection {
 }
 
 
-
-
+//
+// class CanvasCursor{
+//   constructor(){
+//     this.canvas = document.querySelector('.js-canvas');
+//     this.ctx = this.canvas.getContext('2d');
+//     this.width = this.canvas.width = window.innerWidth;
+//     this.height = this.canvas.height = window.innerHeight;
+//
+//     this.mouseX = this.width / 2;
+//     this.mouseY = this.height / 2;
+//
+//     this.circle = {
+//       radius: 10,
+//       lastX: this.mouseX,
+//       lastY: this.mouseY
+//     }
+//
+//     this.elems = document.querySelectorAll('a[transition="project"]');
+//
+//     this.onResize = () => {
+//       this.width = this.canvas.width = window.innerWidth
+//       this.height = this.canvas.height = window.innerHeight
+//     }
+//
+//     this.render = () => {
+//       this.circle.lastX = lerp(this.circle.lastX, this.mouseX, 0.25)
+//       this.circle.lastY = lerp(this.circle.lastY, this.mouseY, 0.25)
+//       this.ctx.clearRect(0, 0, this.width, this.height)
+//       this.ctx.beginPath()
+//       this.ctx.arc(this.circle.lastX, this.circle.lastY, this.circle.radius, 0, Math.PI * 2, false)
+//       this.ctx.fillStyle = "#ffffff"
+//       this.ctx.fill()
+//       this.ctx.closePath()
+//       requestAnimationFrame(this.render);
+//     }
+//
+//     this.onResize = this.onResize.bind(this);
+//     this.render = this.render.bind(this);
+//
+//     this.init()
+//
+//   }
+//
+//   init(){
+//     requestAnimationFrame(this.render);
+//
+//     window.addEventListener('mousemove', function(e) {
+//       this.mouseX = e.clientX;
+//       this.mouseY = e.clientY;
+//     })
+//
+//     window.addEventListener('resize', this.onResize, false)
+//
+//     let tween = gsap.to(this.circle, 0.25, {
+//       radius: this.circle.radius * 3,
+//       ease: 'power2',
+//       paused: true
+//     })
+//
+//     this.elems.forEach((el) => {
+//       el.addEventListener('mouseenter', () => {
+//         tween.play()
+//       }, false)
+//       el.addEventListener('mouseleave', () => {
+//         tween.reverse()
+//       }, false)
+//     })
+//   }
+// }
 
 
 let menu = new Menu(document.querySelector('header'));
+// let cursor = new CanvasCursor();
 
 
 
@@ -911,6 +983,8 @@ swup.on('samePageWithHash', (e) => {
   });
   // }
 });
+
+
 
 class HoverImgF {
   constructor(el) {
@@ -996,12 +1070,27 @@ class HoverImgF {
 
 
 
-gsap.set('body', {
-  alpha: 0
-});
 window.addEventListener('load', () => {
-  gsap.to('body', 0.5, {
-    alpha: 1
+  if (sessionStorage.getItem('loaded') == 'yes'){
+    addClass(document.querySelector('body'),'noCursor');
+    rmvClass(document.querySelector('body'),'noScroll');
+    return;
+  }
+  let tl = gsap.timeline();
+  const loaderSolid = document.querySelector('#loaderSolid');
+  const loaderText = document.querySelector('#loaderText');
+  gsap.set(loaderSolid, {transformOrigin: "center top"});
+  tl.to(window, {duration: 0.01, scrollTo: 0})
+  tl.to(loaderText, 0.5, {yPercent: -100, delay: 1, ease:'expo'})
+  tl.to(loaderSolid, 1, {scaleY: 0, ease:'expo'},"-=0.25");
+  tl.from('main', 0.5, {
+    alpha: 0,
+    y: 300,
+    onComplete:() => {
+      rmvClass(document.querySelector('body'),'noScroll');
+      addClass(document.querySelector('body'),'noCursor');
+      sessionStorage.setItem("loaded", "yes");
+    }
   });
 });
 init();

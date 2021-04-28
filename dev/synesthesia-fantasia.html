@@ -28,6 +28,19 @@
 
 <body>
 
+  <div id='loader' style="width: 100vw; z-index: 99; position: fixed; height: 100vh; pointer-events: none;">
+    <div id='loaderSolid' style='position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #B7B7B7;'></div>
+    <svg aria-label='loading...' style='width: 25vw; height: 10vw;position: absolute; bottom: 1rem; left: 1rem;' overflow="hidden" viewBox="0 0 130 52.1">
+      <path id='loaderText' d="M5.7.5v45.9H10v5.3H0V.5h5.7zM25.3 45.3c0 2.2-.3 3.5-1 4.4-1.2 1.5-3.1 2.5-5.4 2.5-4.2 0-6.2-2.3-6.2-7.4V8.5c0-5.8 2.1-8.5 6.4-8.5 4.1 0 6.2 2.5 6.2 7.1v38.2zm-7.3-.1c0 1.2.3 1.7 1.1 1.7s1-.5 1-1.8V7.3c0-1.5-.2-1.9-1-1.9S18 5.8 18 7.2v38zM44.1 51.7h-5.9l-.7-9.9h-3.3l-.5 9.9h-5.8L31.3.5h8.3l4.5 51.2zm-9.7-15.3h2.8l-1.6-23.9-1.2 23.9zM53.2.5c4.1-.1 6.1 1.7 6.1 5.4V46c0 3.8-2.1 5.8-5.8 5.7h-6.8L46.6.5h6.6zm-.5 45.8c.8.1 1.3-.7 1.3-1.8v-37c0-1.5-.3-1.8-1.3-1.8h-.5l.1 40.7h.4zM67.9 51.7h-5.6V.5h5.6v51.2zM76.9.5L80.5 30V.5h5l-.1 51.2h-6.1l-3.2-25.6.1 25.6H71V.5h5.9zM101.1 25.4v20.4c0 3.8-2.5 6.3-6.2 6.3-4 0-6.4-2.1-6.4-5.8V7.7c0-5.1 2.1-7.7 6.3-7.7 2.4 0 4.5 1.2 5.5 3 .5.8.6 1.6.6 3.1V17h-5.1V7.2c0-1.6-.2-1.9-.8-1.9s-1 .3-1 1.2v39.3c0 .8.3 1.2.9 1.2.6 0 .8-.3.8-1.3V31.9h-.8v-6.5h6.2zM110.5 48.3c0 1.8-1.5 3.4-3.3 3.4s-3.3-1.5-3.3-3.5 1.4-3.3 3.3-3.3 3.3 1.5 3.3 3.4zM120.3 48.3c0 1.8-1.5 3.4-3.3 3.4s-3.3-1.5-3.3-3.5 1.4-3.3 3.3-3.3 3.3 1.5 3.3 3.4zM130 48.3c0 1.8-1.5 3.4-3.3 3.4s-3.3-1.5-3.3-3.5 1.4-3.3 3.3-3.3 3.3 1.5 3.3 3.4z" fill="black"/>
+    </svg>
+  </div>
+
+  <script>
+    if (sessionStorage.getItem('loaded') == 'yes'){
+      document.querySelector('#loader').style.display = 'none';
+    }
+  </script>
+
   <header class="inactive">
     <div class="menuBar">
       <a data-swup-link class="menuLogo" href="index.html">
@@ -461,6 +474,10 @@
 
 
   </main>
+
+  <footer>
+    An X Bui © 2021
+  </footer>
 
   <script src="js/lazysizes.min.js" async></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" crossorigin="anonymous"></script>

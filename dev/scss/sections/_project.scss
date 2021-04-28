@@ -76,6 +76,29 @@ p, h4{
   }
 }
 
+.profileImage{
+  width: 0.55em;
+  height: 0.55em;
+  margin-top: 0.1em;
+  margin-left: 0.1em;
+  position: relative;
+  display: none;
+  transform: rotate(-15deg);
+
+
+  @include lg{
+    display: block;
+  }
+  >img{
+    position: absolute;
+    top: -15%;
+    left: -15%;
+    width: 130%;
+    height: 130%;
+    filter: brightness(0.75);
+  }
+}
+
 /* ==========================
     Project Components
 ========================== */

@@ -76,7 +76,7 @@ button {
   border: 2px solid var(--textColor);
   border-radius: 100%;
   color: transparent;
-  cursor: url("../img/cursor.svg") 25 14.5, pointer !important;
+  // cursor: url("../img/cursor.svg") 25 14.5, pointer !important;
   display: flex;
   font-family: bee, sans-serif;
   font-size: 3rem;
@@ -103,7 +103,7 @@ button {
   > svg {
     fill: none;
     stroke: var(--strokeSVG);
-    cursor: url("../img/cursor.svg") 25 14.5, pointer !important;
+    // cursor: url("../img/cursor.svg") 25 14.5, pointer !important;
     height: 80%;
     left: 10%;
     position: absolute;
@@ -159,10 +159,14 @@ button {
   }
 }
 
-a[data-swup-transition='project'] {
-  cursor: url("../img/cursor.svg") 25 8.3, pointer !important;
-}
-
-a[target="_blank"]{
+a{
   cursor: pointer;
 }
+
+// a[data-swup-transition='project'] {
+//   cursor: url("../img/cursor.svg") 25 8.3, pointer !important;
+// }
+
+// a[target="_blank"]{
+//   cursor: pointer;
+// }
