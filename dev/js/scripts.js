@@ -967,7 +967,7 @@ function unload() {
 }
 
 swup.on('clickLink', (e) => {
-  let link = e.delegateTarget.getAttribute('data-swup-transition');
+  const link = e.delegateTarget.getAttribute('data-swup-transition');
   if (link == 'project') {
     projectLink = e.target;
   }
@@ -975,9 +975,9 @@ swup.on('clickLink', (e) => {
 
 swup.on('samePageWithHash', (e) => {
 
-  let target = e.delegateTarget;
-  let id = target.getAttribute('href');
-  let offset = document.querySelector(id).offsetHeight;
+  const target = e.delegateTarget;
+  const id = target.getAttribute('href');
+  const offset = document.querySelector(id).offsetHeight;
   gsap.to(window, 0.5, {
     scrollTo: id
   });
