@@ -13,11 +13,14 @@ p, h4{
 }
 .projectCoverFull {
   position: relative;
+  // overflow: hidden;
 
   > picture {
     border: 0;
     position: sticky;
     top: 0;
+    width: 100%;
+    max-width: 100vw;
   }
 }
 
